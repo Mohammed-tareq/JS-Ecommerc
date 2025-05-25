@@ -1,6 +1,6 @@
 
 import {app, analytics} from "../adminJs/dataconfig.js";
-import {getFirestore, collection, getDocs, doc ,deleteDoc} from "https://www.gstatic.com/firebasejs/11.7.3/firebase-firestore.js";
+import {getFirestore, collection, getDocs, doc ,deleteDoc} from "https://www.gstatic.com/firebasejs/11.8.1/firebase-firestore.js";
 
 
 const db = getFirestore(app);
