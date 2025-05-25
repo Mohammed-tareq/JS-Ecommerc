@@ -14,15 +14,16 @@
 
   <!--=============== CSS ===============-->
   <link rel="stylesheet" href="./assets/css/styles.css" />
-<script type="module">
-  import { auth, onAuthStateChanged } from './assets/js/userAuth.js';
+ <link rel="stylesheet" href="./assets/css/responsive.css">
 
-  onAuthStateChanged(auth, (user) => {
-    if (!user) {
-      window.location.href = "login-register.html";
-    }
-  });
-</script>
+
+ <!-- =======================headerHandeler======= -->
+ <script src="assets/js/headerHandler.js" defer></script>
+
+ <!-- =======================js button=============== -->
+ <script src="./assets/js/scrollToTop.js" defer></script>
+
+
   <title>Ecommerce Website</title>
 </head>
 
@@ -60,14 +61,14 @@
           <li class="nav-item">
             <a href="shop.html" class="nav-link ">Shop</a>
           </li>
-          <li class="nav-item" id="myAccount">
+          <li class="nav-item">
             <a href="accounts.html" class="nav-link">My Account</a>
           </li>
           <li class="nav-item">
             <a href="compare.html" class="nav-link">Compare</a>
           </li>
-          <li class="nav-item" id="logOutBtn">
-            <a href="#" class="nav-link">Logout</a>
+          <li class="nav-item">
+            <a href="login-register.html" class="nav-link">Login</a>
           </li>
 
         </ul>
@@ -150,62 +151,40 @@
         <div class="checkout-group">
           <h3 class="section-title"> Cart Torals</h3>
 
-          <table class="order-table">
-            <tr>
-              <th colspan="2">Products</th>
-              <th>Total</th>
-            </tr>
+         <!-- Cart Totals Table -->
+<table class="order-table" id="orderTable">
+  <tr>
+    <th colspan="2">Products</th>
+    <th>Total</th>
+  </tr>
+  <!-- Dynamic rows will be inserted here -->
+  <tbody id="orderTableBody"></tbody>
 
-            <tr>
-              <td><img src="assets/img/product-1-2.jpg" class="order-img" alt=""></td>
+  <tr>
+    <td><span class="order-subtitle">SubTotal</span></td>
+    <td colspan="2"><span class="table-price" id="subtotal">$0.00</span></td>
+  </tr>
 
-              <td>
-                <h3 class="table-title">Yidarton Women Summer Blue</h3>
-                <p class="table-quantity">x 2</p>
-              </td>
+  <tr>
+    <td><span class="order-subtitle">Shipping</span></td>
+    <td colspan="2"><span class="table-price" id="shipping">Free Shipping</span></td>
+  </tr>
 
-              <td><span class="table-price">$180</span></td>
-            </tr>
-            <tr>
-              <td><img src="assets/img/product-2-2.jpg" class="order-img" alt=""></td>
-              <td>
-                <h3 class="table-title">Yidarton Women Summer Blue</h3>
-                <p class="table-quantity">x 2</p>
-              </td>
+  <tr>
+    <td><span class="order-subtitle">Total</span></td>
+    <td colspan="2"><span class="order-grand-total" id="grandTotal">$0.00</span></td>
+  </tr>
+</table>
 
-              <td><span class="table-price">$180</span></td>
-            </tr>
-            <tr>
-              <td><img src="assets/img/product-3-2.jpg" class="order-img" alt=""></td>
-              <td>
-                <h3 class="table-title">Yidarton Women Summer Blue</h3>
-                <p class="table-quantity">x 2</p>
-              </td>
-
-              <td><span class="table-price">$180</span></td>
-            </tr>
-
-            <tr>
-              <td><span class="order-subtitle">SubTotal</span></td>
-              <td colspan="2"><span class="table-price">$280</span></td>
-            </tr>
-
-            <tr>
-              <td><span class="order-subtitle">Shipping</span></td>
-              <td colspan="2"><span class="table-price">Free Shipping</span></td>
-            </tr>
-
-            <tr>
-              <td> <span class="order-subtitle">Total</span></td>
-              <td colspan="2"><span class="order-grand-total">$280</span></td>
-            </tr>
-
-          </table>
 
           <div class="payment-methods">
-            <h3 class="checkout-title payment-title">Payment</h3>
 
-            <div class="payment-option flex">
+
+            <!-- helmyyyyy comment  -->
+
+            <!-- <h3 class="checkout-title payment-title">Payment</h3> -->
+
+            <!-- <div class="payment-option flex">
 
               <input type="radio" id="1" name="radio" class="payment-input">
               <label for="1" class="payment-label">Dirct Bank Transfer</label>
@@ -221,11 +200,13 @@
 
               <input type="radio" name="radio" id="3" class="payment-input">
               <label for="3" class="payment-label">Paypal</label>
-            </div>
+            </div> -->
 
           </div>
           
-          <button class="btn btn-md"> Place Order </button>
+          <!-- <button class="btn btn-md"> Place Order </button> -->
+        <button id="placeOrderBtn" class="btn btn-md">Place Order</button>
+
         </div>
       </div>
       </div>
@@ -354,7 +335,88 @@
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
   <!--=============== MAIN JS ===============-->
-  <script src="assets/js/app.js"></script>
+  <script src="./assets/js/main.js"></script>
+
+
+  <!-- ======================= -->
+   <script>
+    // assets/js/payment-handler.js
+import { db } from "./firebaseInitializeApp.js";
+import { collection, addDoc } from "https://www.gstatic.com/firebasejs/11.7.3/firebase-firestore.js";
+
+window.addEventListener("DOMContentLoaded", async () => {
+  if (window.location.pathname.includes("success.html")) {
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    if (cart.length === 0) return;
+
+    const order = {
+      items: cart,
+      total: cart.reduce((sum, item) => sum + item.price * item.quantity, 0),
+      createdAt: new Date(),
+    };
+
+    try {
+      await addDoc(collection(db, "successfulOrders"), order);
+      localStorage.removeItem("cart");
+      alert("✅ Order saved to Firebase!");
+    } catch (err) {
+      console.error("❌ Firebase error:", err);
+    }
+  }
+});
+
+   </script>
+   <script type="module" src="./assets/js/checkout-stripe.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    document.getElementById("placeOrderBtn").addEventListener("click", () => {
+      if (typeof window.checkout === "function") {
+        window.checkout();
+      }
+    });
+  });
+</script>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    let total = 0;
+
+    const tableBody = document.querySelector("table.order-table");
+
+    cart.forEach(item => {
+      const row = document.createElement("tr");
+      row.innerHTML = `
+        <td><img src="assets/img/product-1-2.jpg" class="order-img" alt=""></td>
+        <td>
+          <h3 class="table-title">${item.name}</h3>
+          <p class="table-quantity">x ${item.quantity}</p>
+        </td>
+        <td><span class="table-price">$${item.price * item.quantity}</span></td>
+      `;
+      tableBody.appendChild(row);
+
+      total += item.price * item.quantity;
+    });
+
+    // Update total fields in summary
+    document.querySelector(".order-grand-total").textContent = `$${total.toFixed(2)}`;
+  });
+
+</script>
+
+<script>
+  
+  document.getElementById("placeOrderBtn").addEventListener("click", () => {
+    if (typeof window.checkout === "function") {
+      window.checkout();
+    }
+  });
+
+
+</script>
+   <script type="module" src="./assets/js/payment-handler.js"></script>
+
 </body>
 
 </html>

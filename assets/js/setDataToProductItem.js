@@ -1,13 +1,20 @@
-const productsContainer = document.getElementById('products-container');
-function setDataToProductItem({ category, title, badge, price, oldPrice, rating }, productId) {
-  let starsHtml = '';
+//setdataToProductItem.js
+
+const productsContainer = document.getElementById("products-container");
+
+function setDataToProductItem(
+  { category, title, badge, price, oldPrice, rating },
+  productId
+) {
+  let starsHtml = "";
   for (let i = 0; i < 5; i++) {
-    starsHtml += i < rating
-      ? `<i id = "star" class="fa-solid fa-star"></i>`
-      : `<i id = "star" class="fa-regular fa-star"></i>`;
+    starsHtml +=
+      i < rating
+        ? `<i id = "star" class="fa-solid fa-star"></i>`
+        : `<i id = "star" class="fa-regular fa-star"></i>`;
   }
 
-  return `<div class="product-item">
+  return `<div class="product-item" data-product-id="${productId}">
     <div class="product-banner">
       <a href="details.html?id=${productId}" class="product-imgs">
         <img src="assets/img/product-9-1.jpg" class="product-img default" alt="product-1">
@@ -38,8 +45,7 @@ function setDataToProductItem({ category, title, badge, price, oldPrice, rating 
       </div>
     </div>
   </div>`;
+
 }
 
-
-
-export { setDataToProductItem, productsContainer }
+export { setDataToProductItem, productsContainer };

@@ -1,3 +1,4 @@
+//searchByName.js
 import { collection, query, where, getDocs, db } from "./firebaseFirestore.js";
 import { fetchOnePage, currentPage } from "./shop.js";
 import { setDataToProductItem } from "./setDataToProductItem.js";

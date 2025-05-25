@@ -1,66 +1,97 @@
-import { setDataToProductItem, productsContainer } from "./setDataToProductItem.js";
-import { collection, getDocs, db, query, limit, startAfter } from "./firebaseFirestore.js";
+//shop.js
+import {
+  setDataToProductItem,
+  productsContainer,
+} from "./setDataToProductItem.js";
+import {
+  collection,
+  getDocs,
+  db,
+  query,
+  limit,
+  startAfter,
+  doc,
+  getDoc,
+} from "./firebaseFirestore.js";
+import { addToCart } from "./addToCart.js";
 
-const btnPagination = document.getElementsByClassName('btn-pagination');
+const btnPagination = document.getElementsByClassName("btn-pagination");
 
 let currentPage = 1;
 
-
 for (let i = 0; i < btnPagination.length; i++) {
-    btnPagination[i].addEventListener('click', function handlePagination(e) {
-        const numOfPage = Number(e.target.parentElement.id);
-        currentPage = numOfPage;
-        fetchOnePage();
-        setActivePaginationButton(numOfPage);
-    })
+  btnPagination[i].addEventListener("click", function handlePagination(e) {
+    const numOfPage = Number(e.target.parentElement.id);
+    currentPage = numOfPage;
+    fetchOnePage();
+    setActivePaginationButton(numOfPage);
+  });
 }
-
 
 let lastDoc;
 async function fetchOnePage() {
-    productsContainer.innerHTML = '';
-    let q = query(collection(db, 'products'), limit(28));
-    if (currentPage > 1) {
-        q = query(collection(db, "products"), startAfter(lastDoc), limit(28));
-    }
-    const documentSnapshots = await getDocs(q);
-    const docs = documentSnapshots.docs;
-    lastDoc = docs[docs.length - 1];
-    docs.forEach(doc => {
-        let productId = doc.id;
-        productsContainer.innerHTML += setDataToProductItem(doc.data(), productId);
+  productsContainer.innerHTML = "";
+  let q = query(collection(db, "products"), limit(28));
+  if (currentPage > 1) {
+    q = query(collection(db, "products"), startAfter(lastDoc), limit(28));
+  }
+  const documentSnapshots = await getDocs(q);
+  const docs = documentSnapshots.docs;
+  lastDoc = docs[docs.length - 1];
+  docs.forEach((doc) => {
+    let productId = doc.id;
+    productsContainer.innerHTML += setDataToProductItem(doc.data(), productId);
+  });
+  attachAddToCartEventListeners();
+
+  function attachAddToCartEventListeners() {
+    const cartBtns = document.querySelectorAll(".product-item .cart-btn"); // Select all cart buttons
+
+    cartBtns.forEach((button) => {
+      button.addEventListener("click", async (event) => {
+        event.preventDefault();
+
+        const productItem = event.target.closest(".product-item");
+        if (productItem) {
+          const productId = productItem.dataset.productId;
+
+          // Fetch the product data from Firestore using its ID
+          const productDocRef = doc(db, "products", productId);
+          const productDocSnap = await getDoc(productDocRef);
+
+          if (productDocSnap.exists()) {
+            const productData = productDocSnap.data();
+            addToCart(productId, productData, 1); // Add with quantity 1
+          } else {
+            console.error(
+              "Error: Product document not found for ID:",
+              productId
+            );
+          }
+        } else {
+          console.error(
+            "Error: Could not find parent product item for cart button."
+          );
+        }
+      });
     });
-
-
-    // let cartBtns = document.getElementsByClassName('cart-btn');
-
-    // for (let i = 0; i < cartBtns.length; i++) {
-    //     cartBtns[i].addEventListener('click', () => {
-
-    //     })
-
-    // }
+  }
 }
 
 fetchOnePage();
 
 function setActivePaginationButton(activeId) {
-    for (let i = 0; i < btnPagination.length; i++) {
-        btnPagination[i].classList.remove('active-page');
-    }
+  for (let i = 0; i < btnPagination.length; i++) {
+    btnPagination[i].classList.remove("active-page");
+  }
 
-    const activeBtn = document.getElementById(`${activeId}`);
-    if (activeBtn) {
-        activeBtn.classList.add('active-page');
-    }
+  const activeBtn = document.getElementById(`${activeId}`);
+  if (activeBtn) {
+    activeBtn.classList.add("active-page");
+  }
 }
 
-
-
-
-export { fetchOnePage, currentPage }
-
-
+export { fetchOnePage, currentPage };
 
 // import { db, collection, addDoc } from './firebaseFirestore.js'
 
@@ -364,7 +395,2307 @@ export { fetchOnePage, currentPage }
 //         "description": "Lightweight and comfortable.",
 //         "rating": 2
 //     },
-//
+//     {
+//         "brand": "Nike",
+//         "policy": "30-day return",
+//         "size": "XL",
+//         "oldPrice": 178.39,
+//         "badge": "Exclusive",
+//         "category": "Accessories",
+//         "title": "Running Shoes",
+//         "price": 77.11,
+//         "count": 39,
+//         "description": "High-quality product with modern design.",
+//         "rating": 1
+//     },
+//     {
+//         "brand": "Under Armour",
+//         "policy": "Exchange only",
+//         "size": "M",
+//         "oldPrice": 67.57,
+//         "badge": "Bestseller",
+//         "category": "Clothing",
+//         "title": "Fitness Tracker",
+//         "price": 41.09,
+//         "count": 19,
+//         "description": "Durable and reliable for everyday use.",
+//         "rating": 1
+//     },
+//     {
+//         "brand": "Under Armour",
+//         "policy": "Exchange only",
+//         "size": "XL",
+//         "oldPrice": 170.35,
+//         "badge": "Sale",
+//         "category": "Clothing",
+//         "title": "Running Shoes",
+//         "price": 64.07,
+//         "count": 72,
+//         "description": "Perfect for training and casual wear.",
+//         "rating": 3
+//     },
+//     {
+//         "brand": "Nike",
+//         "policy": "Exchange only",
+//         "size": "S",
+//         "oldPrice": 123.4,
+//         "badge": "Sale",
+//         "category": "Shoes",
+//         "title": "Sneakers",
+//         "price": 133.98,
+//         "count": 72,
+//         "description": "Lightweight and comfortable.",
+//         "rating": 4
+//     },
+//     {
+//         "brand": "Adidas",
+//         "policy": "30-day return",
+//         "size": "M",
+//         "oldPrice": 166.68,
+//         "badge": "Limited",
+//         "category": "Gear",
+//         "title": "Sneakers",
+//         "price": 29.23,
+//         "count": 49,
+//         "description": "Durable and reliable for everyday use.",
+//         "rating": 5
+//     },
+//     {
+//         "brand": "Adidas",
+//         "policy": "30-day return",
+//         "size": "M",
+//         "oldPrice": 108.08,
+//         "badge": "Exclusive",
+//         "category": "Accessories",
+//         "title": "Running Shoes",
+//         "price": 139.98,
+//         "count": 37,
+//         "description": "Top-rated item by customers.",
+//         "rating": 1
+//     },
+//     {
+//         "brand": "Nike",
+//         "policy": "Exchange only",
+//         "size": "S",
+//         "oldPrice": 104.16,
+//         "badge": "Exclusive",
+//         "category": "Gear",
+//         "title": "Fitness Tracker",
+//         "price": 25.46,
+//         "count": 25,
+//         "description": "High-quality product with modern design.",
+//         "rating": 2
+//     },
+//     {
+//         "brand": "Reebok",
+//         "policy": "Refundable",
+//         "size": "S",
+//         "oldPrice": 52.27,
+//         "badge": "Bestseller",
+//         "category": "Accessories",
+//         "title": "Sneakers",
+//         "price": 94.79,
+//         "count": 70,
+//         "description": "Top-rated item by customers.",
+//         "rating": 4
+//     },
+//     {
+//         "brand": "Nike",
+//         "policy": "Refundable",
+//         "size": "L",
+//         "oldPrice": 171.28,
+//         "badge": "New",
+//         "category": "Gear",
+//         "title": "Fitness Tracker",
+//         "price": 32.96,
+//         "count": 82,
+//         "description": "Perfect for training and casual wear.",
+//         "rating": 2
+//     },
+//     {
+//         "brand": "Reebok",
+//         "policy": "Exchange only",
+//         "size": "XL",
+//         "oldPrice": 77.3,
+//         "badge": "Sale",
+//         "category": "Gear",
+//         "title": "Sneakers",
+//         "price": 38.77,
+//         "count": 66,
+//         "description": "Durable and reliable for everyday use.",
+//         "rating": 1
+//     },
+//     {
+//         "brand": "Puma",
+//         "policy": "Refundable",
+//         "size": "L",
+//         "oldPrice": 143.07,
+//         "badge": "Limited",
+//         "category": "Shoes",
+//         "title": "Sports T-Shirt",
+//         "price": 119.69,
+//         "count": 21,
+//         "description": "High-quality product with modern design.",
+//         "rating": 1
+//     },
+//     {
+//         "brand": "Reebok",
+//         "policy": "No return",
+//         "size": "XL",
+//         "oldPrice": 106.66,
+//         "badge": "New",
+//         "category": "Gear",
+//         "title": "Gym Bag",
+//         "price": 55.11,
+//         "count": 68,
+//         "description": "Lightweight and comfortable.",
+//         "rating": 3
+//     },
+//     {
+//         "brand": "Reebok",
+//         "policy": "Exchange only",
+//         "size": "S",
+//         "oldPrice": 161.58,
+//         "badge": "New",
+//         "category": "Accessories",
+//         "title": "Gym Bag",
+//         "price": 133.18,
+//         "count": 39,
+//         "description": "Top-rated item by customers.",
+//         "rating": 4
+//     },
+//     {
+//         "brand": "Adidas",
+//         "policy": "Refundable",
+//         "size": "M",
+//         "oldPrice": 125.5,
+//         "badge": "New",
+//         "category": "Gear",
+//         "title": "Sneakers",
+//         "price": 86.56,
+//         "count": 93,
+//         "description": "Durable and reliable for everyday use.",
+//         "rating": 4
+//     },
+//     {
+//         "brand": "Puma",
+//         "policy": "30-day return",
+//         "size": "L",
+//         "oldPrice": 141.22,
+//         "badge": "Bestseller",
+//         "category": "Gear",
+//         "title": "Gym Bag",
+//         "price": 81.51,
+//         "count": 15,
+//         "description": "High-quality product with modern design.",
+//         "rating": 5
+//     },
+//     {
+//         "brand": "Nike",
+//         "policy": "Refundable",
+//         "size": "S",
+//         "oldPrice": 90.13,
+//         "badge": "Sale",
+//         "category": "Shoes",
+//         "title": "Sneakers",
+//         "price": 85.88,
+//         "count": 93,
+//         "description": "Durable and reliable for everyday use.",
+//         "rating": 3
+//     },
+//     {
+//         "brand": "Reebok",
+//         "policy": "Refundable",
+//         "size": "M",
+//         "oldPrice": 86.02,
+//         "badge": "Sale",
+//         "category": "Clothing",
+//         "title": "Fitness Tracker",
+//         "price": 117.73,
+//         "count": 1,
+//         "description": "Durable and reliable for everyday use.",
+//         "rating": 4
+//     },
+//     {
+//         "brand": "Adidas",
+//         "policy": "Refundable",
+//         "size": "XL",
+//         "oldPrice": 62.11,
+//         "badge": "New",
+//         "category": "Accessories",
+//         "title": "Running Shoes",
+//         "price": 73.05,
+//         "count": 38,
+//         "description": "Lightweight and comfortable.",
+//         "rating": 5
+//     },
+//     {
+//         "brand": "Puma",
+//         "policy": "30-day return",
+//         "size": "S",
+//         "oldPrice": 93.21,
+//         "badge": "Exclusive",
+//         "category": "Shoes",
+//         "title": "Running Shoes",
+//         "price": 53.02,
+//         "count": 99,
+//         "description": "Lightweight and comfortable.",
+//         "rating": 2
+//     },
+//     {
+//         "brand": "Reebok",
+//         "policy": "No return",
+//         "size": "S",
+//         "oldPrice": 115.25,
+//         "badge": "Sale",
+//         "category": "Gear",
+//         "title": "Sneakers",
+//         "price": 25.18,
+//         "count": 87,
+//         "description": "Top-rated item by customers.",
+//         "rating": 5
+//     },
+//     {
+//         "brand": "Puma",
+//         "policy": "No return",
+//         "size": "L",
+//         "oldPrice": 63.62,
+//         "badge": "Sale",
+//         "category": "Shoes",
+//         "title": "Running Shoes",
+//         "price": 99.33,
+//         "count": 51,
+//         "description": "High-quality product with modern design.",
+//         "rating": 4
+//     },
+//     {
+//         "brand": "Nike",
+//         "policy": "30-day return",
+//         "size": "L",
+//         "oldPrice": 114.68,
+//         "badge": "New",
+//         "category": "Gear",
+//         "title": "Sneakers",
+//         "price": 69.59,
+//         "count": 56,
+//         "description": "High-quality product with modern design.",
+//         "rating": 2
+//     },
+//     {
+//         "brand": "Adidas",
+//         "policy": "No return",
+//         "size": "S",
+//         "oldPrice": 95.83,
+//         "badge": "Bestseller",
+//         "category": "Clothing",
+//         "title": "Gym Bag",
+//         "price": 22.34,
+//         "count": 71,
+//         "description": "Lightweight and comfortable.",
+//         "rating": 2
+//     },
+//     {
+//         "brand": "Nike",
+//         "policy": "Exchange only",
+//         "size": "M",
+//         "oldPrice": 171.76,
+//         "badge": "Bestseller",
+//         "category": "Accessories",
+//         "title": "Sports T-Shirt",
+//         "price": 117.42,
+//         "count": 80,
+//         "description": "High-quality product with modern design.",
+//         "rating": 2
+//     },
+//     {
+//         "brand": "Nike",
+//         "policy": "30-day return",
+//         "size": "XL",
+//         "oldPrice": 194.53,
+//         "badge": "Bestseller",
+//         "category": "Gear",
+//         "title": "Sports T-Shirt",
+//         "price": 24.15,
+//         "count": 56,
+//         "description": "Durable and reliable for everyday use.",
+//         "rating": 5
+//     },
+//     {
+//         "brand": "Nike",
+//         "policy": "Refundable",
+//         "size": "XL",
+//         "oldPrice": 194.35,
+//         "badge": "Bestseller",
+//         "category": "Shoes",
+//         "title": "Sports T-Shirt",
+//         "price": 133.7,
+//         "count": 12,
+//         "description": "Top-rated item by customers.",
+//         "rating": 5
+//     },
+//     {
+//         "brand": "Adidas",
+//         "policy": "30-day return",
+//         "size": "XL",
+//         "oldPrice": 77.97,
+//         "badge": "Bestseller",
+//         "category": "Gear",
+//         "title": "Gym Bag",
+//         "price": 65.26,
+//         "count": 3,
+//         "description": "Top-rated item by customers.",
+//         "rating": 1
+//     },
+//     {
+//         "brand": "Puma",
+//         "policy": "30-day return",
+//         "size": "L",
+//         "oldPrice": 148.56,
+//         "badge": "Exclusive",
+//         "category": "Gear",
+//         "title": "Sports T-Shirt",
+//         "price": 61.19,
+//         "count": 9,
+//         "description": "Lightweight and comfortable.",
+//         "rating": 2
+//     },
+//     {
+//         "brand": "Adidas",
+//         "policy": "No return",
+//         "size": "M",
+//         "oldPrice": 144.47,
+//         "badge": "Bestseller",
+//         "category": "Gear",
+//         "title": "Running Shoes",
+//         "price": 36.75,
+//         "count": 59,
+//         "description": "Lightweight and comfortable.",
+//         "rating": 5
+//     },
+//     {
+//         "brand": "Nike",
+//         "policy": "Refundable",
+//         "size": "S",
+//         "oldPrice": 153.77,
+//         "badge": "Limited",
+//         "category": "Clothing",
+//         "title": "Fitness Tracker",
+//         "price": 65.55,
+//         "count": 69,
+//         "description": "Top-rated item by customers.",
+//         "rating": 2
+//     },
+//     {
+//         "brand": "Adidas",
+//         "policy": "No return",
+//         "size": "S",
+//         "oldPrice": 164.7,
+//         "badge": "Limited",
+//         "category": "Gear",
+//         "title": "Running Shoes",
+//         "price": 143.46,
+//         "count": 23,
+//         "description": "Lightweight and comfortable.",
+//         "rating": 3
+//     },
+//     {
+//         "brand": "Under Armour",
+//         "policy": "30-day return",
+//         "size": "M",
+//         "oldPrice": 191.72,
+//         "badge": "Bestseller",
+//         "category": "Accessories",
+//         "title": "Sports T-Shirt",
+//         "price": 39.6,
+//         "count": 47,
+//         "description": "High-quality product with modern design.",
+//         "rating": 3
+//     },
+//     {
+//         "brand": "Reebok",
+//         "policy": "Refundable",
+//         "size": "S",
+//         "oldPrice": 184.22,
+//         "badge": "Sale",
+//         "category": "Accessories",
+//         "title": "Gym Bag",
+//         "price": 42.66,
+//         "count": 99,
+//         "description": "Lightweight and comfortable.",
+//         "rating": 4
+//     },
+//     {
+//         "brand": "Reebok",
+//         "policy": "Refundable",
+//         "size": "S",
+//         "oldPrice": 167.05,
+//         "badge": "Sale",
+//         "category": "Accessories",
+//         "title": "Fitness Tracker",
+//         "price": 77.41,
+//         "count": 86,
+//         "description": "High-quality product with modern design.",
+//         "rating": 5
+//     },
+//     {
+//         "brand": "Puma",
+//         "policy": "30-day return",
+//         "size": "L",
+//         "oldPrice": 65.09,
+//         "badge": "Sale",
+//         "category": "Clothing",
+//         "title": "Sneakers",
+//         "price": 39.84,
+//         "count": 55,
+//         "description": "Durable and reliable for everyday use.",
+//         "rating": 4
+//     },
+//     {
+//         "brand": "Nike",
+//         "policy": "Refundable",
+//         "size": "M",
+//         "oldPrice": 113.52,
+//         "badge": "Limited",
+//         "category": "Clothing",
+//         "title": "Running Shoes",
+//         "price": 20.92,
+//         "count": 84,
+//         "description": "Lightweight and comfortable.",
+//         "rating": 3
+//     },
+//     {
+//         "brand": "Under Armour",
+//         "policy": "Refundable",
+//         "size": "XL",
+//         "oldPrice": 121.45,
+//         "badge": "New",
+//         "category": "Gear",
+//         "title": "Sneakers",
+//         "price": 120.85,
+//         "count": 78,
+//         "description": "High-quality product with modern design.",
+//         "rating": 5
+//     },
+//     {
+//         "brand": "Under Armour",
+//         "policy": "Exchange only",
+//         "size": "M",
+//         "oldPrice": 168.82,
+//         "badge": "Exclusive",
+//         "category": "Gear",
+//         "title": "Sports T-Shirt",
+//         "price": 83.26,
+//         "count": 17,
+//         "description": "Top-rated item by customers.",
+//         "rating": 2
+//     },
+//     {
+//         "brand": "Adidas",
+//         "policy": "Exchange only",
+//         "size": "M",
+//         "oldPrice": 74.18,
+//         "badge": "Exclusive",
+//         "category": "Gear",
+//         "title": "Running Shoes",
+//         "price": 34.71,
+//         "count": 31,
+//         "description": "Perfect for training and casual wear.",
+//         "rating": 3
+//     },
+//     {
+//         "brand": "Under Armour",
+//         "policy": "No return",
+//         "size": "XL",
+//         "oldPrice": 105.54,
+//         "badge": "Limited",
+//         "category": "Gear",
+//         "title": "Sneakers",
+//         "price": 53.74,
+//         "count": 36,
+//         "description": "Lightweight and comfortable.",
+//         "rating": 4
+//     },
+//     {
+//         "brand": "Nike",
+//         "policy": "No return",
+//         "size": "M",
+//         "oldPrice": 143.95,
+//         "badge": "New",
+//         "category": "Gear",
+//         "title": "Sneakers",
+//         "price": 116.91,
+//         "count": 57,
+//         "description": "Perfect for training and casual wear.",
+//         "rating": 4
+//     },
+//     {
+//         "brand": "Puma",
+//         "policy": "30-day return",
+//         "size": "S",
+//         "oldPrice": 163.16,
+//         "badge": "New",
+//         "category": "Shoes",
+//         "title": "Running Shoes",
+//         "price": 81.06,
+//         "count": 70,
+//         "description": "Lightweight and comfortable.",
+//         "rating": 4
+//     },
+//     {
+//         "brand": "Puma",
+//         "policy": "No return",
+//         "size": "M",
+//         "oldPrice": 66.2,
+//         "badge": "Bestseller",
+//         "category": "Clothing",
+//         "title": "Sports T-Shirt",
+//         "price": 37.66,
+//         "count": 37,
+//         "description": "Lightweight and comfortable.",
+//         "rating": 5
+//     },
+//     {
+//         "brand": "Adidas",
+//         "policy": "Refundable",
+//         "size": "M",
+//         "oldPrice": 121.37,
+//         "badge": "Exclusive",
+//         "category": "Clothing",
+//         "title": "Gym Bag",
+//         "price": 77.67,
+//         "count": 79,
+//         "description": "Perfect for training and casual wear.",
+//         "rating": 5
+//     },
+//     {
+//         "brand": "Adidas",
+//         "policy": "Refundable",
+//         "size": "L",
+//         "oldPrice": 54.05,
+//         "badge": "New",
+//         "category": "Gear",
+//         "title": "Fitness Tracker",
+//         "price": 37.65,
+//         "count": 80,
+//         "description": "High-quality product with modern design.",
+//         "rating": 1
+//     },
+//     {
+//         "brand": "Reebok",
+//         "policy": "Refundable",
+//         "size": "M",
+//         "oldPrice": 179.29,
+//         "badge": "Limited",
+//         "category": "Gear",
+//         "title": "Running Shoes",
+//         "price": 53.95,
+//         "count": 32,
+//         "description": "Top-rated item by customers.",
+//         "rating": 2
+//     },
+//     {
+//         "brand": "Nike",
+//         "policy": "No return",
+//         "size": "M",
+//         "oldPrice": 63.82,
+//         "badge": "Limited",
+//         "category": "Clothing",
+//         "title": "Fitness Tracker",
+//         "price": 84.44,
+//         "count": 34,
+//         "description": "Top-rated item by customers.",
+//         "rating": 3
+//     },
+//     {
+//         "brand": "Adidas",
+//         "policy": "Exchange only",
+//         "size": "XL",
+//         "oldPrice": 85.31,
+//         "badge": "Exclusive",
+//         "category": "Accessories",
+//         "title": "Gym Bag",
+//         "price": 53.71,
+//         "count": 54,
+//         "description": "High-quality product with modern design.",
+//         "rating": 2
+//     },
+//     {
+//         "brand": "Puma",
+//         "policy": "Refundable",
+//         "size": "M",
+//         "oldPrice": 60.6,
+//         "badge": "New",
+//         "category": "Clothing",
+//         "title": "Sneakers",
+//         "price": 64.53,
+//         "count": 78,
+//         "description": "Durable and reliable for everyday use.",
+//         "rating": 4
+//     },
+//     {
+//         "brand": "Under Armour",
+//         "policy": "30-day return",
+//         "size": "M",
+//         "oldPrice": 70.08,
+//         "badge": "Exclusive",
+//         "category": "Accessories",
+//         "title": "Sneakers",
+//         "price": 63.96,
+//         "count": 38,
+//         "description": "Perfect for training and casual wear.",
+//         "rating": 5
+//     },
+//     {
+//         "brand": "Nike",
+//         "policy": "Refundable",
+//         "size": "S",
+//         "oldPrice": 138.14,
+//         "badge": "New",
+//         "category": "Accessories",
+//         "title": "Running Shoes",
+//         "price": 142.93,
+//         "count": 59,
+//         "description": "Durable and reliable for everyday use.",
+//         "rating": 5
+//     },
+//     {
+//         "brand": "Puma",
+//         "policy": "No return",
+//         "size": "S",
+//         "oldPrice": 199.46,
+//         "badge": "Bestseller",
+//         "category": "Gear",
+//         "title": "Running Shoes",
+//         "price": 120.44,
+//         "count": 76,
+//         "description": "Lightweight and comfortable.",
+//         "rating": 1
+//     },
+//     {
+//         "brand": "Nike",
+//         "policy": "Exchange only",
+//         "size": "S",
+//         "oldPrice": 73.63,
+//         "badge": "Limited",
+//         "category": "Gear",
+//         "title": "Sports T-Shirt",
+//         "price": 44.66,
+//         "count": 59,
+//         "description": "Top-rated item by customers.",
+//         "rating": 3
+//     },
+//     {
+//         "brand": "Puma",
+//         "policy": "Exchange only",
+//         "size": "M",
+//         "oldPrice": 190.03,
+//         "badge": "New",
+//         "category": "Clothing",
+//         "title": "Gym Bag",
+//         "price": 141.94,
+//         "count": 48,
+//         "description": "Durable and reliable for everyday use.",
+//         "rating": 4
+//     },
+//     {
+//         "brand": "Adidas",
+//         "policy": "30-day return",
+//         "size": "M",
+//         "oldPrice": 86.82,
+//         "badge": "Exclusive",
+//         "category": "Clothing",
+//         "title": "Sports T-Shirt",
+//         "price": 23.6,
+//         "count": 88,
+//         "description": "Durable and reliable for everyday use.",
+//         "rating": 5
+//     },
+//     {
+//         "brand": "Puma",
+//         "policy": "Exchange only",
+//         "size": "M",
+//         "oldPrice": 159.85,
+//         "badge": "Limited",
+//         "category": "Gear",
+//         "title": "Fitness Tracker",
+//         "price": 37.8,
+//         "count": 90,
+//         "description": "Lightweight and comfortable.",
+//         "rating": 1
+//     },
+//     {
+//         "brand": "Nike",
+//         "policy": "30-day return",
+//         "size": "L",
+//         "oldPrice": 139.5,
+//         "badge": "Exclusive",
+//         "category": "Clothing",
+//         "title": "Gym Bag",
+//         "price": 79.18,
+//         "count": 33,
+//         "description": "Durable and reliable for everyday use.",
+//         "rating": 1
+//     },
+//     {
+//         "brand": "Puma",
+//         "policy": "No return",
+//         "size": "XL",
+//         "oldPrice": 71.34,
+//         "badge": "Bestseller",
+//         "category": "Gear",
+//         "title": "Running Shoes",
+//         "price": 72.15,
+//         "count": 28,
+//         "description": "Durable and reliable for everyday use.",
+//         "rating": 1
+//     },
+//     {
+//         "brand": "Nike",
+//         "policy": "Refundable",
+//         "size": "XL",
+//         "oldPrice": 123.69,
+//         "badge": "Sale",
+//         "category": "Shoes",
+//         "title": "Gym Bag",
+//         "price": 57.28,
+//         "count": 38,
+//         "description": "Top-rated item by customers.",
+//         "rating": 4
+//     },
+//     {
+//         "brand": "Reebok",
+//         "policy": "Exchange only",
+//         "size": "L",
+//         "oldPrice": 180.81,
+//         "badge": "Exclusive",
+//         "category": "Gear",
+//         "title": "Running Shoes",
+//         "price": 72.88,
+//         "count": 97,
+//         "description": "Top-rated item by customers.",
+//         "rating": 1
+//     },
+//     {
+//         "brand": "Puma",
+//         "policy": "Exchange only",
+//         "size": "XL",
+//         "oldPrice": 113.94,
+//         "badge": "New",
+//         "category": "Gear",
+//         "title": "Sneakers",
+//         "price": 69.85,
+//         "count": 90,
+//         "description": "Lightweight and comfortable.",
+//         "rating": 3
+//     },
+//     {
+//         "brand": "Under Armour",
+//         "policy": "Refundable",
+//         "size": "XL",
+//         "oldPrice": 135.52,
+//         "badge": "New",
+//         "category": "Shoes",
+//         "title": "Sports T-Shirt",
+//         "price": 96.08,
+//         "count": 30,
+//         "description": "Lightweight and comfortable.",
+//         "rating": 1
+//     },
+//     {
+//         "brand": "Puma",
+//         "policy": "Exchange only",
+//         "size": "S",
+//         "oldPrice": 101.91,
+//         "badge": "Exclusive",
+//         "category": "Clothing",
+//         "title": "Gym Bag",
+//         "price": 91.66,
+//         "count": 100,
+//         "description": "Perfect for training and casual wear.",
+//         "rating": 3
+//     },
+//     {
+//         "brand": "Under Armour",
+//         "policy": "Refundable",
+//         "size": "L",
+//         "oldPrice": 92.93,
+//         "badge": "Exclusive",
+//         "category": "Clothing",
+//         "title": "Gym Bag",
+//         "price": 122.94,
+//         "count": 22,
+//         "description": "Lightweight and comfortable.",
+//         "rating": 3
+//     },
+//     {
+//         "brand": "Reebok",
+//         "policy": "Exchange only",
+//         "size": "M",
+//         "oldPrice": 127.38,
+//         "badge": "Exclusive",
+//         "category": "Clothing",
+//         "title": "Gym Bag",
+//         "price": 146.23,
+//         "count": 31,
+//         "description": "High-quality product with modern design.",
+//         "rating": 1
+//     },
+//     {
+//         "brand": "Puma",
+//         "policy": "30-day return",
+//         "size": "S",
+//         "oldPrice": 82.15,
+//         "badge": "Limited",
+//         "category": "Gear",
+//         "title": "Gym Bag",
+//         "price": 94.47,
+//         "count": 7,
+//         "description": "Durable and reliable for everyday use.",
+//         "rating": 4
+//     },
+//     {
+//         "brand": "Adidas",
+//         "policy": "Refundable",
+//         "size": "M",
+//         "oldPrice": 137.07,
+//         "badge": "New",
+//         "category": "Gear",
+//         "title": "Gym Bag",
+//         "price": 113.04,
+//         "count": 65,
+//         "description": "Lightweight and comfortable.",
+//         "rating": 4
+//     },
+//     {
+//         "brand": "Reebok",
+//         "policy": "30-day return",
+//         "size": "M",
+//         "oldPrice": 68.87,
+//         "badge": "New",
+//         "category": "Accessories",
+//         "title": "Gym Bag",
+//         "price": 87.46,
+//         "count": 11,
+//         "description": "High-quality product with modern design.",
+//         "rating": 2
+//     },
+//     {
+//         "brand": "Reebok",
+//         "policy": "Refundable",
+//         "size": "S",
+//         "oldPrice": 173.89,
+//         "badge": "New",
+//         "category": "Accessories",
+//         "title": "Fitness Tracker",
+//         "price": 100.11,
+//         "count": 11,
+//         "description": "Lightweight and comfortable.",
+//         "rating": 1
+//     },
+//     {
+//         "brand": "Reebok",
+//         "policy": "Exchange only",
+//         "size": "M",
+//         "oldPrice": 122.11,
+//         "badge": "Exclusive",
+//         "category": "Gear",
+//         "title": "Gym Bag",
+//         "price": 113.57,
+//         "count": 25,
+//         "description": "Durable and reliable for everyday use.",
+//         "rating": 4
+//     },
+//     {
+//         "brand": "Puma",
+//         "policy": "No return",
+//         "size": "XL",
+//         "oldPrice": 142.59,
+//         "badge": "Sale",
+//         "category": "Shoes",
+//         "title": "Sports T-Shirt",
+//         "price": 130.13,
+//         "count": 49,
+//         "description": "Lightweight and comfortable.",
+//         "rating": 5
+//     },
+//     {
+//         "brand": "Reebok",
+//         "policy": "30-day return",
+//         "size": "L",
+//         "oldPrice": 196.79,
+//         "badge": "Bestseller",
+//         "category": "Clothing",
+//         "title": "Fitness Tracker",
+//         "price": 143.98,
+//         "count": 55,
+//         "description": "Perfect for training and casual wear.",
+//         "rating": 2
+//     },
+//     {
+//         "brand": "Reebok",
+//         "policy": "Exchange only",
+//         "size": "L",
+//         "oldPrice": 103.06,
+//         "badge": "New",
+//         "category": "Shoes",
+//         "title": "Gym Bag",
+//         "price": 35.82,
+//         "count": 53,
+//         "description": "Lightweight and comfortable.",
+//         "rating": 5
+//     },
+//     {
+//         "brand": "Adidas",
+//         "policy": "Exchange only",
+//         "size": "M",
+//         "oldPrice": 71.31,
+//         "badge": "New",
+//         "category": "Accessories",
+//         "title": "Gym Bag",
+//         "price": 139.68,
+//         "count": 61,
+//         "description": "Perfect for training and casual wear.",
+//         "rating": 5
+//     },
+//     {
+//         "brand": "Under Armour",
+//         "policy": "No return",
+//         "size": "XL",
+//         "oldPrice": 135.69,
+//         "badge": "Limited",
+//         "category": "Gear",
+//         "title": "Gym Bag",
+//         "price": 98.94,
+//         "count": 55,
+//         "description": "High-quality product with modern design.",
+//         "rating": 5
+//     },
+//     {
+//         "brand": "Puma",
+//         "policy": "Refundable",
+//         "size": "M",
+//         "oldPrice": 161.36,
+//         "badge": "Sale",
+//         "category": "Accessories",
+//         "title": "Running Shoes",
+//         "price": 57.06,
+//         "count": 47,
+//         "description": "Durable and reliable for everyday use.",
+//         "rating": 1
+//     },
+//     {
+//         "brand": "Under Armour",
+//         "policy": "Refundable",
+//         "size": "S",
+//         "oldPrice": 196.0,
+//         "badge": "Bestseller",
+//         "category": "Shoes",
+//         "title": "Sneakers",
+//         "price": 88.23,
+//         "count": 48,
+//         "description": "Lightweight and comfortable.",
+//         "rating": 3
+//     },
+//     {
+//         "brand": "Nike",
+//         "policy": "Refundable",
+//         "size": "L",
+//         "oldPrice": 55.73,
+//         "badge": "Limited",
+//         "category": "Gear",
+//         "title": "Gym Bag",
+//         "price": 68.82,
+//         "count": 82,
+//         "description": "Top-rated item by customers.",
+//         "rating": 1
+//     },
+//     {
+//         "brand": "Adidas",
+//         "policy": "Refundable",
+//         "size": "S",
+//         "oldPrice": 185.49,
+//         "badge": "New",
+//         "category": "Shoes",
+//         "title": "Fitness Tracker",
+//         "price": 69.66,
+//         "count": 40,
+//         "description": "High-quality product with modern design.",
+//         "rating": 1
+//     },
+//     {
+//         "brand": "Reebok",
+//         "policy": "Refundable",
+//         "size": "XL",
+//         "oldPrice": 116.97,
+//         "badge": "Sale",
+//         "category": "Accessories",
+//         "title": "Gym Bag",
+//         "price": 108.46,
+//         "count": 15,
+//         "description": "Durable and reliable for everyday use.",
+//         "rating": 3
+//     },
+//     {
+//         "brand": "Puma",
+//         "policy": "No return",
+//         "size": "L",
+//         "oldPrice": 108.65,
+//         "badge": "Sale",
+//         "category": "Shoes",
+//         "title": "Sneakers",
+//         "price": 39.39,
+//         "count": 99,
+//         "description": "Lightweight and comfortable.",
+//         "rating": 5
+//     },
+//     {
+//         "brand": "Reebok",
+//         "policy": "No return",
+//         "size": "L",
+//         "oldPrice": 144.41,
+//         "badge": "Bestseller",
+//         "category": "Clothing",
+//         "title": "Gym Bag",
+//         "price": 102.62,
+//         "count": 35,
+//         "description": "Perfect for training and casual wear.",
+//         "rating": 5
+//     },
+//     {
+//         "brand": "Adidas",
+//         "policy": "30-day return",
+//         "size": "XL",
+//         "oldPrice": 145.73,
+//         "badge": "Exclusive",
+//         "category": "Accessories",
+//         "title": "Sports T-Shirt",
+//         "price": 40.51,
+//         "count": 49,
+//         "description": "High-quality product with modern design.",
+//         "rating": 4
+//     },
+//     {
+//         "brand": "Adidas",
+//         "policy": "30-day return",
+//         "size": "M",
+//         "oldPrice": 92.06,
+//         "badge": "New",
+//         "category": "Accessories",
+//         "title": "Fitness Tracker",
+//         "price": 147.57,
+//         "count": 63,
+//         "description": "Top-rated item by customers.",
+//         "rating": 5
+//     },
+//     {
+//         "brand": "Reebok",
+//         "policy": "30-day return",
+//         "size": "M",
+//         "oldPrice": 140.45,
+//         "badge": "Bestseller",
+//         "category": "Gear",
+//         "title": "Sneakers",
+//         "price": 55.52,
+//         "count": 21,
+//         "description": "High-quality product with modern design.",
+//         "rating": 1
+//     },
+//     {
+//         "brand": "Reebok",
+//         "policy": "No return",
+//         "size": "L",
+//         "oldPrice": 160.42,
+//         "badge": "New",
+//         "category": "Clothing",
+//         "title": "Sneakers",
+//         "price": 64.71,
+//         "count": 12,
+//         "description": "Lightweight and comfortable.",
+//         "rating": 2
+//     },
+//     {
+//         "brand": "Puma",
+//         "policy": "Refundable",
+//         "size": "M",
+//         "oldPrice": 172.51,
+//         "badge": "Sale",
+//         "category": "Accessories",
+//         "title": "Sports T-Shirt",
+//         "price": 121.65,
+//         "count": 39,
+//         "description": "Durable and reliable for everyday use.",
+//         "rating": 1
+//     },
+//     {
+//         "brand": "Nike",
+//         "policy": "Refundable",
+//         "size": "XL",
+//         "oldPrice": 88.81,
+//         "badge": "Bestseller",
+//         "category": "Shoes",
+//         "title": "Fitness Tracker",
+//         "price": 100.91,
+//         "count": 3,
+//         "description": "Top-rated item by customers.",
+//         "rating": 3
+//     },
+//     {
+//         "brand": "Nike",
+//         "policy": "No return",
+//         "size": "M",
+//         "oldPrice": 125.38,
+//         "badge": "Exclusive",
+//         "category": "Shoes",
+//         "title": "Sneakers",
+//         "price": 133.99,
+//         "count": 34,
+//         "description": "Top-rated item by customers.",
+//         "rating": 4
+//     },
+//     {
+//         "brand": "Puma",
+//         "policy": "Refundable",
+//         "size": "M",
+//         "oldPrice": 121.76,
+//         "badge": "Bestseller",
+//         "category": "Accessories",
+//         "title": "Fitness Tracker",
+//         "price": 77.45,
+//         "count": 42,
+//         "description": "Durable and reliable for everyday use.",
+//         "rating": 5
+//     },
+//     {
+//         "brand": "Reebok",
+//         "policy": "30-day return",
+//         "size": "L",
+//         "oldPrice": 101.93,
+//         "badge": "Bestseller",
+//         "category": "Gear",
+//         "title": "Fitness Tracker",
+//         "price": 122.74,
+//         "count": 58,
+//         "description": "Lightweight and comfortable.",
+//         "rating": 3
+//     },
+//     {
+//         "brand": "Puma",
+//         "policy": "No return",
+//         "size": "M",
+//         "oldPrice": 79.86,
+//         "badge": "Bestseller",
+//         "category": "Gear",
+//         "title": "Fitness Tracker",
+//         "price": 136.94,
+//         "count": 79,
+//         "description": "Durable and reliable for everyday use.",
+//         "rating": 3
+//     },
+//     {
+//         "brand": "Nike",
+//         "policy": "30-day return",
+//         "size": "M",
+//         "oldPrice": 93.16,
+//         "badge": "Sale",
+//         "category": "Gear",
+//         "title": "Fitness Tracker",
+//         "price": 31.71,
+//         "count": 28,
+//         "description": "Top-rated item by customers.",
+//         "rating": 3
+//     },
+//     {
+//         "brand": "Reebok",
+//         "policy": "30-day return",
+//         "size": "L",
+//         "oldPrice": 72.92,
+//         "badge": "New",
+//         "category": "Accessories",
+//         "title": "Sports T-Shirt",
+//         "price": 57.63,
+//         "count": 98,
+//         "description": "High-quality product with modern design.",
+//         "rating": 4
+//     },
+//     {
+//         "brand": "Under Armour",
+//         "policy": "Refundable",
+//         "size": "M",
+//         "oldPrice": 192.86,
+//         "badge": "Limited",
+//         "category": "Gear",
+//         "title": "Running Shoes",
+//         "price": 61.72,
+//         "count": 54,
+//         "description": "Perfect for training and casual wear.",
+//         "rating": 2
+//     },
+//     {
+//         "brand": "Reebok",
+//         "policy": "No return",
+//         "size": "M",
+//         "oldPrice": 109.24,
+//         "badge": "Limited",
+//         "category": "Shoes",
+//         "title": "Running Shoes",
+//         "price": 86.29,
+//         "count": 64,
+//         "description": "Durable and reliable for everyday use.",
+//         "rating": 5
+//     },
+//     {
+//         "brand": "Reebok",
+//         "policy": "30-day return",
+//         "size": "L",
+//         "oldPrice": 120.28,
+//         "badge": "Sale",
+//         "category": "Accessories",
+//         "title": "Gym Bag",
+//         "price": 28.83,
+//         "count": 32,
+//         "description": "Durable and reliable for everyday use.",
+//         "rating": 3
+//     },
+//     {
+//         "brand": "Adidas",
+//         "policy": "Refundable",
+//         "size": "XL",
+//         "oldPrice": 62.57,
+//         "badge": "New",
+//         "category": "Clothing",
+//         "title": "Sports T-Shirt",
+//         "price": 30.83,
+//         "count": 54,
+//         "description": "Durable and reliable for everyday use.",
+//         "rating": 5
+//     },
+//     {
+//         "brand": "Adidas",
+//         "policy": "Refundable",
+//         "size": "L",
+//         "oldPrice": 183.62,
+//         "badge": "New",
+//         "category": "Shoes",
+//         "title": "Sports T-Shirt",
+//         "price": 27.38,
+//         "count": 66,
+//         "description": "Perfect for training and casual wear.",
+//         "rating": 4
+//     },
+//     {
+//         "brand": "Under Armour",
+//         "policy": "No return",
+//         "size": "S",
+//         "oldPrice": 124.04,
+//         "badge": "Sale",
+//         "category": "Gear",
+//         "title": "Running Shoes",
+//         "price": 114.94,
+//         "count": 13,
+//         "description": "Lightweight and comfortable.",
+//         "rating": 1
+//     },
+//     {
+//         "brand": "Puma",
+//         "policy": "Exchange only",
+//         "size": "M",
+//         "oldPrice": 73.73,
+//         "badge": "Bestseller",
+//         "category": "Gear",
+//         "title": "Sneakers",
+//         "price": 26.78,
+//         "count": 91,
+//         "description": "Durable and reliable for everyday use.",
+//         "rating": 3
+//     },
+//     {
+//         "brand": "Nike",
+//         "policy": "No return",
+//         "size": "M",
+//         "oldPrice": 95.97,
+//         "badge": "Exclusive",
+//         "category": "Clothing",
+//         "title": "Fitness Tracker",
+//         "price": 34.75,
+//         "count": 50,
+//         "description": "Lightweight and comfortable.",
+//         "rating": 5
+//     },
+//     {
+//         "brand": "Under Armour",
+//         "policy": "Exchange only",
+//         "size": "M",
+//         "oldPrice": 76.32,
+//         "badge": "Sale",
+//         "category": "Accessories",
+//         "title": "Gym Bag",
+//         "price": 65.91,
+//         "count": 62,
+//         "description": "Lightweight and comfortable.",
+//         "rating": 5
+//     },
+//     {
+//         "brand": "Adidas",
+//         "policy": "No return",
+//         "size": "L",
+//         "oldPrice": 130.98,
+//         "badge": "Sale",
+//         "category": "Shoes",
+//         "title": "Fitness Tracker",
+//         "price": 139.65,
+//         "count": 24,
+//         "description": "Perfect for training and casual wear.",
+//         "rating": 1
+//     },
+//     {
+//         "brand": "Reebok",
+//         "policy": "Refundable",
+//         "size": "M",
+//         "oldPrice": 76.25,
+//         "badge": "Exclusive",
+//         "category": "Clothing",
+//         "title": "Sports T-Shirt",
+//         "price": 118.86,
+//         "count": 30,
+//         "description": "Durable and reliable for everyday use.",
+//         "rating": 3
+//     },
+//     {
+//         "brand": "Reebok",
+//         "policy": "Exchange only",
+//         "size": "L",
+//         "oldPrice": 136.1,
+//         "badge": "Sale",
+//         "category": "Gear",
+//         "title": "Gym Bag",
+//         "price": 107.56,
+//         "count": 33,
+//         "description": "Lightweight and comfortable.",
+//         "rating": 4
+//     },
+//     {
+//         "brand": "Adidas",
+//         "policy": "Exchange only",
+//         "size": "XL",
+//         "oldPrice": 95.63,
+//         "badge": "New",
+//         "category": "Accessories",
+//         "title": "Running Shoes",
+//         "price": 71.94,
+//         "count": 20,
+//         "description": "Durable and reliable for everyday use.",
+//         "rating": 2
+//     },
+//     {
+//         "brand": "Adidas",
+//         "policy": "No return",
+//         "size": "S",
+//         "oldPrice": 139.04,
+//         "badge": "New",
+//         "category": "Clothing",
+//         "title": "Sports T-Shirt",
+//         "price": 35.51,
+//         "count": 54,
+//         "description": "Top-rated item by customers.",
+//         "rating": 2
+//     },
+//     {
+//         "brand": "Under Armour",
+//         "policy": "30-day return",
+//         "size": "M",
+//         "oldPrice": 101.77,
+//         "badge": "Limited",
+//         "category": "Gear",
+//         "title": "Sports T-Shirt",
+//         "price": 50.65,
+//         "count": 68,
+//         "description": "Durable and reliable for everyday use.",
+//         "rating": 1
+//     },
+//     {
+//         "brand": "Nike",
+//         "policy": "30-day return",
+//         "size": "L",
+//         "oldPrice": 147.04,
+//         "badge": "Bestseller",
+//         "category": "Gear",
+//         "title": "Gym Bag",
+//         "price": 56.64,
+//         "count": 73,
+//         "description": "Perfect for training and casual wear.",
+//         "rating": 3
+//     },
+//     {
+//         "brand": "Nike",
+//         "policy": "30-day return",
+//         "size": "S",
+//         "oldPrice": 88.95,
+//         "badge": "New",
+//         "category": "Gear",
+//         "title": "Sports T-Shirt",
+//         "price": 59.69,
+//         "count": 61,
+//         "description": "Perfect for training and casual wear.",
+//         "rating": 5
+//     },
+//     {
+//         "brand": "Puma",
+//         "policy": "Exchange only",
+//         "size": "S",
+//         "oldPrice": 150.58,
+//         "badge": "Exclusive",
+//         "category": "Shoes",
+//         "title": "Sneakers",
+//         "price": 69.11,
+//         "count": 13,
+//         "description": "Lightweight and comfortable.",
+//         "rating": 2
+//     },
+//     {
+//         "brand": "Under Armour",
+//         "policy": "Refundable",
+//         "size": "XL",
+//         "oldPrice": 169.04,
+//         "badge": "Limited",
+//         "category": "Gear",
+//         "title": "Sneakers",
+//         "price": 55.68,
+//         "count": 100,
+//         "description": "High-quality product with modern design.",
+//         "rating": 1
+//     },
+//     {
+//         "brand": "Puma",
+//         "policy": "30-day return",
+//         "size": "L",
+//         "oldPrice": 101.21,
+//         "badge": "Sale",
+//         "category": "Shoes",
+//         "title": "Sports T-Shirt",
+//         "price": 22.5,
+//         "count": 75,
+//         "description": "High-quality product with modern design.",
+//         "rating": 3
+//     },
+//     {
+//         "brand": "Under Armour",
+//         "policy": "Refundable",
+//         "size": "XL",
+//         "oldPrice": 64.7,
+//         "badge": "Limited",
+//         "category": "Accessories",
+//         "title": "Gym Bag",
+//         "price": 43.19,
+//         "count": 56,
+//         "description": "High-quality product with modern design.",
+//         "rating": 2
+//     },
+//     {
+//         "brand": "Adidas",
+//         "policy": "No return",
+//         "size": "L",
+//         "oldPrice": 86.66,
+//         "badge": "Exclusive",
+//         "category": "Gear",
+//         "title": "Sports T-Shirt",
+//         "price": 24.08,
+//         "count": 79,
+//         "description": "Top-rated item by customers.",
+//         "rating": 3
+//     },
+//     {
+//         "brand": "Adidas",
+//         "policy": "Refundable",
+//         "size": "XL",
+//         "oldPrice": 106.81,
+//         "badge": "Bestseller",
+//         "category": "Shoes",
+//         "title": "Fitness Tracker",
+//         "price": 128.58,
+//         "count": 60,
+//         "description": "Durable and reliable for everyday use.",
+//         "rating": 3
+//     },
+//     {
+//         "brand": "Under Armour",
+//         "policy": "30-day return",
+//         "size": "XL",
+//         "oldPrice": 86.89,
+//         "badge": "Sale",
+//         "category": "Accessories",
+//         "title": "Gym Bag",
+//         "price": 87.95,
+//         "count": 24,
+//         "description": "High-quality product with modern design.",
+//         "rating": 4
+//     },
+//     {
+//         "brand": "Reebok",
+//         "policy": "30-day return",
+//         "size": "XL",
+//         "oldPrice": 93.81,
+//         "badge": "Limited",
+//         "category": "Gear",
+//         "title": "Fitness Tracker",
+//         "price": 32.62,
+//         "count": 79,
+//         "description": "High-quality product with modern design.",
+//         "rating": 1
+//     },
+//     {
+//         "brand": "Puma",
+//         "policy": "30-day return",
+//         "size": "S",
+//         "oldPrice": 118.48,
+//         "badge": "Bestseller",
+//         "category": "Clothing",
+//         "title": "Gym Bag",
+//         "price": 123.22,
+//         "count": 2,
+//         "description": "Top-rated item by customers.",
+//         "rating": 5
+//     },
+//     {
+//         "brand": "Puma",
+//         "policy": "No return",
+//         "size": "S",
+//         "oldPrice": 118.72,
+//         "badge": "Bestseller",
+//         "category": "Gear",
+//         "title": "Fitness Tracker",
+//         "price": 20.76,
+//         "count": 23,
+//         "description": "Durable and reliable for everyday use.",
+//         "rating": 1
+//     },
+//     {
+//         "brand": "Under Armour",
+//         "policy": "30-day return",
+//         "size": "M",
+//         "oldPrice": 160.7,
+//         "badge": "New",
+//         "category": "Clothing",
+//         "title": "Sports T-Shirt",
+//         "price": 55.3,
+//         "count": 77,
+//         "description": "High-quality product with modern design.",
+//         "rating": 5
+//     },
+//     {
+//         "brand": "Nike",
+//         "policy": "30-day return",
+//         "size": "S",
+//         "oldPrice": 146.24,
+//         "badge": "Limited",
+//         "category": "Accessories",
+//         "title": "Running Shoes",
+//         "price": 52.18,
+//         "count": 28,
+//         "description": "High-quality product with modern design.",
+//         "rating": 5
+//     },
+//     {
+//         "brand": "Puma",
+//         "policy": "Exchange only",
+//         "size": "XL",
+//         "oldPrice": 184.19,
+//         "badge": "Exclusive",
+//         "category": "Accessories",
+//         "title": "Gym Bag",
+//         "price": 149.19,
+//         "count": 3,
+//         "description": "Top-rated item by customers.",
+//         "rating": 5
+//     },
+//     {
+//         "brand": "Puma",
+//         "policy": "30-day return",
+//         "size": "XL",
+//         "oldPrice": 61.19,
+//         "badge": "Bestseller",
+//         "category": "Gear",
+//         "title": "Gym Bag",
+//         "price": 48.16,
+//         "count": 84,
+//         "description": "Top-rated item by customers.",
+//         "rating": 5
+//     },
+//     {
+//         "brand": "Nike",
+//         "policy": "Exchange only",
+//         "size": "M",
+//         "oldPrice": 75.73,
+//         "badge": "New",
+//         "category": "Shoes",
+//         "title": "Gym Bag",
+//         "price": 50.68,
+//         "count": 4,
+//         "description": "Top-rated item by customers.",
+//         "rating": 4
+//     },
+//     {
+//         "brand": "Reebok",
+//         "policy": "Refundable",
+//         "size": "M",
+//         "oldPrice": 127.1,
+//         "badge": "Exclusive",
+//         "category": "Clothing",
+//         "title": "Sneakers",
+//         "price": 134.71,
+//         "count": 5,
+//         "description": "Lightweight and comfortable.",
+//         "rating": 3
+//     },
+//     {
+//         "brand": "Nike",
+//         "policy": "Exchange only",
+//         "size": "L",
+//         "oldPrice": 154.86,
+//         "badge": "Exclusive",
+//         "category": "Clothing",
+//         "title": "Gym Bag",
+//         "price": 142.5,
+//         "count": 14,
+//         "description": "High-quality product with modern design.",
+//         "rating": 3
+//     },
+//     {
+//         "brand": "Nike",
+//         "policy": "Refundable",
+//         "size": "XL",
+//         "oldPrice": 164.79,
+//         "badge": "Limited",
+//         "category": "Clothing",
+//         "title": "Fitness Tracker",
+//         "price": 34.95,
+//         "count": 31,
+//         "description": "Durable and reliable for everyday use.",
+//         "rating": 3
+//     },
+//     {
+//         "brand": "Nike",
+//         "policy": "30-day return",
+//         "size": "S",
+//         "oldPrice": 182.84,
+//         "badge": "Sale",
+//         "category": "Clothing",
+//         "title": "Gym Bag",
+//         "price": 146.32,
+//         "count": 34,
+//         "description": "High-quality product with modern design.",
+//         "rating": 1
+//     },
+//     {
+//         "brand": "Reebok",
+//         "policy": "Exchange only",
+//         "size": "S",
+//         "oldPrice": 79.33,
+//         "badge": "Limited",
+//         "category": "Clothing",
+//         "title": "Running Shoes",
+//         "price": 103.22,
+//         "count": 5,
+//         "description": "Lightweight and comfortable.",
+//         "rating": 1
+//     },
+//     {
+//         "brand": "Under Armour",
+//         "policy": "No return",
+//         "size": "XL",
+//         "oldPrice": 120.59,
+//         "badge": "Bestseller",
+//         "category": "Gear",
+//         "title": "Sneakers",
+//         "price": 89.61,
+//         "count": 35,
+//         "description": "Perfect for training and casual wear.",
+//         "rating": 5
+//     },
+//     {
+//         "brand": "Puma",
+//         "policy": "Exchange only",
+//         "size": "XL",
+//         "oldPrice": 133.18,
+//         "badge": "Exclusive",
+//         "category": "Shoes",
+//         "title": "Running Shoes",
+//         "price": 58.3,
+//         "count": 49,
+//         "description": "Perfect for training and casual wear.",
+//         "rating": 5
+//     },
+//     {
+//         "brand": "Reebok",
+//         "policy": "Exchange only",
+//         "size": "S",
+//         "oldPrice": 178.37,
+//         "badge": "Bestseller",
+//         "category": "Accessories",
+//         "title": "Running Shoes",
+//         "price": 40.51,
+//         "count": 79,
+//         "description": "Durable and reliable for everyday use.",
+//         "rating": 1
+//     },
+//     {
+//         "brand": "Nike",
+//         "policy": "30-day return",
+//         "size": "L",
+//         "oldPrice": 60.44,
+//         "badge": "Limited",
+//         "category": "Shoes",
+//         "title": "Running Shoes",
+//         "price": 67.01,
+//         "count": 39,
+//         "description": "High-quality product with modern design.",
+//         "rating": 2
+//     },
+//     {
+//         "brand": "Reebok",
+//         "policy": "30-day return",
+//         "size": "L",
+//         "oldPrice": 147.26,
+//         "badge": "Sale",
+//         "category": "Clothing",
+//         "title": "Gym Bag",
+//         "price": 29.91,
+//         "count": 56,
+//         "description": "Top-rated item by customers.",
+//         "rating": 4
+//     },
+//     {
+//         "brand": "Under Armour",
+//         "policy": "Refundable",
+//         "size": "M",
+//         "oldPrice": 127.47,
+//         "badge": "New",
+//         "category": "Shoes",
+//         "title": "Sports T-Shirt",
+//         "price": 96.25,
+//         "count": 43,
+//         "description": "High-quality product with modern design.",
+//         "rating": 1
+//     },
+//     {
+//         "brand": "Puma",
+//         "policy": "Exchange only",
+//         "size": "XL",
+//         "oldPrice": 82.31,
+//         "badge": "Limited",
+//         "category": "Accessories",
+//         "title": "Fitness Tracker",
+//         "price": 95.45,
+//         "count": 95,
+//         "description": "Perfect for training and casual wear.",
+//         "rating": 5
+//     },
+//     {
+//         "brand": "Puma",
+//         "policy": "Refundable",
+//         "size": "XL",
+//         "oldPrice": 105.1,
+//         "badge": "Exclusive",
+//         "category": "Clothing",
+//         "title": "Sports T-Shirt",
+//         "price": 69.27,
+//         "count": 2,
+//         "description": "Lightweight and comfortable.",
+//         "rating": 5
+//     },
+//     {
+//         "brand": "Reebok",
+//         "policy": "30-day return",
+//         "size": "L",
+//         "oldPrice": 85.77,
+//         "badge": "New",
+//         "category": "Shoes",
+//         "title": "Gym Bag",
+//         "price": 103.47,
+//         "count": 1,
+//         "description": "Durable and reliable for everyday use.",
+//         "rating": 2
+//     },
+//     {
+//         "brand": "Under Armour",
+//         "policy": "30-day return",
+//         "size": "S",
+//         "oldPrice": 171.74,
+//         "badge": "Limited",
+//         "category": "Gear",
+//         "title": "Running Shoes",
+//         "price": 74.83,
+//         "count": 58,
+//         "description": "Perfect for training and casual wear.",
+//         "rating": 1
+//     },
+//     {
+//         "brand": "Nike",
+//         "policy": "Refundable",
+//         "size": "XL",
+//         "oldPrice": 159.65,
+//         "badge": "Exclusive",
+//         "category": "Clothing",
+//         "title": "Sneakers",
+//         "price": 63.11,
+//         "count": 47,
+//         "description": "Top-rated item by customers.",
+//         "rating": 2
+//     },
+//     {
+//         "brand": "Adidas",
+//         "policy": "Refundable",
+//         "size": "M",
+//         "oldPrice": 84.38,
+//         "badge": "Bestseller",
+//         "category": "Accessories",
+//         "title": "Sneakers",
+//         "price": 30.91,
+//         "count": 86,
+//         "description": "Top-rated item by customers.",
+//         "rating": 4
+//     },
+//     {
+//         "brand": "Under Armour",
+//         "policy": "30-day return",
+//         "size": "XL",
+//         "oldPrice": 94.78,
+//         "badge": "Sale",
+//         "category": "Shoes",
+//         "title": "Running Shoes",
+//         "price": 87.31,
+//         "count": 32,
+//         "description": "Lightweight and comfortable.",
+//         "rating": 2
+//     },
+//     {
+//         "brand": "Under Armour",
+//         "policy": "30-day return",
+//         "size": "L",
+//         "oldPrice": 196.82,
+//         "badge": "Limited",
+//         "category": "Gear",
+//         "title": "Gym Bag",
+//         "price": 70.35,
+//         "count": 19,
+//         "description": "Perfect for training and casual wear.",
+//         "rating": 4
+//     },
+//     {
+//         "brand": "Adidas",
+//         "policy": "Refundable",
+//         "size": "XL",
+//         "oldPrice": 155.04,
+//         "badge": "New",
+//         "category": "Shoes",
+//         "title": "Gym Bag",
+//         "price": 39.16,
+//         "count": 38,
+//         "description": "High-quality product with modern design.",
+//         "rating": 1
+//     },
+//     {
+//         "brand": "Under Armour",
+//         "policy": "30-day return",
+//         "size": "M",
+//         "oldPrice": 150.57,
+//         "badge": "Bestseller",
+//         "category": "Clothing",
+//         "title": "Sports T-Shirt",
+//         "price": 61.68,
+//         "count": 60,
+//         "description": "Top-rated item by customers.",
+//         "rating": 2
+//     },
+//     {
+//         "brand": "Adidas",
+//         "policy": "No return",
+//         "size": "M",
+//         "oldPrice": 163.95,
+//         "badge": "New",
+//         "category": "Accessories",
+//         "title": "Running Shoes",
+//         "price": 119.23,
+//         "count": 27,
+//         "description": "Lightweight and comfortable.",
+//         "rating": 4
+//     },
+//     {
+//         "brand": "Nike",
+//         "policy": "Refundable",
+//         "size": "S",
+//         "oldPrice": 157.22,
+//         "badge": "New",
+//         "category": "Shoes",
+//         "title": "Sneakers",
+//         "price": 97.1,
+//         "count": 20,
+//         "description": "Lightweight and comfortable.",
+//         "rating": 2
+//     },
+//     {
+//         "brand": "Puma",
+//         "policy": "No return",
+//         "size": "M",
+//         "oldPrice": 108.46,
+//         "badge": "Limited",
+//         "category": "Clothing",
+//         "title": "Gym Bag",
+//         "price": 23.25,
+//         "count": 95,
+//         "description": "Perfect for training and casual wear.",
+//         "rating": 4
+//     },
+//     {
+//         "brand": "Nike",
+//         "policy": "30-day return",
+//         "size": "XL",
+//         "oldPrice": 141.22,
+//         "badge": "Sale",
+//         "category": "Clothing",
+//         "title": "Fitness Tracker",
+//         "price": 88.12,
+//         "count": 87,
+//         "description": "Perfect for training and casual wear.",
+//         "rating": 5
+//     },
+//     {
+//         "brand": "Nike",
+//         "policy": "No return",
+//         "size": "L",
+//         "oldPrice": 187.65,
+//         "badge": "Bestseller",
+//         "category": "Accessories",
+//         "title": "Sneakers",
+//         "price": 144.27,
+//         "count": 36,
+//         "description": "High-quality product with modern design.",
+//         "rating": 4
+//     },
+//     {
+//         "brand": "Puma",
+//         "policy": "Exchange only",
+//         "size": "XL",
+//         "oldPrice": 88.43,
+//         "badge": "New",
+//         "category": "Clothing",
+//         "title": "Sports T-Shirt",
+//         "price": 125.02,
+//         "count": 39,
+//         "description": "Lightweight and comfortable.",
+//         "rating": 1
+//     },
+//     {
+//         "brand": "Reebok",
+//         "policy": "No return",
+//         "size": "S",
+//         "oldPrice": 116.59,
+//         "badge": "Exclusive",
+//         "category": "Clothing",
+//         "title": "Running Shoes",
+//         "price": 105.36,
+//         "count": 85,
+//         "description": "High-quality product with modern design.",
+//         "rating": 2
+//     },
+//     {
+//         "brand": "Puma",
+//         "policy": "Exchange only",
+//         "size": "S",
+//         "oldPrice": 79.22,
+//         "badge": "Sale",
+//         "category": "Clothing",
+//         "title": "Sports T-Shirt",
+//         "price": 69.09,
+//         "count": 33,
+//         "description": "Lightweight and comfortable.",
+//         "rating": 2
+//     },
+//     {
+//         "brand": "Under Armour",
+//         "policy": "Exchange only",
+//         "size": "L",
+//         "oldPrice": 77.0,
+//         "badge": "Limited",
+//         "category": "Shoes",
+//         "title": "Sneakers",
+//         "price": 108.08,
+//         "count": 26,
+//         "description": "Perfect for training and casual wear.",
+//         "rating": 5
+//     },
+//     {
+//         "brand": "Nike",
+//         "policy": "30-day return",
+//         "size": "S",
+//         "oldPrice": 60.45,
+//         "badge": "Bestseller",
+//         "category": "Clothing",
+//         "title": "Gym Bag",
+//         "price": 129.0,
+//         "count": 85,
+//         "description": "Durable and reliable for everyday use.",
+//         "rating": 1
+//     },
+//     {
+//         "brand": "Adidas",
+//         "policy": "Exchange only",
+//         "size": "L",
+//         "oldPrice": 154.96,
+//         "badge": "Bestseller",
+//         "category": "Shoes",
+//         "title": "Sports T-Shirt",
+//         "price": 47.61,
+//         "count": 20,
+//         "description": "Perfect for training and casual wear.",
+//         "rating": 3
+//     },
+//     {
+//         "brand": "Reebok",
+//         "policy": "Refundable",
+//         "size": "M",
+//         "oldPrice": 131.44,
+//         "badge": "Exclusive",
+//         "category": "Clothing",
+//         "title": "Gym Bag",
+//         "price": 88.44,
+//         "count": 22,
+//         "description": "Durable and reliable for everyday use.",
+//         "rating": 5
+//     },
+//     {
+//         "brand": "Nike",
+//         "policy": "Exchange only",
+//         "size": "L",
+//         "oldPrice": 128.98,
+//         "badge": "Limited",
+//         "category": "Accessories",
+//         "title": "Sports T-Shirt",
+//         "price": 40.4,
+//         "count": 97,
+//         "description": "High-quality product with modern design.",
+//         "rating": 4
+//     },
+//     {
+//         "brand": "Puma",
+//         "policy": "Exchange only",
+//         "size": "M",
+//         "oldPrice": 92.16,
+//         "badge": "Bestseller",
+//         "category": "Clothing",
+//         "title": "Running Shoes",
+//         "price": 22.32,
+//         "count": 40,
+//         "description": "High-quality product with modern design.",
+//         "rating": 2
+//     },
+//     {
+//         "brand": "Under Armour",
+//         "policy": "Exchange only",
+//         "size": "XL",
+//         "oldPrice": 159.62,
+//         "badge": "Sale",
+//         "category": "Clothing",
+//         "title": "Sneakers",
+//         "price": 29.15,
+//         "count": 23,
+//         "description": "Lightweight and comfortable.",
+//         "rating": 5
+//     },
+//     {
+//         "brand": "Adidas",
+//         "policy": "30-day return",
+//         "size": "L",
+//         "oldPrice": 98.12,
+//         "badge": "Sale",
+//         "category": "Accessories",
+//         "title": "Running Shoes",
+//         "price": 103.88,
+//         "count": 30,
+//         "description": "Perfect for training and casual wear.",
+//         "rating": 2
+//     },
+//     {
+//         "brand": "Puma",
+//         "policy": "Exchange only",
+//         "size": "L",
+//         "oldPrice": 101.93,
+//         "badge": "New",
+//         "category": "Shoes",
+//         "title": "Fitness Tracker",
+//         "price": 50.66,
+//         "count": 64,
+//         "description": "Perfect for training and casual wear.",
+//         "rating": 1
+//     },
+//     {
+//         "brand": "Adidas",
+//         "policy": "30-day return",
+//         "size": "S",
+//         "oldPrice": 187.79,
+//         "badge": "Limited",
+//         "category": "Accessories",
+//         "title": "Running Shoes",
+//         "price": 66.84,
+//         "count": 8,
+//         "description": "Durable and reliable for everyday use.",
+//         "rating": 2
+//     },
+//     {
+//         "brand": "Nike",
+//         "policy": "No return",
+//         "size": "S",
+//         "oldPrice": 168.95,
+//         "badge": "Sale",
+//         "category": "Clothing",
+//         "title": "Sports T-Shirt",
+//         "price": 43.38,
+//         "count": 17,
+//         "description": "Durable and reliable for everyday use.",
+//         "rating": 4
+//     },
+//     {
+//         "brand": "Adidas",
+//         "policy": "No return",
+//         "size": "M",
+//         "oldPrice": 185.42,
+//         "badge": "Limited",
+//         "category": "Shoes",
+//         "title": "Sports T-Shirt",
+//         "price": 71.1,
+//         "count": 2,
+//         "description": "Durable and reliable for everyday use.",
+//         "rating": 5
+//     },
+//     {
+//         "brand": "Reebok",
+//         "policy": "Refundable",
+//         "size": "L",
+//         "oldPrice": 146.94,
+//         "badge": "Exclusive",
+//         "category": "Gear",
+//         "title": "Running Shoes",
+//         "price": 77.77,
+//         "count": 42,
+//         "description": "Durable and reliable for everyday use.",
+//         "rating": 4
+//     },
+//     {
+//         "brand": "Reebok",
+//         "policy": "30-day return",
+//         "size": "L",
+//         "oldPrice": 74.75,
+//         "badge": "Exclusive",
+//         "category": "Accessories",
+//         "title": "Sneakers",
+//         "price": 59.73,
+//         "count": 72,
+//         "description": "Perfect for training and casual wear.",
+//         "rating": 5
+//     },
+//     {
+//         "brand": "Puma",
+//         "policy": "30-day return",
+//         "size": "XL",
+//         "oldPrice": 192.3,
+//         "badge": "Bestseller",
+//         "category": "Shoes",
+//         "title": "Fitness Tracker",
+//         "price": 141.55,
+//         "count": 86,
+//         "description": "Top-rated item by customers.",
+//         "rating": 5
+//     },
+//     {
+//         "brand": "Adidas",
+//         "policy": "No return",
+//         "size": "L",
+//         "oldPrice": 72.93,
+//         "badge": "Exclusive",
+//         "category": "Gear",
+//         "title": "Fitness Tracker",
+//         "price": 63.55,
+//         "count": 41,
+//         "description": "Perfect for training and casual wear.",
+//         "rating": 4
+//     },
+//     {
+//         "brand": "Nike",
+//         "policy": "Refundable",
+//         "size": "L",
+//         "oldPrice": 197.53,
+//         "badge": "Exclusive",
+//         "category": "Clothing",
+//         "title": "Gym Bag",
+//         "price": 22.23,
+//         "count": 58,
+//         "description": "Perfect for training and casual wear.",
+//         "rating": 3
+//     },
+//     {
+//         "brand": "Puma",
+//         "policy": "30-day return",
+//         "size": "XL",
+//         "oldPrice": 89.31,
+//         "badge": "New",
+//         "category": "Accessories",
+//         "title": "Sneakers",
+//         "price": 125.5,
+//         "count": 23,
+//         "description": "Perfect for training and casual wear.",
+//         "rating": 4
+//     },
+//     {
+//         "brand": "Puma",
+//         "policy": "Refundable",
+//         "size": "XL",
+//         "oldPrice": 178.9,
+//         "badge": "New",
+//         "category": "Accessories",
+//         "title": "Fitness Tracker",
+//         "price": 142.01,
+//         "count": 67,
+//         "description": "Lightweight and comfortable.",
+//         "rating": 5
+//     },
+//     {
+//         "brand": "Puma",
+//         "policy": "Exchange only",
+//         "size": "XL",
+//         "oldPrice": 99.41,
+//         "badge": "Bestseller",
+//         "category": "Clothing",
+//         "title": "Fitness Tracker",
+//         "price": 23.63,
+//         "count": 44,
+//         "description": "Lightweight and comfortable.",
+//         "rating": 2
+//     },
+//     {
+//         "brand": "Puma",
+//         "policy": "Exchange only",
+//         "size": "XL",
+//         "oldPrice": 89.93,
+//         "badge": "Exclusive",
+//         "category": "Clothing",
+//         "title": "Fitness Tracker",
+//         "price": 82.25,
+//         "count": 3,
+//         "description": "Top-rated item by customers.",
+//         "rating": 1
+//     },
+//     {
+//         "brand": "Adidas",
+//         "policy": "No return",
+//         "size": "M",
+//         "oldPrice": 86.61,
+//         "badge": "New",
+//         "category": "Gear",
+//         "title": "Sports T-Shirt",
+//         "price": 42.08,
+//         "count": 9,
+//         "description": "High-quality product with modern design.",
+//         "rating": 4
+//     }
 // ]
 //     async function addProductsToDB() {
 //         for (let i = 0; products.length; i++) {
@@ -380,5 +2711,5 @@ export { fetchOnePage, currentPage }
 //         }
 //     }
 
-
 // addProductsToDB()
+

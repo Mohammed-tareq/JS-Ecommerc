@@ -1,6 +1,7 @@
-const detailsContainer = document.getElementById('main-details');
+//setDataToDetailsItem.js
+const detailsContainer = document.getElementById("main-details");
 function setDataToDetailsItem({ title, price, oldPrice, badge, category }) {
-    detailsContainer.innerHTML += `
+  detailsContainer.innerHTML += `
     <div class="details-group">
         <h3 class="details-title">${title}</h3>
 
@@ -68,9 +69,6 @@ function setDataToDetailsItem({ title, price, oldPrice, badge, category }) {
         </ul>
     </div>
 `;
-
 }
 
-
-export { setDataToDetailsItem }
-
+export { setDataToDetailsItem };

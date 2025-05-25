@@ -1,41 +1,38 @@
+//getrelatedProducts.js
 import { collection, db, getDocs, limit, query, where } from "./firebaseFirestore.js";
 import { setDataToRelatedProducts } from "./setDataToRelatedProducts.js";
+import { addToCart } from "./addToCart.js";
 
 async function getRelatedProducts({ category }) {
-    try {
-        // First get all products in the category
-        let q = query(collection(db, 'products'), where("category", "==", category));
-        const documentSnapshots = await getDocs(q);
-        const docs = documentSnapshots.docs;
+  let q = query(collection(db, 'products'), where("category", "==", category), limit(4));
+  const documentSnapshots = await getDocs(q);
+  const docs = documentSnapshots.docs;
+  let relatedProductsContainer = document.getElementById("relatedProducts"); // Get container once
+  relatedProductsContainer.innerHTML = ''; // Clear previous content
 
-        // If we have less than 4 products, get some products from other categories
-        if (docs.length < 4) {
-            // Get remaining products from other categories
-            let remainingProducts = 4 - docs.length;
-            let otherProductsQuery = query(
-                collection(db, 'products'),
-                where("category", "!=", category),
-                limit(remainingProducts)
-            );
-            const otherProductsSnapshots = await getDocs(otherProductsQuery);
-            const otherDocs = otherProductsSnapshots.docs;
+  docs.forEach(async docItem => { // Use async forEach to await getDoc if needed, though not strictly required here
+    const productData = docItem.data();
+    const productId = docItem.id;
 
-            // Combine both sets of products
-            const allDocs = [...docs, ...otherDocs];
+    setDataToRelatedProducts(productData, productId); // This function now *adds* the HTML
 
-            // Display all products
-            allDocs.forEach(doc => {
-                setDataToRelatedProducts(doc.data(), doc.id);
-            });
-        } else {
-            // If we have enough products in the same category, just show those
-            docs.slice(0, 4).forEach(doc => {
-                setDataToRelatedProducts(doc.data(), doc.id);
-            });
-        }
-    } catch (error) {
-        console.error("Error fetching related products:", error);
+    // --- NEW: Attach event listener to the newly added product item's cart button ---
+    // Select the last added product item's cart button
+    // This needs to be done *after* setDataToRelatedProducts has added the HTML
+    const newProductItem = relatedProductsContainer.lastElementChild;
+    if (newProductItem) {
+      const cartBtn = newProductItem.querySelector(".cart-btn");
+      if (cartBtn) {
+        cartBtn.addEventListener("click", async (event) => {
+          event.preventDefault(); // Prevent page refresh
+          // The productData is already available from docItem.data()
+          addToCart(productId, productData, 1); // Add with default quantity 1
+        });
+      }
     }
+    // --- END NEW ---
+  });
 }
+
 
 export { getRelatedProducts };

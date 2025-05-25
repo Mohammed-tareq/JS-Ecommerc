@@ -14,34 +14,15 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
     <!--=============== CSS ===============-->
+    <link rel="stylesheet" href="assets/css/all.min.css">
     <link rel="stylesheet" href="./assets/css/styles.css" />
-    <script type="module">
-    import { auth, onAuthStateChanged } from "./assets/js/userAuth.js";
 
-    window.addEventListener("DOMContentLoaded", () => {
-      const myAccountLink = document.getElementById("myAccount");
-      const loggedIn = document.getElementById("loggedIn");
-      const loggedOut = document.getElementById("logOutBtn");
+    <!-- =======================js button=============== -->
+ <script src="./assets/js/scrollToTop.js" defer></script>
 
-      onAuthStateChanged(auth, (user) => {
-        const myAccountLink = document.getElementById("myAccount");
-        const loginLink = document.getElementById("loggedIn");
-        const logoutLink = document.getElementById("logOutBtn");
+ <!-- =======================headerHandeler======= -->
+ <script src="assets/js/headerHandler.js" defer></script>
 
-        if (user) {
-          // User is logged in
-          if (myAccountLink) myAccountLink.style.display = "block";
-          if (logoutLink) logoutLink.style.display = "block";
-          if (loginLink) loginLink.style.display = "none";
-        } else {
-          // User is logged out
-          if (myAccountLink) myAccountLink.style.display = "none";
-          if (logoutLink) logoutLink.style.display = "none";
-          if (loginLink) loginLink.style.display = "block";
-        }
-      });
-    });
-  </script>
     <title>Ecommerce Website</title>
 </head>
 
@@ -79,18 +60,15 @@
                     <li class="nav-item">
                         <a href="shop.html" class="nav-link active-link ">Shop</a>
                     </li>
-                    <li class="nav-item" id="myAccount" style="display: none;">
-            <a href="accounts.html" class="nav-link">My Account</a>
-          </li>
-          <li class="nav-item">
-            <a href="compare.html" class="nav-link">Compare</a>
-          </li>
-          <li class="nav-item" id="loggedIn" style="display: block;">
-            <a href="login-register.html" class="nav-link">Login</a>
-          </li>
-          <li class="nav-item" id="logOutBtn" style="display: none;">
-            <a href="#" class="nav-link">Logout</a>
-          </li>
+                    <li class="nav-item">
+                        <a href="accounts.html" class="nav-link">My Account</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="compare.html" class="nav-link">Compare</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="login-register.html" class="nav-link">Login</a>
+                    </li>
 
                 </ul>
 
@@ -161,8 +139,8 @@
                     </div>
 
                 </div>
-                <div class="details-group">
-                    <h3 class="details-title">
+                <div id="main-details" class="details-group">
+                    <!-- <h3 class="details-title">
                         Henley Shirt
                     </h3>
 
@@ -248,7 +226,7 @@
                                 <a href="#" class="size-link">XXL</a>
                             </li>
 
-                        </ul>
+                        </ul> -->
 
                     </div>
 
@@ -411,7 +389,7 @@
                         </div>
                         <div class="review-single">
                             <div>
-                                <img src="assets/img/avatar-3.jpg" alt="" class="review-img">
+                                <img src="assets/img/avatar-4.jpg" alt="" class="review-img">
 
                                 <h4 class="review-title">
                                     Jackey Chan
@@ -477,239 +455,7 @@
         <section class="products container section-lg">
             <h3 class="section-title"><span>Related</span> Products</h3>
 
-            <div class="products-container grid">
-                <div class="product-item">
-                    <div class="product-banner">
-                        <a href="details.html" class="product-imgs">
-                            <img src="assets/img/product-9-1.jpg" class="product-img default" alt="product-1">
-
-                            <img src="assets/img/product-9-2.jpg" class="product-img hover" alt="product-1">
-
-                        </a>
-
-                        <div class="product-actions">
-                            <a href="#" class="action-btn" aria-label="Quick View">
-                                <i class="fi fi-rs-eye"></i>
-                            </a>
-
-                            <a href="#" class="action-btn" aria-label="Add to Wishlist">
-                                <i class="fi fi-rs-heart"></i>
-                            </a>
-
-                            <a href="#" class="action-btn" aria-label="Compare">
-                                <i class="fi fi-rs-shuffle"></i>
-                            </a>
-
-                        </div>
-
-                        <div class="product-badge light-pink">Hot</div>
-
-                    </div>
-
-                    <div class="product-content">
-                        <span class="product-category">Clothing</span>
-
-                        <a href="details.html">
-                            <h3 class="product-title">
-                                Colorful Pattern Shirts
-                            </h3>
-                        </a>
-
-                        <div class="product-rating">
-                            <i class="fi fi-rs-star"></i>
-                            <i class="fi fi-rs-star"></i>
-                            <i class="fi fi-rs-star"></i>
-                            <i class="fi fi-rs-star"></i>
-                            <i class="fi fi-rs-star"></i>
-                        </div>
-                        <div class="flex-content" style="padding: 5px">
-
-                            <div class="product-price flex">
-                                <span class="new-price">$238</span>
-                                <span class="old-price">$250</span>
-                            </div>
-
-                            <a href="#" class="action-btn cart-btn" aria-label="Add to Cart">
-                                <i class="fi fi-rs-shopping-bag-add"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="product-item">
-                    <div class="product-banner">
-                        <a href="details.html" class="product-imgs">
-                            <img src="assets/img/product-2-1.jpg" class="product-img default" alt="product-1">
-
-                            <img src="assets/img/product-2-2.jpg" class="product-img hover" alt="product-1">
-
-                        </a>
-
-                        <div class="product-actions">
-                            <a href="#" class="action-btn" aria-label="Quick View">
-                                <i class="fi fi-rs-eye"></i>
-                            </a>
-
-                            <a href="#" class="action-btn" aria-label="Add to Wishlist">
-                                <i class="fi fi-rs-heart"></i>
-                            </a>
-
-                            <a href="#" class="action-btn" aria-label="Compare">
-                                <i class="fi fi-rs-shuffle"></i>
-                            </a>
-
-                        </div>
-
-                        <div class="product-badge light-green">Hot</div>
-
-                    </div>
-
-                    <div class="product-content">
-                        <span class="product-category">Clothing</span>
-
-                        <a href="details.html">
-                            <h3 class="product-title">
-                                Colorful Pattern Shirts
-                            </h3>
-                        </a>
-
-                        <div class="product-rating">
-                            <i class="fi fi-rs-star"></i>
-                            <i class="fi fi-rs-star"></i>
-                            <i class="fi fi-rs-star"></i>
-                            <i class="fi fi-rs-star"></i>
-                            <i class="fi fi-rs-star"></i>
-                        </div>
-                        <div class="flex-content" style="padding: 5px">
-
-                            <div class="product-price flex">
-                                <span class="new-price">$238</span>
-                                <span class="old-price">$250</span>
-                            </div>
-
-                            <a href="#" class="action-btn cart-btn" aria-label="Add to Cart">
-                                <i class="fi fi-rs-shopping-bag-add"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="product-item">
-                    <div class="product-banner">
-                        <a href="details.html" class="product-imgs">
-                            <img src="assets/img/product-3-1.jpg" class="product-img default" alt="product-1">
-
-                            <img src="assets/img/product-3-2.jpg" class="product-img hover" alt="product-1">
-
-                        </a>
-
-                        <div class="product-actions">
-                            <a href="#" class="action-btn" aria-label="Quick View">
-                                <i class="fi fi-rs-eye"></i>
-                            </a>
-
-                            <a href="#" class="action-btn" aria-label="Add to Wishlist">
-                                <i class="fi fi-rs-heart"></i>
-                            </a>
-
-                            <a href="#" class="action-btn" aria-label="Compare">
-                                <i class="fi fi-rs-shuffle"></i>
-                            </a>
-
-                        </div>
-
-                        <div class="product-badge light-orange">Hot</div>
-
-                    </div>
-
-                    <div class="product-content">
-                        <span class="product-category">Clothing</span>
-
-                        <a href="details.html">
-                            <h3 class="product-title">
-                                Colorful Pattern Shirts
-                            </h3>
-                        </a>
-
-                        <div class="product-rating">
-                            <i class="fi fi-rs-star"></i>
-                            <i class="fi fi-rs-star"></i>
-                            <i class="fi fi-rs-star"></i>
-                            <i class="fi fi-rs-star"></i>
-                            <i class="fi fi-rs-star"></i>
-                        </div>
-                        <div class="flex-content" style="padding: 5px">
-
-                            <div class="product-price flex">
-                                <span class="new-price">$238</span>
-                                <span class="old-price">$250</span>
-                            </div>
-
-                            <a href="#" class="action-btn cart-btn" aria-label="Add to Cart">
-                                <i class="fi fi-rs-shopping-bag-add"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="product-item">
-                    <div class="product-banner">
-                        <a href="details.html" class="product-imgs">
-                            <img src="assets/img/product-4-1.jpg" class="product-img default" alt="product-1">
-
-                            <img src="assets/img/product-4-2.jpg" class="product-img hover" alt="product-1">
-
-                        </a>
-
-                        <div class="product-actions">
-                            <a href="#" class="action-btn" aria-label="Quick View">
-                                <i class="fi fi-rs-eye"></i>
-                            </a>
-
-                            <a href="#" class="action-btn" aria-label="Add to Wishlist">
-                                <i class="fi fi-rs-heart"></i>
-                            </a>
-
-                            <a href="#" class="action-btn" aria-label="Compare">
-                                <i class="fi fi-rs-shuffle"></i>
-                            </a>
-
-                        </div>
-
-                        <div class="product-badge light-blue">Hot</div>
-
-                    </div>
-
-                    <div class="product-content">
-                        <span class="product-category">Clothing</span>
-
-                        <a href="details.html">
-                            <h3 class="product-title">
-                                Colorful Pattern Shirts
-                            </h3>
-                        </a>
-
-                        <div class="product-rating">
-                            <i class="fi fi-rs-star"></i>
-                            <i class="fi fi-rs-star"></i>
-                            <i class="fi fi-rs-star"></i>
-                            <i class="fi fi-rs-star"></i>
-                            <i class="fi fi-rs-star"></i>
-                        </div>
-                        <div class="flex-content" style="padding: 5px">
-
-                            <div class="product-price flex">
-                                <span class="new-price">$238</span>
-                                <span class="old-price">$250</span>
-                            </div>
-
-                            <a href="#" class="action-btn cart-btn" aria-label="Add to Cart">
-                                <i class="fi fi-rs-shopping-bag-add"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
+            <div  id = "relatedProducts" class="products-container grid">
             </div>
         </section>
 
@@ -836,7 +582,7 @@
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
     <!--=============== MAIN JS ===============-->
-    <script type="module" src="assets/js/app.js"></script>
+    <script type="module" src="assets/js/getDetailsOfProduct.js"></script>
 </body>
 
 </html>

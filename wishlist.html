@@ -14,33 +14,14 @@
 
   <!--=============== CSS ===============-->
   <link rel="stylesheet" href="./assets/css/styles.css" />
-  <script type="module">
-    import { auth, onAuthStateChanged } from "./assets/js/userAuth.js";
+<link rel="stylesheet" href="./assets/css/responsive.css"/>
 
-    window.addEventListener("DOMContentLoaded", () => {
-      const myAccountLink = document.getElementById("myAccount");
-      const loggedIn = document.getElementById("loggedIn");
-      const loggedOut = document.getElementById("logOutBtn");
+<!-- =======================js button=============== -->
+ <script src="./assets/js/scrollToTop.js" defer></script>
 
-      onAuthStateChanged(auth, (user) => {
-        const myAccountLink = document.getElementById("myAccount");
-        const loginLink = document.getElementById("loggedIn");
-        const logoutLink = document.getElementById("logOutBtn");
+ <!-- =======================headerHandeler======= -->
+ <script src="assets/js/headerHandler.js" defer></script>
 
-        if (user) {
-          // User is logged in
-          if (myAccountLink) myAccountLink.style.display = "block";
-          if (logoutLink) logoutLink.style.display = "block";
-          if (loginLink) loginLink.style.display = "none";
-        } else {
-          // User is logged out
-          if (myAccountLink) myAccountLink.style.display = "none";
-          if (logoutLink) logoutLink.style.display = "none";
-          if (loginLink) loginLink.style.display = "block";
-        }
-      });
-    });
-  </script>
   <title>Ecommerce Website</title>
 </head>
 
@@ -78,17 +59,14 @@
           <li class="nav-item">
             <a href="shop.html" class="nav-link ">Shop</a>
           </li>
-          <li class="nav-item" id="myAccount" style="display: none;">
+          <li class="nav-item">
             <a href="accounts.html" class="nav-link">My Account</a>
           </li>
           <li class="nav-item">
             <a href="compare.html" class="nav-link">Compare</a>
           </li>
-          <li class="nav-item" id="loggedIn" style="display: block;">
+          <li class="nav-item">
             <a href="login-register.html" class="nav-link">Login</a>
-          </li>
-          <li class="nav-item" id="logOutBtn" style="display: none;">
-            <a href="#" class="nav-link">Logout</a>
           </li>
 
         </ul>
@@ -357,7 +335,7 @@
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
   <!--=============== MAIN JS ===============-->
-  <script src="assets/js/app.js"></script>
+  <script src="./assets/js/main.js"></script>
 </body>
 
 </html>

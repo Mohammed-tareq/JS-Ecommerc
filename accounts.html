@@ -14,33 +14,15 @@
 
   <!--=============== CSS ===============-->
   <link rel="stylesheet" href="./assets/css/styles.css" />
-  <script type="module">
-    import { auth, onAuthStateChanged } from "./assets/js/userAuth.js";
+<link rel="stylesheet" href="./assets/css/responsive.css">
 
-    window.addEventListener("DOMContentLoaded", () => {
-      const myAccountLink = document.getElementById("myAccount");
-      const loggedIn = document.getElementById("loggedIn");
-      const loggedOut = document.getElementById("logOutBtn");
+<!-- =======================headerHandeler======= -->
+ <script src="assets/js/headerHandler.js" defer></script>
 
-      onAuthStateChanged(auth, (user) => {
-        const myAccountLink = document.getElementById("myAccount");
-        const loginLink = document.getElementById("loggedIn");
-        const logoutLink = document.getElementById("logOutBtn");
 
-        if (user) {
-          // User is logged in
-          if (myAccountLink) myAccountLink.style.display = "block";
-          if (logoutLink) logoutLink.style.display = "block";
-          if (loginLink) loginLink.style.display = "none";
-        } else {
-          // User is logged out
-          if (myAccountLink) myAccountLink.style.display = "none";
-          if (logoutLink) logoutLink.style.display = "none";
-          if (loginLink) loginLink.style.display = "block";
-        }
-      });
-    });
-  </script>
+<!-- =======================js=============== -->
+ <script src="./assets/js/scrollToTop.js" defer></script>
+
   <title>Ecommerce Website</title>
 </head>
 
@@ -78,17 +60,14 @@
           <li class="nav-item">
             <a href="shop.html" class="nav-link ">Shop</a>
           </li>
-          <li class="nav-item" id="myAccount" style="display: none;">
-            <a href="accounts.html" class="nav-link">My Account</a>
+          <li class="nav-item">
+            <a href="accounts.html" class="nav-link active-link">My Account</a>
           </li>
           <li class="nav-item">
-            <a href="compare.html" class="nav-link">Compare</a>
+            <a href="compare.html" class="nav-link ">Compare</a>
           </li>
-          <li class="nav-item" id="loggedIn" style="display: block;">
+          <li class="nav-item">
             <a href="login-register.html" class="nav-link">Login</a>
-          </li>
-          <li class="nav-item" id="logOutBtn" style="display: none;">
-            <a href="#" class="nav-link">Logout</a>
           </li>
 
         </ul>
@@ -180,51 +159,72 @@
             </div>
           </div>
 
-          <div class="tab-content" data-content id="orders">
-            <h3 class="tab-header">Your Order</h3>
+          <!-- Orders Tab (Modified) -->
+<div class="tab-content" data-content id="orders">
+  <h3 class="tab-header">Your Orders</h3>
+  <div class="tab-body">
+    <table class="placed-order-table" id="orders-table">
+      <tr>
+        <th>Order</th>
+        <th>Date</th>
+        <th>Status</th>
+        <th>Total</th>
+        <th>Action</th>
+      </tr>
+      <!-- Orders will be dynamically inserted here -->
+    </table>
+  </div>
+</div>
 
-            <div class="tab-body">
-              <table class="placed-order-table">
-                <tr>
-                  <th>orders</th>
-                  <th>Date</th>
-                  <th>Status</th>
-                  <th>Total</th>
-                  <th>Action</th>
-                </tr>
+<!-- Firebase Orders Script -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.7.3/firebase-app.js";
+  import { getFirestore, collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/11.7.3/firebase-firestore.js";
 
-                <tr>
-                  <td>#1375</td>
-                  <td>May 10 2025</td>
-                  <td>Processing</td>
-                  <td>$120</td>
-                  <td><a href="#" class="view-order">View</a></td>
-                </tr>
-                <tr>
-                  <td>#1375</td>
-                  <td>May 10 2025</td>
-                  <td>Processing</td>
-                  <td>$120</td>
-                  <td><a href="#" class="view-order">View</a></td>
-                </tr>
-                <tr>
-                  <td>#1375</td>
-                  <td>May 10 2025</td>
-                  <td>Processing</td>
-                  <td>$120</td>
-                  <td><a href="#" class="view-order">View</a></td>
-                </tr>
-                <tr>
-                  <td>#1375</td>
-                  <td>May 10 2025</td>
-                  <td>Processing</td>
-                  <td>$120</td>
-                  <td><a href="#" class="view-order">View</a></td>
-                </tr>
+const firebaseConfig = {
+  apiKey: "AIzaSyBvgAkeEr6ai2yZIsX8z90zdtkHAWiSFPA",
+  authDomain: "iti-e-commerce-47ba6.firebaseapp.com",
+  projectId: "iti-e-commerce-47ba6",
+  storageBucket: "iti-e-commerce-47ba6.firebasestorage.app",
+  messagingSenderId: "719185540860",
+  appId: "1:719185540860:web:77a8c68b749823f0e24979"
+};
 
-              </table>
-            </div>
-          </div>
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+
+  document.addEventListener("DOMContentLoaded", async () => {
+    const email = localStorage.getItem("currentUserEmail");
+    const ordersTable = document.getElementById("orders-table");
+
+    if (!email || !ordersTable) return;
+
+    try {
+      const q = query(collection(db, "orders"), where("email", "==", email));
+      const querySnapshot = await getDocs(q);
+
+      let index = 1;
+      querySnapshot.forEach((docSnap) => {
+        const order = docSnap.data();
+        const createdAt = new Date(order.createdAt?.seconds * 1000 || Date.now()).toLocaleDateString();
+        const total = Object.values(order.items || {}).reduce((sum, item) => sum + item.price * item.quantity, 0).toFixed(2);
+
+        const row = document.createElement("tr");
+        row.innerHTML = `
+          <td>#${index++}</td>
+          <td>${createdAt}</td>
+          <td>Processing</td>
+          <td>$${total}</td>
+          <td><a href="#" class="view-order">View</a></td>
+        `;
+        ordersTable.appendChild(row);
+      });
+    } catch (err) {
+      console.error("Failed to fetch orders:", err);
+    }
+  });
+</script>
+
 
           <div class="tab-content" data-content id="update-profile">
             <h3 class="tab-header"> Update Profile</h3>
@@ -290,6 +290,8 @@
         </form>
       </div>
     </section>
+    <button onclick="topFunction()" id="scrollTopBtn" title="Go to top">↑</button>
+
   </main>
 
   <!--=============== FOOTER ===============-->
@@ -395,7 +397,7 @@
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
   <!--=============== MAIN JS ===============-->
-  <script src="assets/js/app.js"></script>
+  <script src="./assets/js/main.js"></script>
 </body>
 
 </html>

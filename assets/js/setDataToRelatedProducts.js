@@ -1,13 +1,20 @@
-function setDataToRelatedProducts({ category, title, price, oldPrice, badge, rating }, productId) {
-    let starsHtml = '';
-    for (let i = 0; i < 5; i++) {
-        starsHtml += i < rating
-            ? `<i id = "star" class="fa-solid fa-star"></i>`
-            : `<i id = "star" class="fa-regular fa-star"></i>`;
-    }
+//setDATAtoRelatedProducts.js
+import { doc, getDoc, db } from "./firebaseFirestore.js";
+import { addToCart } from "./addToCart.js";
+function setDataToRelatedProducts(
+  { category, title, price, oldPrice, badge, rating },
+  productId
+) {
+  let starsHtml = "";
+  for (let i = 0; i < 5; i++) {
+    starsHtml +=
+      i < rating
+        ? `<i id = "star" class="fa-solid fa-star"></i>`
+        : `<i id = "star" class="fa-regular fa-star"></i>`;
+  }
 
-    let relatedProductsContainer = document.getElementById('relatedProducts');
-    relatedProductsContainer.innerHTML += `<div class="product-item">
+  let relatedProductsContainer = document.getElementById("relatedProducts");
+  relatedProductsContainer.innerHTML += `<div class="product-item" data-product-id="${productId}">
                     <div class="product-banner">
                         <a href="details.html?id=${productId}" class="product-imgs">
                             <img src="assets/img/product-9-1.jpg" class="product-img default" alt="product-1">
@@ -59,8 +66,7 @@ function setDataToRelatedProducts({ category, title, price, oldPrice, badge, rat
                             </a>
                         </div>
                     </div>
-                </div>`
+                </div>`;
 }
 
-
-export { setDataToRelatedProducts }
+export { setDataToRelatedProducts };

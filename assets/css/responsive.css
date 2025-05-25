@@ -1,0 +1,69 @@
+/* responsive.css */
+
+/* Mobile Devices (max-width: 600px) */
+@media only screen and (max-width: 600px) {
+  body {
+    font-size: 14px;
+    padding: 10px;
+  }
+  .container {
+    flex-direction: column;
+  }
+}
+
+/* Tablets (min-width: 601px) and (max-width: 1024px) */
+@media only screen and (min-width: 601px) and (max-width: 1024px) {
+  body {
+    font-size: 16px;
+    padding: 20px;
+  }
+  .container {
+    flex-direction: row;
+  }
+}
+
+/* Desktops (min-width: 1025px) */
+@media only screen and (min-width: 1025px) {
+  body {
+    font-size: 18px;
+    padding: 30px;
+  }
+  .container {
+    flex-direction: row;
+  }
+}
+
+
+
+#scrollTopBtn {
+  display: none;
+  position: fixed;
+  bottom: 40px;
+  right: 30px;
+  z-index: 99;
+  border: none;
+  outline: none;
+  background-color: black; /* 🔹 Change this line */
+  color: white;
+  cursor: pointer;
+  padding: 12px;
+  border-radius: 50%;
+  font-size: 18px;
+  transition: opacity 0.3s ease;
+}
+
+#scrollTopBtn:hover {
+  background-color: #222; /* Optional darker black on hover */
+}
+
+
+@media only screen and (max-width: 600px) {
+  #scrollTopBtn {
+    bottom: 20px;
+    right: 20px;
+    padding: 10px;
+    font-size: 16px;
+  }
+}
+
+
