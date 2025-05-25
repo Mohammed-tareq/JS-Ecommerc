@@ -1,4 +1,4 @@
-import { collection, db, getDocs, limit, query, where } from "../get-products/firebase.js";
+import { collection, db, getDocs, limit, query, where } from "./firebase.js";
 import { setDataToRelatedProducts } from "./setDataToRelatedProducts.js";
 
 async function getRelatedProducts({ category }) {

@@ -1,4 +1,4 @@
-import { collection, query, where, getDocs, db } from "./firebaseFirestore.js";
+import { collection, query, where, getDocs, db } from "./firebase.js";
 import { fetchOnePage, currentPage } from "./shop.js";
 import { setDataToProductItem } from "./setDataToProductItem.js";
 const searchInput = document.getElementById('search-input');
