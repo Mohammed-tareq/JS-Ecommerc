@@ -23,7 +23,7 @@ async function getProducts() {
                 <td>${data.price}</td>
                 <td>${data.Count}</td>
                 <td>${data.category}</td>
-                <td><img src=" ${data.Img}" width="70px" height="70px"></td>
+                <td><img src=" ${data.img1}" width="70px" height="70px"></td>
                 <td><button class="btn btn-bd-primary btn-delete" id="${doc.id}">DELETE</button></td>
 
                </tr>`;
