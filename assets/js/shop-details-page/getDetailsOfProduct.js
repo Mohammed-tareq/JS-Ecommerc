@@ -1,5 +1,5 @@
-import { doc, getDoc, db } from "../get-products/firebase.js";
-import { getRelatedProducts } from "../get-products/getRelatedProducts.js";
+import { doc, getDoc, db } from "./firebase.js";
+import { getRelatedProducts } from "./getRelatedProducts.js";
 import { setDataToDetailsItem } from "./setDataToDetailsItem.js";
 
 
