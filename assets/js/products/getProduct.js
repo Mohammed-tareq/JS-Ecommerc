@@ -1,6 +1,6 @@
 
 import {app, analytics} from "../adminJs/dataconfig.js";
-import {getFirestore, collection, getDocs, doc ,deleteDoc} from "https://www.gstatic.com/firebasejs/11.7.3/firebase-firestore.js";
+import {getFirestore, collection, getDocs, doc ,deleteDoc} from "https://www.gstatic.com/firebasejs/11.8.1/firebase-firestore.js";
 
 
 const db = getFirestore(app);
@@ -9,18 +9,105 @@ let OutletCollection = collection(db, "OutletProducts")
 let BrandCollection = collection(db, "BrandProducts")
 let lastPieceCollection = collection(db, "lastPieceProducts")
 let newProductCollection = collection(db, "newProducts")
+let allProductCollection = collection(db, "products")
+
 
 
 
 
 // ================ div to view product =====================
+let allProduct = document.getElementById("allProduct");
 let newProduct = document.getElementById("newProduct");
 let hotReleases = document.getElementById("hotReleases");
 let Outlet = document.getElementById("Outlet");
 let brand = document.getElementById("brand");
 let lastPiece = document.getElementById("lastPiece");
 
+// ========================= all product==================================
+async function getAllProducts() {
 
+    try {
+        let querySnapshot = await getDocs(allProductCollection);
+        let allproduct = '';
+
+
+        querySnapshot.forEach((doc) => {
+            const data = doc.data();
+            allproduct += ` 
+                    
+                          <div class="product-item">
+                        <div class="product-banner">
+                            <a href="details.html" class="product-imgs">
+                                <img src="${data.img1}" class="product-img default" alt="product-1">
+                                <img src="${data.img2}" class="product-img hover" alt="product-1">
+                                 
+
+                            </a>
+
+                            <div class="product-actions">
+                                <a href="#" class="action-btn" aria-label="Quick View">
+                                    <i class="fi fi-rs-eye"></i>
+                                </a>
+
+                                <a href="#" class="action-btn" aria-label="Add to Wishlist">
+                                    <i class="fi fi-rs-heart"></i>
+                                </a>
+
+                                <a href="#" class="action-btn" aria-label="Compare">
+                                    <i class="fi fi-rs-shuffle"></i>
+                                </a>
+
+                            </div>
+
+                            <div class="product-badge light-pink">Hot</div>
+
+                        </div>
+
+                        <div class="product-content">
+                            <span class="product-category">${data.category}</span>
+
+                            <a href="details.html">
+                                <h3 class="product-title">
+                                     ${data.title}
+                                </h3>
+                            </a>
+
+                            <div class="product-rating">
+                                <i class="fi fi-rs-star"></i>
+                                <i class="fi fi-rs-star"></i>
+                                <i class="fi fi-rs-star"></i>
+                                <i class="fi fi-rs-star"></i>
+                                <i class="fi fi-rs-star"></i>
+                            </div>
+                            <div class="flex-content" style="padding: 5px">
+
+                                <div class="product-price flex">
+                                    <span class="new-price">${data.price}</span>
+                                    <span class="old-price">${data.oldPrice}</span>
+                                </div>
+
+                                <a href="#" class="action-btn cart-btn" aria-label="Add to Cart">
+                                    <i class="fi fi-rs-shopping-bag-add"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+                </div>
+
+                    
+               `;
+        })
+        allProduct.innerHTML += allproduct;
+
+
+    } catch (e) {
+        console.error("Error getting documents in product lastPiece: ", e);
+    }
+}
 // ========================== new Products ============================================
 async function getNewProducts() {
 
@@ -249,6 +336,7 @@ async function getLastPiece() {
     }
 }
 //======================== call all fun =====================
+getAllProducts();
 getNewProducts();
 gethotReleases();
 getOutlet();
