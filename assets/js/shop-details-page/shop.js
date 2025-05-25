@@ -1,4 +1,4 @@
-import { collection, getDocs, db, query, limit, startAfter, doc, getCountFromServer } from "./firebase.js";
+import { collection, getDocs, db, query, limit, startAfter, doc, getCountFromServer, where } from "./firebase.js";
 import { setDataToProductItem, productsContainer } from "./setDataToProductItem.js";
 
 
@@ -64,11 +64,18 @@ getTotalDocumentCount();
 
 
 let lastDoc;
-async function fetchOnePage() {
+
+async function fetchOnePage(category) {
     productsContainer.innerHTML = '';
     let q = query(collection(db, 'products'), limit(pageSize));
 
+    if (category) {
+        console.log(category);
+        q = query(collection(db, "products"), where("category", "==", category), limit(pageSize));
+    }
+
     if (currentPage > 1) {
+        console.log('test1');
         q = query(collection(db, "products"), startAfter(lastDoc), limit(pageSize));
     }
     const documentSnapshots = await getDocs(q);
