@@ -30,8 +30,8 @@ function setDataToProductItem({ category, title, badge, price, oldPrice, rating,
         <div class="product-rating">${starsHtml}</div>
         <div class="flex-content" style="padding: 5px">
           <div class="product-price flex">
-            <span class="new-price">${price}</span>
-            <span class="old-price">${oldPrice}</span>
+            <span class="new-price">$${price}</span>
+            <span class="old-price">$${oldPrice}</span>
           </div>
           <a href="#" class="action-btn cart-btn" aria-label="Add to Cart">
             <i class="fi fi-rs-shopping-bag-add"></i>
