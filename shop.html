@@ -19,6 +19,7 @@
   <script src="assets/js/headerHandler.js" defer></script>
   <!-- =======================font awesome======= -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <script type="module" src="assets/js/userAuth.js"></script>
 
   <title>Ecommerce Website</title>
 </head>
@@ -51,23 +52,23 @@
 
       <div class="nav-menu">
         <ul class="nav-list">
-          <li class="nav-item">
-            <a href="index.html" class="nav-link ">Home</a>
-          </li>
-          <li class="nav-item">
-            <a href="shop.html" class="nav-link active-link">Shop</a>
-          </li>
-          <li class="nav-item">
-            <a href="accounts.html" class="nav-link">My Account</a>
-          </li>
-          <li class="nav-item">
-            <a href="compare.html" class="nav-link">Compare</a>
-          </li>
-          <li class="nav-item">
-            <a href="login-register.html" class="nav-link">Login</a>
-          </li>
+                    <li class="nav-item">
+                        <a href="index.html" class="nav-link active-link">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="shop.html" class="nav-link">Shop</a>
+                    </li>
+                    <li class="nav-item" id="myAccount" style="display: none;">
+                        <a href="accounts.html" class="nav-link">My Account</a>
+                    </li>
+                    <li class="nav-item" id="loggedIn" style="display: block;">
+                        <a href="login-register.html" class="nav-link">Login</a>
+                    </li>
+                    <li class="nav-item" id="logOutBtn" style="display: none;">
+                        <a href="#" class="nav-link">Logout</a>
+                    </li>
 
-        </ul>
+                </ul>
 
         <div class="header-search">
           <input id="search-input" type="text" class="form-input" placeholder="Search For Item ...">
