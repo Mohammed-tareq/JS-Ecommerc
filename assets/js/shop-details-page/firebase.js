@@ -87,5 +87,6 @@ export {
   setDoc,
   orderBy,
   app,
-  getCountFromServer
+  getCountFromServer,
+  firebaseConfig
 };
