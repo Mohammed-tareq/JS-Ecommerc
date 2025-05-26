@@ -1,6 +1,6 @@
 import { collection, query, where, getDocs, db } from "./firebase.js";
-import { fetchOnePage } from "./shop.js";
-import { productsContainer, setDataToProductItem } from "./setDataToProductItem.js";
+import { fetchOnePage, currentPage } from "./shop.js";
+import { setDataToProductItem } from "./setDataToProductItem.js";
 const searchInput = document.getElementById('search-input');
 searchInput.addEventListener('input', handleChange)
 
@@ -13,13 +13,12 @@ export async function handleChange() {
         const querySnapshot = await getDocs(q);
         if (value) {
             querySnapshot.forEach((doc) => {
-                productsContainer.innerHTML = '';
                 let productId = doc.id;
-                productsContainer.innerHTML += setDataToProductItem(doc.data(), productId);
+                setDataToProductItem(doc.data(), productId)
             });
         } else {
             productsContainer.innerHTML = '';
-            fetchOnePage();
+            fetchOnePage(currentPage);
         }
     } catch (error) {
         console.log(error);

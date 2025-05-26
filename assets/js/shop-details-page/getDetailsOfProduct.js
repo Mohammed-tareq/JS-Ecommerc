@@ -1,3 +1,4 @@
+import { addToCart } from "./addtocart.js";
 import { doc, getDoc, db } from "./firebase.js";
 import { getRelatedProducts } from "./getRelatedProducts.js";
 import { setDataToDetailsItem } from "./setDataToDetailsItem.js";
@@ -20,14 +21,20 @@ async function fetchOneProduct(id) {
     if (docSnap.exists()) {
         getRelatedProducts(docSnap.data());
         setDataToDetailsItem(docSnap.data());
+        handleClickCartBtn();
     } else {
         console.log("No such document!");
     }
 }
 
-const cartBtn = document.getElementById('cart-btn');
-cartBtn.addEventListener('click',)
 getDetailsOfProduct();
 
 export { getDetailsOfProduct }
+
+
+function handleClickCartBtn(params) {
+    const cartBtn = document.getElementById('cart-btn');
+    cartBtn.addEventListener('click', addToCart)
+}
+
 

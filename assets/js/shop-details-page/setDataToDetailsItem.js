@@ -15,7 +15,7 @@ function setDataToDetailsItem({ title, price, oldPrice, badge, description, bran
     <div class="details-group">
         <h3 class="details-title">${title}</h3>
 
-        <p class="details-brand">Brands: <span>${brand}</span></p>
+        <p class="details-brand">Brands: <span>a${brand}</span></p>
 
         <div class="details-price flex">
             <span class="new-price">$${price}</span>

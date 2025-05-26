@@ -33,7 +33,7 @@ function setDataToProductItem({ category, title, badge, price, oldPrice, rating,
             <span class="new-price">$${price}</span>
             <span class="old-price">$${oldPrice}</span>
           </div>
-          <button href="#" id="cart-btn" class="action-btn cart-btn" aria-label="Add to Cart">
+            <button href="#" id="cart-btn" class="action-btn cart-btn" aria-label="Add to Cart">
             <i class="fi fi-rs-shopping-bag-add"></i>
           </button>
         </div>
