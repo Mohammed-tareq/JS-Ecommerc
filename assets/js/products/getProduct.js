@@ -7,7 +7,7 @@ const db = getFirestore(app);
 let hotReleasesCollection = collection(db, "hotReleasesProducts")
 let OutletCollection = collection(db, "OutletProducts")
 let BrandCollection = collection(db, "BrandProducts")
-let lastPieceCollection = collection(db, "lastPieceProducts")
+let lastPieceCollection = collection(db, "lastPieceProducts")c
 let newProductCollection = collection(db, "newProducts")
 let allProductCollection = collection(db, "products")
 
@@ -213,7 +213,11 @@ async function gethotReleases() {
                         <h4 class="showcase-title">${data.description}</h4>
                     </a>
                     <div class="showcase-item">
+<<<<<<< HEAD
                         <a href="details.html" class="showcase-img-box">
+=======
+                        <a href="details.html?id=${doc.id}" class="showcase-img-box?id=${doc.id}">
+>>>>>>> f077a7a13519e7712566d87bd4006d344322a9a5
                             <img class="showcase-img" src="${data.img1}">
                         </a>
 
@@ -221,7 +225,10 @@ async function gethotReleases() {
                             <a href="details.html">
                                 <h4 class="showcase-title">${data.description}</h4>
                             </a>
+<<<<<<< HEAD
 
+=======
+>>>>>>> f077a7a13519e7712566d87bd4006d344322a9a5
                     <div class="showcase-price flex">
                         <span class="new-price">${data.oldPrice}</span>
                         <span class="old-price">${data.price}</span>

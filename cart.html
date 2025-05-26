@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<!-- /////////// -->
+
   <!--=============== FLATICON ===============-->
   <link rel='stylesheet'
     href='https://cdn-uicons.flaticon.com/2.6.0/uicons-regular-straight/css/uicons-regular-straight.css'>
@@ -18,15 +18,18 @@
 
 <!-- =======================headerHandeler======= -->
  <script src="assets/js/headerHandler.js" defer></script>
+  <script type="module" src="assets/js/userAuth.js"></script>
 
-
+<!-- =======================js button=============== -->
+ <script src="./assets/js/scrollToTop.js" defer></script>
 
 
   <title>Ecommerce Website</title>
 <script type="module" src="./assets/js/loadCart.js"></script>
-  <script type="module" src="./assets/js/checkout-js/cart-total.js" defer></script>
+<script type="module" src="./assets/js/checkout-stripe.js"></script>
 
 </head>
+
 
 <body>
   <!--=============== HEADER ===============-->
@@ -56,23 +59,23 @@
 
       <div class="nav-menu">
         <ul class="nav-list">
-          <li class="nav-item">
-            <a href="index.html" class="nav-link ">Home</a>
-          </li>
-          <li class="nav-item">
-            <a href="shop.html" class="nav-link ">Shop</a>
-          </li>
-          <li class="nav-item">
-            <a href="accounts.html" class="nav-link">My Account</a>
-          </li>
-          <li class="nav-item">
-            <a href="compare.html" class="nav-link">Compare</a>
-          </li>
-          <li class="nav-item">
-            <a href="login-register.html" class="nav-link">Login</a>
-          </li>
+                    <li class="nav-item">
+                        <a href="index.html" class="nav-link">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="shop.html" class="nav-link">Shop</a>
+                    </li>
+                    <li class="nav-item" id="myAccount" style="display: none;">
+                        <a href="accounts.html" class="nav-link">My Account</a>
+                    </li>
+                    <li class="nav-item" id="loggedIn" style="display: block;">
+                        <a href="login-register.html" class="nav-link">Login</a>
+                    </li>
+                    <li class="nav-item" id="logOutBtn" style="display: none;">
+                        <a href="#" class="nav-link">Logout</a>
+                    </li>
 
-        </ul>
+                </ul>
 
         <div class="header-search">
           <input type="text" class="form-input" placeholder="Search For Item ..." />
@@ -86,12 +89,12 @@
       <div class="header-user-action">
         <a href="wishlist.html" class="header-action-btn">
           <img src="assets/img/icon-heart.svg">
-          <span class="count">3</span>
+          <span class="count"></span>
         </a>
 
         <a href="cart.html" class="header-action-btn">
           <img src="assets/img/icon-cart.svg">
-          <span class="count">3</span>
+          <span class="count"></span>
         </a>
       </div>
     </nav>
@@ -129,101 +132,28 @@
     <section class="cart section-lg container">
       <div class="table-container">
         <table class="table">
-          <tr>
-            <th>Image</th>
-            <th>Name</th>
-            <th>Price</th>
-            <th>Quantity</th>
-            <th>Subtotal</th>
-          </tr>
-
-          <tr>
-            <td><img src="assets/img/product-1-2.jpg" alt="" class="table-img"></td>
-            <td>
-              <h3 class="table-title">J.crew Mercantile Women's Short-sleeve</h3>
-              <p class="table-description">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam inventore sit sequi corporis id!
-                Aspernatur earum .
-              </p>
-            </td>
-
-            <td><span class="table-price">$110</span></td>
-
-            <td><input type="number" value="3" class="quantity"></td>
-
-            <td><span class="table-subtotal">$220</span></td>
-
-            <td><i class="fi fi-rs-trash table-trash"></i></td>
-          </tr>
-
-          <tr>
-            <td><img src="assets/img/product-1-2.jpg" alt="" class="table-img"></td>
-            <td>
-              <h3 class="table-title">J.crew Mercantile Women's Short-sleeve</h3>
-              <p class="table-description">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam inventore sit sequi corporis id!
-                Aspernatur earum .
-              </p>
-            </td>
-
-            <td><span class="table-price">$110</span></td>
-
-            <td><input type="number" value="3" class="quantity"></td>
-
-            <td><span class="table-subtotal">$220</span></td>
-
-            <td><i class="fi fi-rs-trash table-trash"></i></td>
-          </tr>
-
-          <tr>
-            <td><img src="assets/img/product-1-2.jpg" alt="" class="table-img"></td>
-            <td>
-              <h3 class="table-title">J.crew Mercantile Women's Short-sleeve</h3>
-              <p class="table-description">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam inventore sit sequi corporis id!
-                Aspernatur earum .
-              </p>
-            </td>
-
-            <td><span class="table-price">$110</span></td>
-
-            <td><input type="number" value="3" class="quantity"></td>
-
-            <td><span class="table-subtotal">$220</span></td>
-
-            <td><i class="fi fi-rs-trash table-trash"></i></td>
-          </tr>
-
-          <tr>
-            <td><img src="assets/img/product-1-2.jpg" alt="" class="table-img"></td>
-            <td>
-              <h3 class="table-title">J.crew Mercantile Women's Short-sleeve</h3>
-              <p class="table-description">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam inventore sit sequi corporis id!
-                Aspernatur earum .
-              </p>
-            </td>
-
-            <td><span class="table-price">$110</span></td>
-
-            <td><input type="number" value="3" class="quantity"></td>
-
-            <td><span class="table-subtotal">$220</span></td>
-
-            <td><i class="fi fi-rs-trash table-trash"></i></td>
-          </tr>
-
+          <thead>
+            <tr>
+              <th>Image</th>
+              <th>Name</th>
+              <th>Price</th>
+              <th>Quantity</th>
+              <th>Subtotal</th>
+              <th>Remove</th>
+            </tr>
+          </thead>
+          <tbody id="cartItemsContainer">
+            <!-- Dynamic rows from loadCart.js -->
+          </tbody>
         </table>
       </div>
 
       <div class="cart-actions">
-        <a href="" class="btn flex btn-md">
-          <i class="fi-rs-shuffle"></i>Update Cart
-        </a>
+      
+       <a href="shop.html" class="btn flex btn-md">
+  <i class="fi-rs-shopping-bag"></i> Continue Shopping
+</a>
 
-        <a href="" class="btn flex btn-md">
-          <i class="fi-rs-shopping-bag"></i> Continue Shopping
-        </a>
       </div>
 
       <div class="divider">
@@ -281,7 +211,7 @@
 
 
 
-          <button onclick="checkout()" class="btn flex btn-md">
+         <button onclick="checkout()" class="btn flex btn-md">
   <i class="fi fi-rs-box-alt"></i> Proceed To Checkout
 </button>
         </div>
@@ -306,6 +236,7 @@
         </form>
       </div>
     </section>
+    <button onclick="topFunction()" id="scrollTopBtn" title="Go to top">↑</button>
   </main>
 
   <!--=============== FOOTER ===============-->
@@ -440,9 +371,11 @@
 
 
   <!--=============== MAIN JS ===============-->
+  <!-- check out cvrip here  -->
+<!--=============== MAIN JS ===============-->
   <script src="./assets/js/main.js"></script>
   <script type="module">
-  window.checkout = async function () {
+
     const userEmail = localStorage.getItem("currentUserEmail");
     const cartKey = `cart_${userEmail}`;
     const cart = JSON.parse(localStorage.getItem(cartKey)) || {};
@@ -459,7 +392,21 @@
     const shipping = subtotal > 0 ? 40 : 0;
     const total = subtotal + shipping;
 
-    // ==================================
+    const response = await fetch("https://adel.dev/scripts/stripe.php", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        amount: total.toFixed(2),
+        name: "Eva-Shop",
+       secertKey: "sk_test_51RPrHHH48QZxOjj9m0d3VgziDynMUFdIX6UTgHkles1EsSQN8kb8tN9Pi5xRzz1dta0gmY0XRvUqEIRf4gpzRAJk00zALmjBhn",
+        onSuccess: "http://127.0.0.1:5501/success.html",
+        onCancel: "http://127.0.0.1:5501/success.html",
+        shipping: {
+          city: city,
+          zip: zip
+        }
+      }),
+    });
 
     const data = await response.json();
     if (data.url) {
@@ -467,9 +414,9 @@
     } else {
       alert("Stripe error: " + data.error);
     }
-  };
+  
 </script>
 
 </body>
-
+   
 </html>

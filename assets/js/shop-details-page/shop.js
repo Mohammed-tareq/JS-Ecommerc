@@ -1,5 +1,6 @@
 import { collection, getDocs, db, query, limit, startAfter, doc, getCountFromServer, where } from "./firebase.js";
 import { setDataToProductItem, productsContainer } from "./setDataToProductItem.js";
+import { addToCart } from "./addtocart.js";
 
 
 let currentPage = 1;
@@ -96,9 +97,27 @@ async function fetchOnePage(category) {
         let productId = doc.id;
         productsContainer.innerHTML += setDataToProductItem(doc.data(), productId);
     });
+
+
+    
 }
 
 
+/////////////helmyyyyy
+productsContainer.addEventListener('click', (e) => {
+  const button = e.target.closest('.add-to-cart-btn');
+  if (!button) return; // Not an add-to-cart button
+
+  const productId = button.getAttribute('data-id');
+  const productData = {
+    title: button.getAttribute('data-title'),
+    price: parseFloat(button.getAttribute('data-price')),
+    imageUrl: button.getAttribute('data-image'),
+  };
+  addToCart(productId, productData);
+});
+
+/////////////////
 
 if (category) {
     fetchOnePage(category);
@@ -112,5 +131,3 @@ if (category) {
 
 
 export { fetchOnePage, currentPage }
-
-
