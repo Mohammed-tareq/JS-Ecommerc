@@ -8,8 +8,14 @@ let currentPage = 1;
 let totalPages = 0;
 const pageSize = 28;
 
+const params = new URLSearchParams(window.location.search);
+const category = params.get("category");
 async function getTotalDocumentCount() {
-    const snapshot = await getCountFromServer(collection(db, "products"));
+    let q = collection(db, "products");
+    if (category) {
+        q = query(q, where("category", "==", category));
+    }
+    const snapshot = await getCountFromServer(q);
     const totalDocs = snapshot.data().count;
     totalPages = Math.ceil(totalDocs / pageSize);
     createPagination(totalPages);
@@ -37,7 +43,7 @@ function createPagination(totalPages) {
             const selectedPage = Number(btn.id);
             if (selectedPage !== currentPage) {
                 currentPage = selectedPage;
-                fetchOnePage();
+                fetchOnePage(category);
                 updateActivePagination();
             }
         });
@@ -64,7 +70,6 @@ getTotalDocumentCount();
 
 
 let lastDoc;
-
 async function fetchOnePage(category) {
     productsContainer.innerHTML = '';
     let q = query(collection(db, 'products'), limit(pageSize));
@@ -74,21 +79,30 @@ async function fetchOnePage(category) {
         q = query(collection(db, "products"), where("category", "==", category), limit(pageSize));
     }
 
-    if (currentPage > 1) {
-        console.log('test1');
+    if (currentPage > 1 && lastDoc && !category) {
         q = query(collection(db, "products"), startAfter(lastDoc), limit(pageSize));
     }
     const documentSnapshots = await getDocs(q);
     const docs = documentSnapshots.docs;
     lastDoc = docs[docs.length - 1];
 
+    if (documentSnapshots.empty) {
+        productsContainer.innerHTML = '<p class="no-products">no products found</p>'
+    }
     docs.forEach(doc => {
         let productId = doc.id;
         productsContainer.innerHTML += setDataToProductItem(doc.data(), productId);
     });
 }
 
-fetchOnePage();
+
+
+if (category) {
+    fetchOnePage(category);
+} else {
+    fetchOnePage()
+}
+
 
 
 

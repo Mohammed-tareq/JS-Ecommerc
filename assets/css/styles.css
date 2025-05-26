@@ -648,13 +648,14 @@ table {
     color: var(--body-color);
 }
 
-.no-products-msg {
+.no-products {
     text-align: center;
-    padding: 1.5rem;
-    font-size: 1.1rem;
-    color: #555;
-    margin-top: 1rem;
+    margin-top: 60px;
+    font-size: 1.5rem;
+    color: #666;
+    font-family: sans-serif;
 }
+
 
 /*=============== DEALS ===============*/
 
