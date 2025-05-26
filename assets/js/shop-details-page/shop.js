@@ -7,16 +7,19 @@ let currentPage = 1;
 
 let totalPages = 0;
 const pageSize = 28;
-
+const countProducts = document.getElementById('count');
 const params = new URLSearchParams(window.location.search);
 const category = params.get("category");
+
 async function getTotalDocumentCount() {
     let q = collection(db, "products");
     if (category) {
+        console.log(category);
         q = query(q, where("category", "==", category));
     }
     const snapshot = await getCountFromServer(q);
     const totalDocs = snapshot.data().count;
+    countProducts.textContent = totalDocs;
     totalPages = Math.ceil(totalDocs / pageSize);
     createPagination(totalPages);
 }
@@ -31,7 +34,7 @@ function createPagination(totalPages) {
         let li = document.createElement('li');
         li.innerHTML = `
         <button class="btn-pagination" id="${i}">
-        <a href="#" class="pagination-link ${i === currentPage ? 'active' : ''}">0${i}</a>
+        <a href="#" class="pagination-link ${i === currentPage ? 'active-page' : ''}">0${i}</a>
         </button>
         `;
         paginationContainer.appendChild(li);
@@ -54,12 +57,12 @@ function updateActivePagination() {
     const paginationLinks = document.querySelectorAll(".pagination-link");
 
     paginationLinks.forEach(link => {
-        link.classList.remove("active");
+        link.classList.remove("active-page");
     });
 
     const activeLink = paginationContainer.querySelector(`button[id="${currentPage}"] .pagination-link`);
     if (activeLink) {
-        activeLink.classList.add("active");
+        activeLink.classList.add("active-page");
     }
 }
 getTotalDocumentCount();
@@ -102,6 +105,7 @@ if (category) {
 } else {
     fetchOnePage()
 }
+
 
 
 
