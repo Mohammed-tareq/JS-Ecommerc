@@ -15,7 +15,7 @@ function setDataToProductItem({ category, title, badge, price, oldPrice, rating,
           <img src="${img2}" class="product-img hover" alt="product-1">
         </a>
         <div class="product-actions">
-          <a href="#" class="action-btn" aria-label="Quick View">
+                  <a href="details.html?id=${productId}" class="product-imgs" aria-label="Quick View">
             <i class="fi fi-rs-eye"></i>
           </a>
         </div>
