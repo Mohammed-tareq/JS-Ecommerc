@@ -8,15 +8,14 @@ searchInput.addEventListener('input', handleChange)
 
 export async function handleChange() {
     let value = searchInput.value.trim();
-    console.log(value);
-
     try {
         const q = query(collection(db, "products"), where("title", "==", value));
         const querySnapshot = await getDocs(q);
         if (value) {
             querySnapshot.forEach((doc) => {
+                productsContainer.innerHTML = '';
                 let productId = doc.id;
-                setDataToProductItem(doc.data(), productId)
+                productsContainer.innerHTML += setDataToProductItem(doc.data(), productId);
             });
         } else {
             productsContainer.innerHTML = '';
