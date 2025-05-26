@@ -1,4 +1,4 @@
-import { doc, getDoc, db } from "./firebaseFirestore.js";
+import { doc, getDoc, db } from "./shop-details-page/firebase.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
   const userEmail = localStorage.getItem("currentUserEmail");
@@ -16,19 +16,17 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   const cartItems = cartSnap.data().items || {};
-  const tableBody = document.querySelector("table.table");
-  tableBody.innerHTML = `
-    <tr>
-      <th>Image</th>
-      <th>Name</th>
-      <th>Price</th>
-      <th>Quantity</th>
-      <th>Subtotal</th>
-      <th>Remove</th>
-    </tr>
-  `;
+  const tableBody = document.getElementById("cartItemsContainer");
+
+  if (!tableBody) {
+    console.warn("No table body found with id 'cartItemsContainer'");
+    return;
+  }
+
+  tableBody.innerHTML = ""; // Clear existing rows
 
   let subtotal = 0;
+
   Object.keys(cartItems).forEach((productId) => {
     const item = cartItems[productId];
     const totalPrice = item.price * item.quantity;
@@ -49,7 +47,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     tableBody.appendChild(row);
   });
 
-  // Shipping rate handling
+  // Handle shipping totals
   const subtotalElem = document.getElementById("cartSubtotal");
   const shippingElem = document.getElementById("shippingCost");
   const totalElem = document.getElementById("cartTotal");
@@ -58,7 +56,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     "Cairo": 40,
     "Alex": 80,
     "Giza": 55,
-    "Lower Egypt": 100
+    "Lower Egypt": 100,
   };
 
   function updateTotals(selectedCity) {

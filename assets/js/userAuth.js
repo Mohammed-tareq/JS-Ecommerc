@@ -12,13 +12,13 @@ import { getAuth , onAuthStateChanged ,createUserWithEmailAndPassword , signInWi
 // TODO: Add SDKs for Firebase products that you want to use
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBvgAkeEr6ai2yZIsX8z90zdtkHAWiSFPA",
-  authDomain: "iti-e-commerce-47ba6.firebaseapp.com",
-  projectId: "iti-e-commerce-47ba6",
-  storageBucket: "iti-e-commerce-47ba6.firebasestorage.app",
-  messagingSenderId: "719185540860",
-  appId: "1:719185540860:web:77a8c68b749823f0e24979"
-};
+    apiKey: "AIzaSyB1u8q8gL6jGZXs6lys4Pzd-C6E4XpMdWU",
+    authDomain: "js-php-nc.firebaseapp.com",
+    projectId: "js-php-nc",
+    storageBucket: "js-php-nc.firebasestorage.app",
+    messagingSenderId: "871514624564",
+    appId: "1:871514624564:web:79bc38e5214fa0b1147061"
+  };
 
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
