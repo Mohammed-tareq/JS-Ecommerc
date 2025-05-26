@@ -1,3 +1,4 @@
+import { addToCart } from "./addtocart.js";
 import { doc, getDoc, db } from "./firebase.js";
 import { getRelatedProducts } from "./getRelatedProducts.js";
 import { setDataToDetailsItem } from "./setDataToDetailsItem.js";
@@ -20,7 +21,7 @@ async function fetchOneProduct(id) {
     if (docSnap.exists()) {
         getRelatedProducts(docSnap.data());
         setDataToDetailsItem(docSnap.data());
-
+        handleClickCartBtn()
     } else {
         console.log("No such document!");
     }
@@ -28,5 +29,10 @@ async function fetchOneProduct(id) {
 
 
 getDetailsOfProduct();
+
+function handleClickCartBtn() {
+    const cartBtn = document.getElementById('cartBtn');
+    cartBtn.addEventListener('click', addToCart)
+}
 
 export { getDetailsOfProduct }
