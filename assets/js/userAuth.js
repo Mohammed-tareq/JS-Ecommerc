@@ -1,27 +1,4 @@
 
-import { initializeApp } from "https://www.gstatic.com/firebasejs/11.7.3/firebase-app.js";
-import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.7.3/firebase-analytics.js";
-import {
-  getAuth,
-  onAuthStateChanged,
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  signOut,
-  GoogleAuthProvider,
-  signInWithPopup,
-} from "https://www.gstatic.com/firebasejs/11.7.3/firebase-auth.js";
-
-// TODO: Add SDKs for Firebase products that you want to use
-
-// const firebaseConfig = {
-//     apiKey: "AIzaSyBtB_OEijJfGF4xXxqsHnNy7S9w6p3kzKk",
-//     authDomain: "e-commerce-6dfa1.firebaseapp.com",
-//     projectId: "e-commerce-6dfa1",
-//     storageBucket: "e-commerce-6dfa1.firebasestorage.app",
-//     messagingSenderId: "683669349481",
-//     appId: "1:683669349481:web:4a09554ae5e4af47d46ef8",
-//     measurementId: "G-KF27DZN05K"
-//   };
 "use strict"
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.7.3/firebase-app.js";
@@ -116,13 +93,16 @@ window.addEventListener("DOMContentLoaded", () => {
 
   onAuthStateChanged(auth, (user) => {
     if (user) {
-      console.log(user.email, "is logged in");
+      console.log(user.email, "is logged in");localStorage.setItem("authenticatedUserId", user.uid);
+    localStorage.setItem("currentUserEmail", user.email);
       if (myAccountLink) myAccountLink.style.display = "block";
       if (loggedOut) loggedOut.style.display = "block";
       if (loggedIn) loggedIn.style.display = "none";
     } else {
       console.log("user is logged out");
       if (myAccountLink) myAccountLink.style.display = "none";
+       localStorage.removeItem("authenticatedUserId");
+    localStorage.removeItem("currentUserEmail");
       if (loggedOut) loggedOut.style.display = "none";
       if (loggedIn) loggedIn.style.display = "block";
     }
@@ -194,6 +174,7 @@ function loginUser(e){
             if (user.email === "admin@admin.com") {
                 window.location.href = "admin/admin.html";
             } else {
+              curre
                 window.location.href = "index.html";
             }
         })

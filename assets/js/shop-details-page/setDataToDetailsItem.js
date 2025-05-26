@@ -56,7 +56,7 @@ function setDataToDetailsItem({ title, price, oldPrice, badge, description, bran
 
         <div class="details-action">
             <input type="number" class="quantity" value="3">
-            <button href="#" id="cart-btn" class="btn btn-sm">ADD TO CART</button>
+            <a href="#" class="btn btn-sm">ADD TO CART</a>
             <a href="#" class="details-action-btn">
                 <i class="fi fi-rs-heart"></i>
             </a>
@@ -74,4 +74,3 @@ function setDataToDetailsItem({ title, price, oldPrice, badge, description, bran
 
 
 export { setDataToDetailsItem }
-
