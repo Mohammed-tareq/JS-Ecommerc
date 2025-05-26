@@ -24,7 +24,8 @@ let lastPiece = document.getElementById("lastPiece");
 async function getAllProducts() {
 
     try {
-        let querySnapshot = await getDocs(allProductCollection);
+        const limitedQuery = query(allProductCollection, limit(8));
+        let querySnapshot = await getDocs(limitedQuery);
         let allproduct = '';
 
 
@@ -201,33 +202,21 @@ async function gethotReleases() {
         randomDocs.forEach((data) => {
             product += ` 
             <div class="showcase-item">
-                <a href="details.html?id=${data.id}" class="showcase-img-box">
-                    <img class="showcase-img" src="${data.img1}">
-                </a>
-
-                <div class="showcase-content">
-                    <a href="details.html?id=${data.id}">
-                        <h4 class="showcase-title">${data.description}</h4>
-                    </a>
-                    <div class="showcase-item">
- HEAD
-                        <a href="details.html" class="showcase-img-box">
-
-                        <a href="details.html?id=${doc.id}" class="showcase-img-box?id=${doc.id}">
+                        <a href="details.html?id=${data.id}" class="showcase-img-box">
                             <img class="showcase-img" src="${data.img1}">
                         </a>
 
                         <div class="showcase-content">
-                            <a href="details.html">
+                            <a href="details.html?id=${data.id}">
                                 <h4 class="showcase-title">${data.description}</h4>
                             </a>
 
-                    <div class="showcase-price flex">
-                        <span class="new-price">${data.oldPrice}</span>
-                        <span class="old-price">${data.price}</span>
+                            <div class="showcase-price flex">
+                                <span class="new-price">${data.oldPrice}</span>
+                                <span class="old-price">${data.price}</span>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
        `;
         });
 
@@ -244,10 +233,10 @@ async function gethotReleases() {
 async function getOutlet() {
 
     try {
-        const allDocsSnapshot = await getDocs(allProductCollection);
+        const allDocsSnapsOut = await getDocs(allProductCollection);
         const allDocs = [];
 
-        allDocsSnapshot.forEach((doc) => {
+        allDocsSnapsOut.forEach((doc) => {
             allDocs.push({id: doc.id, ...doc.data()});
         });
 
@@ -260,30 +249,21 @@ async function getOutlet() {
         randomDocs.forEach((data) => {
             product += ` 
             <div class="showcase-item">
-                <a href="details.html?id=${data.id}" class="showcase-img-box">
-                    <img class="showcase-img" src="${data.img1}">
-                </a>
-
-                <div class="showcase-content">
-                    <a href="details.html?id=${data.id}">
-                        <h4 class="showcase-title">${data.description}</h4>
-                    </a>
-                    <div class="showcase-item">
-                        <a href="details.html" class="showcase-img-box">
+                        <a href="details.html?id=${data.id}" class="showcase-img-box">
                             <img class="showcase-img" src="${data.img1}">
                         </a>
 
                         <div class="showcase-content">
-                            <a href="details.html">
+                            <a href="details.html?id=${data.id}">
                                 <h4 class="showcase-title">${data.description}</h4>
                             </a>
 
-                    <div class="showcase-price flex">
-                        <span class="new-price">${data.oldPrice}</span>
-                        <span class="old-price">${data.price}</span>
+                            <div class="showcase-price flex">
+                                <span class="new-price">${data.oldPrice}</span>
+                                <span class="old-price">${data.price}</span>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
        `;
         });
 
@@ -300,10 +280,10 @@ async function getBrand() {
 
 
     try {
-        const allDocsSnapshot = await getDocs(allProductCollection);
+        const allDocsSnapsBrand = await getDocs(allProductCollection);
         const allDocs = [];
 
-        allDocsSnapshot.forEach((doc) => {
+        allDocsSnapsBrand.forEach((doc) => {
             allDocs.push({id: doc.id, ...doc.data()});
         });
 
@@ -315,35 +295,27 @@ async function getBrand() {
 
         randomDocs.forEach((data) => {
             product += ` 
+            
             <div class="showcase-item">
-                <a href="details.html?id=${data.id}" class="showcase-img-box">
-                    <img class="showcase-img" src="${data.img1}">
-                </a>
-
-                <div class="showcase-content">
-                    <a href="details.html?id=${data.id}">
-                        <h4 class="showcase-title">${data.description}</h4>
-                    </a>
-                    <div class="showcase-item">
-                        <a href="details.html" class="showcase-img-box">
+                        <a href="details.html?id=${data.id}" class="showcase-img-box">
                             <img class="showcase-img" src="${data.img1}">
                         </a>
 
                         <div class="showcase-content">
-                            <a href="details.html">
+                            <a href="details.html?id=${data.id}">
                                 <h4 class="showcase-title">${data.description}</h4>
                             </a>
 
-                    <div class="showcase-price flex">
-                        <span class="new-price">${data.oldPrice}</span>
-                        <span class="old-price">${data.price}</span>
+                            <div class="showcase-price flex">
+                                <span class="new-price">${data.oldPrice}</span>
+                                <span class="old-price">${data.price}</span>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
        `;
         });
 
-        lastPiecebrand.innerHTML += product;
+        brand.innerHTML += product;
 
     } catch (e) {
         console.error("Error getting documents in product brand: ", e);
@@ -356,10 +328,10 @@ async function getBrand() {
 async function getLastPiece() {
 
     try {
-        const allDocsSnapshot = await getDocs(allProductCollection);
+        const allDocsSnapsLast = await getDocs(allProductCollection);
         const allDocs = [];
 
-        allDocsSnapshot.forEach((doc) => {
+        allDocsSnapsLast.forEach((doc) => {
             allDocs.push({id: doc.id, ...doc.data()});
         });
 
@@ -371,32 +343,22 @@ async function getLastPiece() {
 
         randomDocs.forEach((data) => {
             product += ` 
-            <div class="showcase-item">
-                <a href="details.html?id=${data.id}" class="showcase-img-box">
-                    <img class="showcase-img" src="${data.img1}">
-                </a>
-
-                <div class="showcase-content">
-                    <a href="details.html?id=${data.id}">
-                        <h4 class="showcase-title">${data.description}</h4>
-                    </a>
-
-                    <div class="showcase-item">
-                        <a href="details.html" class="showcase-img-box">
+           <div class="showcase-item">
+                        <a href="details.html?id=${data.id}" class="showcase-img-box">
                             <img class="showcase-img" src="${data.img1}">
                         </a>
 
                         <div class="showcase-content">
-                            <a href="details.html">
+                            <a href="details.html?id=${data.id}">
                                 <h4 class="showcase-title">${data.description}</h4>
                             </a>
 
-                    <div class="showcase-price flex">
-                        <span class="new-price">${data.oldPrice}</span>
-                        <span class="old-price">${data.price}</span>
+                            <div class="showcase-price flex">
+                                <span class="new-price">${data.oldPrice}</span>
+                                <span class="old-price">${data.price}</span>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
        `;
         });
 
