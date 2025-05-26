@@ -3,10 +3,7 @@ import {getFirestore, collection, addDoc  } from "https://www.gstatic.com/fireba
 
 const db = getFirestore(app);
 let productCollection = collection(db, "products");
-let hotReleases = collection(db, "hotReleasesProducts")
-let Outlet = collection(db, "OutletProducts")
-let Brand = collection(db, "BrandProducts")
-let lastPiece = collection(db, "lastPieceProducts")
+
 
 
 let products = [
@@ -566,66 +563,5 @@ let products = [
 
 // ===================================== Hot Releases product home page ===========
 
-async function addHotReleasesProductsToDB() {
-    for (let i = 0;i < 3; i++) {
-        try {
 
-            const docRef = await addDoc(hotReleases,
-                products[i]
-            );
-            console.log("Document written with ID: ", docRef.id);
-        } catch (e) {
-            console.error("Error adding document: ", e);
-        }
-    }
-}
-// ==================== Deals & Outlet ==================================
-async function addOutletToDB() {
-    for (let i = 3; i < 6; i++) {
-        try {
-
-            const docRef = await addDoc(Outlet,
-                products[i]
-            );
-            console.log("Document written with ID: ", docRef.id);
-        } catch (e) {
-            console.error("Error adding document: ", e);
-        }
-    }
-}
-// =================== Brands ==============================
-async function addBrandProductsToDB() {
-    for (let i = 6; i < 9; i++) {
-        try {
-
-            const docRef = await addDoc(Brand,
-                products[i]
-            );
-            console.log("Document written with ID: ", docRef.id);
-        } catch (e) {
-            console.error("Error adding document: ", e);
-        }
-    }
-}
-
-
-//  ================== last Piece ===================
-async function addLastPieceProductsToDB() {
-    for (let i = 9; i < 12; i++) {
-        try {
-
-            const docRef = await addDoc(lastPiece,
-                products[i]
-            );
-            console.log("Document written with ID: ", docRef.id);
-        } catch (e) {
-            console.error("Error adding document: ", e);
-        }
-    }
-}
-// =========================== call all fun==============================
     addProductsToDB();
-    addHotReleasesProductsToDB();
-    addOutletToDB();
-    addBrandProductsToDB();
-    addLastPieceProductsToDB();

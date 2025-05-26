@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <!--=============== CSS ===============-->
     <link rel="stylesheet" href="./assets/css/styles.css" />
-    <link rel="stylesheet" href="./assets/css/responsive.css" />
+<!--    <link rel="stylesheet" href="./assets/css/responsive.css" />-->
     <!-- =======================headerHandeler======= -->
     <script src="assets/js/headerHandler.js" defer></script>
     <script type="module" src="assets/js/userAuth.js"></script>
@@ -133,12 +133,15 @@
         </section>
 
         <!--=============== PRODUCTS ===============-->
-        <section class="products section container">
+        <section class="products section container" >
             <h3 class="section-title">
                 <span>Popular</span>
                 Products
             </h3>
-
+            <div class="tab-items">
+                <div class="products-container grid" id="allProduct">
+                </div>
+            </div>
         </section>
 
         <!--=============== DEALS ===============-->
@@ -270,15 +273,10 @@
                 <div class="showcase-wrapper" id="hotReleases">
                     <h3 class="section-title">Hot Releases</h3>
 
-
-
-
                 </div>
 
                 <div class="showcase-wrapper" id="Outlet">
                     <h3 class="section-title">Deals & Outlet</h3>
-
-
 
 
                 </div>
@@ -287,14 +285,10 @@
                     <h3 class="section-title">Brand</h3>
 
 
-
-
                 </div>
 
                 <div class="showcase-wrapper" id="lastPiece">
                     <h3 class="section-title">Last Piece</h3>
-
-
 
 
                 </div>
@@ -425,10 +419,9 @@
 
     <!--=============== MAIN JS ===============-->
     <script src="./assets/js/main.js"></script>
-    <script type="module" src="assets/js/shop-details-page/firebase.js"></script>
     <script type="module" src="assets/js/category/getCategory.js"></script>
     <script type="module" src="assets/js/products/getProduct.js"></script>
-
+    <script type="module" src="assets/js/shop-details-page/firebase.js"></script>
 </body>
 
 </html>
