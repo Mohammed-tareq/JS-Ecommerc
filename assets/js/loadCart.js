@@ -74,4 +74,4 @@ document.addEventListener("DOMContentLoaded", async () => {
     const city = document.getElementById("citySelect").value;
     updateTotals(city);
   });
-});
+  });
