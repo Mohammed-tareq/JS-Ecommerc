@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="./assets/css/responsive.css" />
     <!-- =======================headerHandeler======= -->
     <script src="assets/js/headerHandler.js" defer></script>
+    <script type="module" src="assets/js/userAuth.js"></script>
 
     <title>Ecommerce Website</title>
 
@@ -55,14 +56,14 @@
                     <li class="nav-item">
                         <a href="shop.html" class="nav-link">Shop</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item" id="myAccount" style="display: none;">
                         <a href="accounts.html" class="nav-link">My Account</a>
                     </li>
-                    <li class="nav-item">
-                        <a href="compare.html" class="nav-link">Compare</a>
-                    </li>
-                    <li class="nav-item">
+                    <li class="nav-item" id="loggedIn" style="display: block;">
                         <a href="login-register.html" class="nav-link">Login</a>
+                    </li>
+                    <li class="nav-item" id="logOutBtn" style="display: none;">
+                        <a href="#" class="nav-link">Logout</a>
                     </li>
 
                 </ul>
