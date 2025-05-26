@@ -15,7 +15,7 @@ function setDataToProductItem({ category, title, badge, price, oldPrice, rating,
           <img src="${img2}" class="product-img hover" alt="product-1">
         </a>
         <div class="product-actions">
-                  <a href="details.html?id=${productId}" class="product-imgs" aria-label="Quick View">
+          <a href="#" class="action-btn" aria-label="Quick View">
             <i class="fi fi-rs-eye"></i>
           </a>
         </div>
@@ -33,9 +33,18 @@ function setDataToProductItem({ category, title, badge, price, oldPrice, rating,
             <span class="new-price">$${price}</span>
             <span class="old-price">$${oldPrice}</span>
           </div>
-            <button href="#" id="cart-btn" class="action-btn cart-btn" aria-label="Add to Cart">
-            <i class="fi fi-rs-shopping-bag-add"></i>
-          </button>
+   <a href="#" 
+   class="action-btn cart-btn add-to-cart-btn" 
+   aria-label="Add to Cart"
+   data-id="${productId}"
+   data-title="${title}"
+   data-price="${price}"
+   data-image="${img1}">
+   <i class="fi fi-rs-shopping-bag-add"></i>
+</a>
+
+
+
         </div>
       </div>
     </div>`;

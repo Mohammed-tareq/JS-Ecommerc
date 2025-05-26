@@ -131,5 +131,3 @@ if (category) {
 
 
 export { fetchOnePage, currentPage }
-
-
