@@ -52,14 +52,8 @@ function setDataToDetailsItem({ productId, title, price, oldPrice, badge, descri
         </div>
 
         <div class="details-action">
-            <input type="number" class="quantity" value="1" min="1">
-            <button class="btn btn-sm add-to-cart-btn" 
-                data-id="${productId}"
-                data-title="${title}"
-                data-price="${price}"
-                data-image="${img1}">
-                ADD TO CART
-            </button>
+            <input type="number" class="quantity" value="3">
+            <a href="#" class="btn btn-sm">ADD TO CART</a>
             <a href="#" class="details-action-btn">
                 <i class="fi fi-rs-heart"></i>
             </a>
