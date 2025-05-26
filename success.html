@@ -58,7 +58,6 @@
   </div>
 
   <script type="module">
-    // Firebase Setup (Matches Your Existing Setup)
     import { initializeApp } from "https://www.gstatic.com/firebasejs/11.7.3/firebase-app.js";
     import { 
       getFirestore, collection, addDoc, getDoc, doc, deleteDoc 
@@ -76,6 +75,7 @@
 
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
+    const auth = getAuth(app);
 
     document.addEventListener("DOMContentLoaded", async () => {
       const userEmail = localStorage.getItem("currentUserEmail");
@@ -84,18 +84,23 @@
 
       if (userEmail && Object.keys(cart).length > 0) {
         try {
-          // Save order to Firestore
+          // Save order to Firestore with status field
           await addDoc(collection(db, "orders"), {
             email: userEmail,
             items: cart,
+            status: "Processing",
             createdAt: new Date()
           });
 
           // Delete cart from Firestore
           await deleteDoc(doc(db, "cart", userEmail));
 
-          // Clear localStorage
+          // Clear localStorage cart
           localStorage.removeItem(cartKey);
+
+          // Update success message
+          document.querySelector(".success-container p").textContent = "Your order has been saved and is now being processed.";
+
           console.log("Order saved and cart cleared.");
         } catch (err) {
           console.error("Error saving order:", err);
@@ -104,17 +109,10 @@
 
       // Handle Logout Button
       document.getElementById("logoutBtn").addEventListener("click", async () => {
-        const auth = getAuth();
         try {
           await signOut(auth);
           localStorage.removeItem("currentUserEmail");
-
-          window.open('', '_self');
-          window.close();
-
-          setTimeout(() => {
-            alert("You have been logged out. Please close the tab manually if it did not close automatically.");
-          }, 500);
+          window.location.href = "login-register.html";
         } catch (err) {
           console.error("Logout failed:", err);
         }
