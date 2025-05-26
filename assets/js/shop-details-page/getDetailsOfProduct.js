@@ -2,31 +2,25 @@ import { doc, getDoc, db } from "./firebase.js";
 import { getRelatedProducts } from "./getRelatedProducts.js";
 import { setDataToDetailsItem } from "./setDataToDetailsItem.js";
 
-
 function getDetailsOfProduct() {
-    let queryString = window.location.search;
-    let id = queryString.split('=')[1];
+  let queryString = window.location.search;
+  let id = queryString.split("=")[1];
 
-    fetchOneProduct(id)
+  fetchOneProduct(id);
 }
-
-
-
 
 async function fetchOneProduct(id) {
-    const docRef = doc(db, "products", id);
-    const docSnap = await getDoc(docRef);
+  const docRef = doc(db, "products", id);
+  const docSnap = await getDoc(docRef);
 
-    if (docSnap.exists()) {
-        getRelatedProducts(docSnap.data());
-        setDataToDetailsItem(docSnap.data());
-    } else {
-        console.log("No such document!");
-    }
+  if (docSnap.exists()) {
+    getRelatedProducts(docSnap.data());
+    setDataToDetailsItem({ ...docSnap.data(), productId: docSnap.id });
+  } else {
+    console.log("No such document!");
+  }
 }
-
 
 getDetailsOfProduct();
 
-export { getDetailsOfProduct }
-
+export { getDetailsOfProduct };
