@@ -20,7 +20,7 @@ async function fetchOneProduct(id) {
 
     if (docSnap.exists()) {
         getRelatedProducts(docSnap.data());
-        setDataToDetailsItem(docSnap.data());
+        setDataToDetailsItem(docSnap.data(),id);
         handleClickCartBtn();
     } else {
         console.log("No such document!");

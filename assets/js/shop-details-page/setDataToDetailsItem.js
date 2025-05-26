@@ -1,4 +1,4 @@
-function setDataToDetailsItem({ title, price, oldPrice, badge, description, brand, policy, img1, img2, count }) {
+function setDataToDetailsItem({ title, price, oldPrice, badge, description, brand, policy, img1, img2, count }, productId) {
     const detailsContainer = document.getElementById('main-details');
     detailsContainer.innerHTML += `
     <div class="details-group">
@@ -57,7 +57,7 @@ function setDataToDetailsItem({ title, price, oldPrice, badge, description, bran
         <div class="details-action">
             <input type="number" class="quantity" value="3">
             <button href="#" id="cart-btn" class="btn btn-sm">ADD TO CART</button>
-            <a href="#" class="details-action-btn">
+            <a href="#" class="details-action-btn" data-product-id="${productId}">
                 <i class="fi fi-rs-heart"></i>
             </a>
         </div>
