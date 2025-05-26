@@ -1,6 +1,5 @@
-
-import { initializeApp } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-app.js";
-import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-analytics.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.7.3/firebase-app.js";
+import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.7.3/firebase-analytics.js";
 import {
   getAuth,
   onAuthStateChanged,
@@ -9,12 +8,19 @@ import {
   signOut,
   GoogleAuthProvider,
   signInWithPopup,
-} from "https://www.gstatic.com/firebasejs/11.8.1/firebase-auth.js";
+} from "https://www.gstatic.com/firebasejs/11.7.3/firebase-auth.js";
 
+// TODO: Add SDKs for Firebase products that you want to use
 
-
-
-
+// const firebaseConfig = {
+//     apiKey: "AIzaSyBtB_OEijJfGF4xXxqsHnNy7S9w6p3kzKk",
+//     authDomain: "e-commerce-6dfa1.firebaseapp.com",
+//     projectId: "e-commerce-6dfa1",
+//     storageBucket: "e-commerce-6dfa1.firebasestorage.app",
+//     messagingSenderId: "683669349481",
+//     appId: "1:683669349481:web:4a09554ae5e4af47d46ef8",
+//     measurementId: "G-KF27DZN05K"
+//   };
 
 const firebaseConfig = {
   apiKey: "AIzaSyBvgAkeEr6ai2yZIsX8z90zdtkHAWiSFPA",

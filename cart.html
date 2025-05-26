@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<!-- /////////// -->
+
   <!--=============== FLATICON ===============-->
   <link rel='stylesheet'
     href='https://cdn-uicons.flaticon.com/2.6.0/uicons-regular-straight/css/uicons-regular-straight.css'>
@@ -20,13 +20,16 @@
  <script src="assets/js/headerHandler.js" defer></script>
 
 
+<!-- =======================js button=============== -->
+ <script src="./assets/js/scrollToTop.js" defer></script>
 
 
   <title>Ecommerce Website</title>
 <script type="module" src="./assets/js/loadCart.js"></script>
-  <script type="module" src="./assets/js/checkout-js/cart-total.js" defer></script>
+<script type="module" src="./assets/js/checkout-stripe.js"></script>
 
 </head>
+
 
 <body>
   <!--=============== HEADER ===============-->
@@ -129,90 +132,19 @@
     <section class="cart section-lg container">
       <div class="table-container">
         <table class="table">
-          <tr>
-            <th>Image</th>
-            <th>Name</th>
-            <th>Price</th>
-            <th>Quantity</th>
-            <th>Subtotal</th>
-          </tr>
-
-          <tr>
-            <td><img src="assets/img/product-1-2.jpg" alt="" class="table-img"></td>
-            <td>
-              <h3 class="table-title">J.crew Mercantile Women's Short-sleeve</h3>
-              <p class="table-description">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam inventore sit sequi corporis id!
-                Aspernatur earum .
-              </p>
-            </td>
-
-            <td><span class="table-price">$110</span></td>
-
-            <td><input type="number" value="3" class="quantity"></td>
-
-            <td><span class="table-subtotal">$220</span></td>
-
-            <td><i class="fi fi-rs-trash table-trash"></i></td>
-          </tr>
-
-          <tr>
-            <td><img src="assets/img/product-1-2.jpg" alt="" class="table-img"></td>
-            <td>
-              <h3 class="table-title">J.crew Mercantile Women's Short-sleeve</h3>
-              <p class="table-description">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam inventore sit sequi corporis id!
-                Aspernatur earum .
-              </p>
-            </td>
-
-            <td><span class="table-price">$110</span></td>
-
-            <td><input type="number" value="3" class="quantity"></td>
-
-            <td><span class="table-subtotal">$220</span></td>
-
-            <td><i class="fi fi-rs-trash table-trash"></i></td>
-          </tr>
-
-          <tr>
-            <td><img src="assets/img/product-1-2.jpg" alt="" class="table-img"></td>
-            <td>
-              <h3 class="table-title">J.crew Mercantile Women's Short-sleeve</h3>
-              <p class="table-description">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam inventore sit sequi corporis id!
-                Aspernatur earum .
-              </p>
-            </td>
-
-            <td><span class="table-price">$110</span></td>
-
-            <td><input type="number" value="3" class="quantity"></td>
-
-            <td><span class="table-subtotal">$220</span></td>
-
-            <td><i class="fi fi-rs-trash table-trash"></i></td>
-          </tr>
-
-          <tr>
-            <td><img src="assets/img/product-1-2.jpg" alt="" class="table-img"></td>
-            <td>
-              <h3 class="table-title">J.crew Mercantile Women's Short-sleeve</h3>
-              <p class="table-description">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam inventore sit sequi corporis id!
-                Aspernatur earum .
-              </p>
-            </td>
-
-            <td><span class="table-price">$110</span></td>
-
-            <td><input type="number" value="3" class="quantity"></td>
-
-            <td><span class="table-subtotal">$220</span></td>
-
-            <td><i class="fi fi-rs-trash table-trash"></i></td>
-          </tr>
-
+          <thead>
+            <tr>
+              <th>Image</th>
+              <th>Name</th>
+              <th>Price</th>
+              <th>Quantity</th>
+              <th>Subtotal</th>
+              <th>Remove</th>
+            </tr>
+          </thead>
+          <tbody id="cartItemsContainer">
+            <!-- Dynamic rows from loadCart.js -->
+          </tbody>
         </table>
       </div>
 
@@ -281,7 +213,7 @@
 
 
 
-          <button onclick="checkout()" class="btn flex btn-md">
+         <button onclick="checkout()" class="btn flex btn-md">
   <i class="fi fi-rs-box-alt"></i> Proceed To Checkout
 </button>
         </div>
@@ -306,6 +238,7 @@
         </form>
       </div>
     </section>
+    <button onclick="topFunction()" id="scrollTopBtn" title="Go to top">↑</button>
   </main>
 
   <!--=============== FOOTER ===============-->
@@ -435,40 +368,13 @@
 
 <!-- =========================script for shipping ================ -->
 
-
+C:\Users\Helmy\OneDrive\Desktop\JS-Ecommerc-main\JS-Ecommerc-main\JS-Ecommerc-main
 <!-- =========================================script for dic bottom  -->
 
 
   <!--=============== MAIN JS ===============-->
   <script src="./assets/js/main.js"></script>
-  <script type="module">
-  window.checkout = async function () {
-    const userEmail = localStorage.getItem("currentUserEmail");
-    const cartKey = `cart_${userEmail}`;
-    const cart = JSON.parse(localStorage.getItem(cartKey)) || {};
-
-    const cartArray = Object.values(cart);
-    if (cartArray.length === 0) return alert("Cart is empty");
-
-    // Get shipping details
-    const city = document.getElementById("citySelect")?.value || "Unknown City";
-    const zip = document.querySelector('input[placeholder="PostCode / ZIP"]')?.value || "00000";
-
-    // Calculate total
-    const subtotal = cartArray.reduce((sum, item) => sum + item.price * item.quantity, 0);
-    const shipping = subtotal > 0 ? 40 : 0;
-    const total = subtotal + shipping;
-
-    // ==================================
-
-    const data = await response.json();
-    if (data.url) {
-      window.location.href = data.url;
-    } else {
-      alert("Stripe error: " + data.error);
-    }
-  };
-</script>
+  
 
 </body>
 

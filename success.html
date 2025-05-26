@@ -58,9 +58,24 @@
   </div>
 
   <script type="module">
-    import { db } from "./assets/js/firebaseFirestore.js";
-    import { doc, deleteDoc, collection, addDoc } from "https://www.gstatic.com/firebasejs/11.7.3/firebase-firestore.js";
+    // Firebase Setup (Matches Your Existing Setup)
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.7.3/firebase-app.js";
+    import { 
+      getFirestore, collection, addDoc, getDoc, doc, deleteDoc 
+    } from "https://www.gstatic.com/firebasejs/11.7.3/firebase-firestore.js";
     import { getAuth, signOut } from "https://www.gstatic.com/firebasejs/11.7.3/firebase-auth.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyBvgAkeEr6ai2yZIsX8z90zdtkHAWiSFPA",
+      authDomain: "iti-e-commerce-47ba6.firebaseapp.com",
+      projectId: "iti-e-commerce-47ba6",
+      storageBucket: "iti-e-commerce-47ba6.firebasestorage.app",
+      messagingSenderId: "719185540860",
+      appId: "1:719185540860:web:77a8c68b749823f0e24979"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
 
     document.addEventListener("DOMContentLoaded", async () => {
       const userEmail = localStorage.getItem("currentUserEmail");
@@ -69,13 +84,17 @@
 
       if (userEmail && Object.keys(cart).length > 0) {
         try {
+          // Save order to Firestore
           await addDoc(collection(db, "orders"), {
             email: userEmail,
             items: cart,
             createdAt: new Date()
           });
 
+          // Delete cart from Firestore
           await deleteDoc(doc(db, "cart", userEmail));
+
+          // Clear localStorage
           localStorage.removeItem(cartKey);
           console.log("Order saved and cart cleared.");
         } catch (err) {
@@ -83,13 +102,13 @@
         }
       }
 
+      // Handle Logout Button
       document.getElementById("logoutBtn").addEventListener("click", async () => {
         const auth = getAuth();
         try {
           await signOut(auth);
           localStorage.removeItem("currentUserEmail");
 
-          // Attempt to close tab
           window.open('', '_self');
           window.close();
 
@@ -102,5 +121,6 @@
       });
     });
   </script>
+
 </body>
 </html>
