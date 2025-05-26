@@ -1,11 +1,6 @@
 
-<<<<<<< HEAD
 import { app, analytics } from "../adminJs/dataconfig.js";
 import { getFirestore, collection, getDocs, doc,where, deleteDoc, limit, query } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-firestore.js";
-=======
-import {app, analytics} from "../adminJs/dataconfig.js";
-import {getFirestore, collection, getDocs, doc ,deleteDoc} from "https://www.gstatic.com/firebasejs/11.8.1/firebase-firestore.js";
->>>>>>> 88b968b751a9598dbd6f3993d8bf60109f6fd683
 
 
 const db = getFirestore(app);
@@ -208,7 +203,6 @@ async function gethotReleases() {
 
         randomDocs.forEach((data) => {
             product += ` 
-<<<<<<< HEAD
             <div class="showcase-item">
                 <a href="details.html?id=${data.id}" class="showcase-img-box">
                     <img class="showcase-img" src="${data.img1}">
@@ -218,7 +212,6 @@ async function gethotReleases() {
                     <a href="details.html?id=${data.id}">
                         <h4 class="showcase-title">${data.description}</h4>
                     </a>
-=======
                     <div class="showcase-item">
                         <a href="details.html" class="showcase-img-box">
                             <img class="showcase-img" src="${data.img1}">
@@ -228,8 +221,6 @@ async function gethotReleases() {
                             <a href="details.html">
                                 <h4 class="showcase-title">${data.description}</h4>
                             </a>
->>>>>>> 88b968b751a9598dbd6f3993d8bf60109f6fd683
-
                     <div class="showcase-price flex">
                         <span class="new-price">${data.oldPrice}</span>
                         <span class="old-price">${data.price}</span>
@@ -267,7 +258,6 @@ async function getOutlet() {
 
         randomDocs.forEach((data) => {
             product += ` 
-<<<<<<< HEAD
             <div class="showcase-item">
                 <a href="details.html?id=${data.id}" class="showcase-img-box">
                     <img class="showcase-img" src="${data.img1}">
@@ -277,7 +267,6 @@ async function getOutlet() {
                     <a href="details.html?id=${data.id}">
                         <h4 class="showcase-title">${data.description}</h4>
                     </a>
-=======
                     <div class="showcase-item">
                         <a href="details.html" class="showcase-img-box">
                             <img class="showcase-img" src="${data.img1}">
@@ -287,7 +276,6 @@ async function getOutlet() {
                             <a href="details.html">
                                 <h4 class="showcase-title">${data.description}</h4>
                             </a>
->>>>>>> 88b968b751a9598dbd6f3993d8bf60109f6fd683
 
                     <div class="showcase-price flex">
                         <span class="new-price">${data.oldPrice}</span>
@@ -326,7 +314,6 @@ async function getBrand() {
 
         randomDocs.forEach((data) => {
             product += ` 
-<<<<<<< HEAD
             <div class="showcase-item">
                 <a href="details.html?id=${data.id}" class="showcase-img-box">
                     <img class="showcase-img" src="${data.img1}">
@@ -336,7 +323,6 @@ async function getBrand() {
                     <a href="details.html?id=${data.id}">
                         <h4 class="showcase-title">${data.description}</h4>
                     </a>
-=======
                     <div class="showcase-item">
                         <a href="details.html" class="showcase-img-box">
                             <img class="showcase-img" src="${data.img1}">
@@ -346,7 +332,6 @@ async function getBrand() {
                             <a href="details.html">
                                 <h4 class="showcase-title">${data.description}</h4>
                             </a>
->>>>>>> 88b968b751a9598dbd6f3993d8bf60109f6fd683
 
                     <div class="showcase-price flex">
                         <span class="new-price">${data.oldPrice}</span>
@@ -385,7 +370,6 @@ async function getLastPiece() {
 
         randomDocs.forEach((data) => {
             product += ` 
-<<<<<<< HEAD
             <div class="showcase-item">
                 <a href="details.html?id=${data.id}" class="showcase-img-box">
                     <img class="showcase-img" src="${data.img1}">
@@ -395,7 +379,7 @@ async function getLastPiece() {
                     <a href="details.html?id=${data.id}">
                         <h4 class="showcase-title">${data.description}</h4>
                     </a>
-=======
+
                     <div class="showcase-item">
                         <a href="details.html" class="showcase-img-box">
                             <img class="showcase-img" src="${data.img1}">
@@ -405,7 +389,6 @@ async function getLastPiece() {
                             <a href="details.html">
                                 <h4 class="showcase-title">${data.description}</h4>
                             </a>
->>>>>>> 88b968b751a9598dbd6f3993d8bf60109f6fd683
 
                     <div class="showcase-price flex">
                         <span class="new-price">${data.oldPrice}</span>
