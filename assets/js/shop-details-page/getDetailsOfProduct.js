@@ -25,7 +25,8 @@ async function fetchOneProduct(id) {
     }
 }
 
-
+const cartBtn = document.getElementById('cart-btn');
+cartBtn.addEventListener('click',)
 getDetailsOfProduct();
 
 export { getDetailsOfProduct }
