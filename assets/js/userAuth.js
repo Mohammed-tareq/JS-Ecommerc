@@ -93,13 +93,16 @@ window.addEventListener("DOMContentLoaded", () => {
 
   onAuthStateChanged(auth, (user) => {
     if (user) {
-      console.log(user.email, "is logged in");
+      console.log(user.email, "is logged in");localStorage.setItem("authenticatedUserId", user.uid);
+    localStorage.setItem("currentUserEmail", user.email);
       if (myAccountLink) myAccountLink.style.display = "block";
       if (loggedOut) loggedOut.style.display = "block";
       if (loggedIn) loggedIn.style.display = "none";
     } else {
       console.log("user is logged out");
       if (myAccountLink) myAccountLink.style.display = "none";
+       localStorage.removeItem("authenticatedUserId");
+    localStorage.removeItem("currentUserEmail");
       if (loggedOut) loggedOut.style.display = "none";
       if (loggedIn) loggedIn.style.display = "block";
     }
@@ -171,6 +174,7 @@ function loginUser(e){
             if (user.email === "admin@admin.com") {
                 window.location.href = "admin/admin.html";
             } else {
+              curre
                 window.location.href = "index.html";
             }
         })

@@ -74,4 +74,3 @@ function setDataToDetailsItem({ title, price, oldPrice, badge, description, bran
 
 
 export { setDataToDetailsItem }
-

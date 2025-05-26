@@ -176,54 +176,8 @@
   </div>
 </div>
 
-<!-- Firebase Orders Script -->
-<script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.7.3/firebase-app.js";
-  import { getFirestore, collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/11.7.3/firebase-firestore.js";
 
-const firebaseConfig = {
-  apiKey: "AIzaSyBvgAkeEr6ai2yZIsX8z90zdtkHAWiSFPA",
-  authDomain: "iti-e-commerce-47ba6.firebaseapp.com",
-  projectId: "iti-e-commerce-47ba6",
-  storageBucket: "iti-e-commerce-47ba6.firebasestorage.app",
-  messagingSenderId: "719185540860",
-  appId: "1:719185540860:web:77a8c68b749823f0e24979"
-};
-
-  const app = initializeApp(firebaseConfig);
-  const db = getFirestore(app);
-
-  document.addEventListener("DOMContentLoaded", async () => {
-    const email = localStorage.getItem("currentUserEmail");
-    const ordersTable = document.getElementById("orders-table");
-
-    if (!email || !ordersTable) return;
-
-    try {
-      const q = query(collection(db, "orders"), where("email", "==", email));
-      const querySnapshot = await getDocs(q);
-
-      let index = 1;
-      querySnapshot.forEach((docSnap) => {
-        const order = docSnap.data();
-        const createdAt = new Date(order.createdAt?.seconds * 1000 || Date.now()).toLocaleDateString();
-        const total = Object.values(order.items || {}).reduce((sum, item) => sum + item.price * item.quantity, 0).toFixed(2);
-
-        const row = document.createElement("tr");
-        row.innerHTML = `
-          <td>#${index++}</td>
-          <td>${createdAt}</td>
-          <td>Processing</td>
-          <td>$${total}</td>
-          <td><a href="#" class="view-order">View</a></td>
-        `;
-        ordersTable.appendChild(row);
-      });
-    } catch (err) {
-      console.error("Failed to fetch orders:", err);
-    }
-  });
-</script>
+  
 
 
           <div class="tab-content" data-content id="update-profile">
@@ -396,6 +350,136 @@ const firebaseConfig = {
 
   <!--=============== MAIN JS ===============-->
   <script src="./assets/js/main.js"></script>
+  <!-- Order Details Modal -->
+<div id="orderModal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h3>Order Details</h3>
+    <div id="orderDetailsContent">
+      <!-- Order details will load here dynamically -->
+    </div>
+  </div>
+</div>
+
+<style>
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 999;
+    padding-top: 60px;
+    left: 0; top: 0;
+    width: 100%; height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.6);
+  }
+  .modal-content {
+    background-color: #fff;
+    margin: auto;
+    padding: 20px;
+    border-radius: 8px;
+    width: 80%;
+    max-width: 600px;
+  }
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    cursor: pointer;
+  }
+  .close:hover {
+    color: black;
+  }
+  #orderDetailsContent p {
+    margin: 8px 0;
+    padding: 4px 0;
+    border-bottom: 1px solid #ddd;
+  }
+</style>
+<!-- Firebase Orders Script -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.7.3/firebase-app.js";
+  import { getFirestore, collection, query, where, getDocs, doc, getDoc } from "https://www.gstatic.com/firebasejs/11.7.3/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBjRfUhrD8izFBizJxYvGS4PPoLjV5x6Mc",
+  authDomain: "iti-e2.firebaseapp.com",
+  projectId: "iti-e2",
+  storageBucket: "iti-e2.firebasestorage.app",
+  messagingSenderId: "394747800497",
+  appId: "1:394747800497:web:46ffd532adfab5d7aa2b90"
+};
+
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+
+  document.addEventListener("DOMContentLoaded", async () => {
+    const email = localStorage.getItem("currentUserEmail");
+    const ordersTable = document.getElementById("orders-table");
+    const orderModal = document.getElementById("orderModal");
+    const orderDetailsContent = document.getElementById("orderDetailsContent");
+    const closeBtn = orderModal.querySelector(".close");
+
+    if (!email || !ordersTable) return;
+
+    try {
+      const q = query(collection(db, "orders"), where("email", "==", email));
+      const querySnapshot = await getDocs(q);
+
+      let index = 1;
+      querySnapshot.forEach((docSnap) => {
+        const order = docSnap.data();
+        const orderId = docSnap.id;
+        const createdAt = new Date(order.createdAt?.seconds * 1000 || Date.now()).toLocaleDateString();
+        const total = Object.values(order.items || {}).reduce((sum, item) => sum + item.price * item.quantity, 0).toFixed(2);
+
+        const row = document.createElement("tr");
+        row.innerHTML = `
+          <td>#${index++}</td>
+          <td>${createdAt}</td>
+          <td>Processing</td>
+          <td>$${total}</td>
+          <td><a href="#" class="view-order" data-id="${orderId}">View</a></td>
+        `;
+        ordersTable.appendChild(row);
+      });
+
+      // Add click event for view details
+      ordersTable.addEventListener("click", async (e) => {
+        if (e.target.classList.contains("view-order")) {
+          e.preventDefault();
+          const orderId = e.target.dataset.id;
+          const docRef = doc(db, "orders", orderId);
+          const docSnap = await getDoc(docRef);
+
+          if (docSnap.exists()) {
+            const order = docSnap.data();
+            let detailsHTML = `
+              <p><strong>Order ID:</strong> ${orderId}</p>
+              <p><strong>Date:</strong> ${new Date(order.createdAt?.seconds * 1000 || Date.now()).toLocaleDateString()}</p>
+              <p><strong>Status:</strong> Processing</p>
+              <p><strong>Items:</strong></p>
+            `;
+
+            Object.values(order.items || {}).forEach((item) => {
+              detailsHTML += `<p>• ${item.title} x ${item.quantity} - $${(item.price * item.quantity).toFixed(2)}</p>`;
+            });
+
+            detailsHTML += `<p><strong>Total:</strong> $${Object.values(order.items || {}).reduce((sum, item) => sum + item.price * item.quantity, 0).toFixed(2)}</p>`;
+            orderDetailsContent.innerHTML = detailsHTML;
+            orderModal.style.display = "block";
+          }
+        }
+      });
+
+      // Close modal
+      closeBtn.onclick = () => orderModal.style.display = "none";
+      window.onclick = (e) => { if (e.target == orderModal) orderModal.style.display = "none"; };
+
+    } catch (err) {
+      console.error("Failed to fetch orders:", err);
+    }
+  });
+</script>
 </body>
 
 </html>
