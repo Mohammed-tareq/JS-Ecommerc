@@ -1,6 +1,6 @@
-function setDataToDetailsItem({ productId, title, price, oldPrice, badge, description, brand, policy, img1, img2, count }) {
+function setDataToDetailsItem({ title, price, oldPrice, badge, description, brand, policy, img1, img2, count }) {
     const detailsContainer = document.getElementById('main-details');
-    detailsContainer.innerHTML = ` <!-- Clear previous content and insert -->
+    detailsContainer.innerHTML += `
     <div class="details-group">
         <img src="${img1}" class="details-img">
         <div class="details-small-images grid">
@@ -11,10 +11,11 @@ function setDataToDetailsItem({ productId, title, price, oldPrice, badge, descri
         </div>
     </div>
 
+    </div>
     <div class="details-group">
         <h3 class="details-title">${title}</h3>
 
-        <p class="details-brand">Brands: <span>${brand}</span></p>
+        <p class="details-brand">Brands: <span>a${brand}</span></p>
 
         <div class="details-price flex">
             <span class="new-price">$${price}</span>
@@ -29,17 +30,19 @@ function setDataToDetailsItem({ productId, title, price, oldPrice, badge, descri
         <ul class="product-list">
             <li class="list-item flex">
                 <i class="fi-rs-crown"></i>
-                1 Year Brand Warranty
+                1 Year AL Jazeera Brand Warranty
             </li>
             <li class="list-item flex">
                 <i class="fi-rs-refresh"></i>
-                30 Days Return Policy ${policy}
+                30 Days Return Policy${policy}
             </li>
             <li class="list-item flex">
                 <i class="fi-rs-credit"></i>
                 Cash on Delivery Available
             </li>
         </ul>
+
+
 
         <div class="details-size flex">
             <span class="details-size-title">Size:</span>
@@ -52,10 +55,7 @@ function setDataToDetailsItem({ productId, title, price, oldPrice, badge, descri
         </div>
 
         <div class="details-action">
-            <input type="number" class="quantity" value="3">
-            <a href="#" class="btn btn-sm">ADD TO CART</a>
             <a href="#" class="details-action-btn">
-                <i class="fi fi-rs-heart"></i>
             </a>
         </div>
 
@@ -65,7 +65,9 @@ function setDataToDetailsItem({ productId, title, price, oldPrice, badge, descri
             <li class="meta-list flex"><span>Availability:</span> ${count} Items In Stock</li>
         </ul>
     </div>
-    `;
+`;
+
 }
 
-export { setDataToDetailsItem };
+
+export { setDataToDetailsItem }
