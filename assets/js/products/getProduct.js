@@ -1,6 +1,6 @@
 
-import {app, analytics} from "../adminJs/dataconfig.js";
-import {getFirestore, collection, getDocs, doc ,deleteDoc,limit , query} from "https://www.gstatic.com/firebasejs/11.8.1/firebase-firestore.js";
+import { app, analytics } from "../adminJs/dataconfig.js";
+import { getFirestore, collection, getDocs, doc, deleteDoc, limit, query } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-firestore.js";
 
 
 const db = getFirestore(app);
@@ -38,7 +38,7 @@ async function getAllProducts() {
                     
                           <div class="product-item">
                         <div class="product-banner">
-                            <a href="details.html" class="product-imgs">
+                            <a href="details.html?id=${doc.id}" class="product-imgs">
                                 <img src="${data.img1}" class="product-img default" alt="product-1">
                                 <img src="${data.img2}" class="product-img hover" alt="product-1">
                                  
@@ -67,7 +67,7 @@ async function getAllProducts() {
                         <div class="product-content">
                             <span class="product-category">${data.category}</span>
 
-                            <a href="details.html">
+                            <a href="details.html?id=${doc.id}">
                                 <h3 class="product-title">
                                      ${data.title}
                                 </h3>
@@ -122,7 +122,7 @@ async function getNewProducts() {
             product += ` 
                      <div class="product-item swiper-slide" >
                         <div class="product-banner">
-                            <a href="details.html" class="product-imgs">
+                            <a href="details.html?id=${doc.id}" class="product-imgs">
                                 <img src="${data.Img}" class="product-img " alt="product-1">
 
                             </a>
@@ -149,7 +149,7 @@ async function getNewProducts() {
                         <div class="product-content">
                             <span class="product-category">${data.category}</span>
 
-                            <a href="details.html">
+                            <a href="details.html?id=${doc.id}">
                                 <h3 class="product-title">
                                     ${data.title}
                                 </h3>
@@ -197,12 +197,12 @@ async function gethotReleases() {
             const data = doc.data();
             product += ` 
                     <div class="showcase-item">
-                        <a href="details.html" class="showcase-img-box">
+                        <a href="details.html?id=${doc.id}" class="showcase-img-box">
                             <img class="showcase-img" src="${data.img1}">
                         </a>
 
                         <div class="showcase-content">
-                            <a href="details.html">
+                            <a href="details.html?id=${doc.id}">
                                 <h4 class="showcase-title">${data.description}</h4>
                             </a>
 
@@ -235,12 +235,12 @@ async function getOutlet() {
             const data = doc.data();
             product += ` 
                     <div class="showcase-item">
-                        <a href="details.html" class="showcase-img-box">
+                        <a href="details.html?id=${doc.id}" class="showcase-img-box">
                             <img class="showcase-img" src="${data.img1}">
                         </a>
 
                         <div class="showcase-content">
-                            <a href="details.html">
+                            <a href="details.html?id=${doc.id}">
                                 <h4 class="showcase-title">${data.description}</h4>
                             </a>
 
@@ -273,12 +273,12 @@ async function getBrand() {
             const data = doc.data();
             product += ` 
                     <div class="showcase-item">
-                        <a href="details.html" class="showcase-img-box">
+                        <a href="details.html?id=${doc.id}" class="showcase-img-box">
                             <img class="showcase-img" src="${data.img1}">
                         </a>
 
                         <div class="showcase-content">
-                            <a href="details.html">
+                            <a href="details.html?id=${doc.id}">
                                 <h4 class="showcase-title">${data.description}</h4>
                             </a>
 
@@ -312,12 +312,12 @@ async function getLastPiece() {
             const data = doc.data();
             product += ` 
                     <div class="showcase-item">
-                        <a href="details.html" class="showcase-img-box">
+                        <a href="details.html?id=${doc.id}" class="showcase-img-box">
                             <img class="showcase-img" src="${data.img1}">
                         </a>
 
                         <div class="showcase-content">
-                            <a href="details.html">
+                            <a href="details.html?id=${doc.id}">
                                 <h4 class="showcase-title">${data.description}</h4>
                             </a>
 
