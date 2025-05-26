@@ -49,5 +49,5 @@ import {
 // Initialize Cloud Firestore and get a reference to the service
 const db = getFirestore(app);
 
-export { db, collection, addDoc, getDocs, limit, query, startAfter, doc, getDoc, where, setDoc, orderBy, app, getCountFromServer, }
+export { db, collection, addDoc, getDocs, limit, query, startAfter, doc, getDoc, where, setDoc, orderBy, app, getCountFromServer, firebaseConfig }
 
