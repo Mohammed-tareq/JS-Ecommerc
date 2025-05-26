@@ -195,10 +195,8 @@ async function gethotReleases() {
 
         randomDocs.forEach((data) => {
             product += ` 
-<<<<<<< HEAD
              <div class="showcase-item">
                         <a href="details.htmlid=${data.id}" class="showcase-img-box">
-=======
             <div class="showcase-item">
                 <a href="details.html?id=${data.id}" class="showcase-img-box">
                     <img class="showcase-img" src="${data.img1}">
@@ -210,7 +208,6 @@ async function gethotReleases() {
                     </a>
                     <div class="showcase-item">
                         <a href="details.html?id=${doc.id}" class="showcase-img-box?id=${doc.id}">
->>>>>>> f077a7a13519e7712566d87bd4006d344322a9a5
                             <img class="showcase-img" src="${data.img1}">
                         </a>
 
@@ -256,10 +253,8 @@ async function getOutlet() {
 
         randomDocs.forEach((data) => {
             product += ` 
-<<<<<<< HEAD
              <div class="showcase-item">
                         <a href="details.htmlid=${data.id}" class="showcase-img-box">
-=======
             <div class="showcase-item">
                 <a href="details.html?id=${data.id}" class="showcase-img-box">
                     <img class="showcase-img" src="${data.img1}">
@@ -271,7 +266,6 @@ async function getOutlet() {
                     </a>
                     <div class="showcase-item">
                         <a href="details.html?id=${doc.id}" class="showcase-img-box">
->>>>>>> f077a7a13519e7712566d87bd4006d344322a9a5
                             <img class="showcase-img" src="${data.img1}">
                         </a>
 
@@ -317,10 +311,8 @@ async function getBrand() {
 
         randomDocs.forEach((data) => {
             product += ` 
-<<<<<<< HEAD
              <div class="showcase-item">
                         <a href="details.html?id=${data.id}" class="showcase-img-box">
-=======
             <div class="showcase-item">
                 <a href="details.html?id=${data.id}" class="showcase-img-box">
                     <img class="showcase-img" src="${data.img1}">
@@ -332,7 +324,6 @@ async function getBrand() {
                     </a>
                     <div class="showcase-item">
                         <a href="details.html?id=${doc.id}" class="showcase-img-box">
->>>>>>> f077a7a13519e7712566d87bd4006d344322a9a5
                             <img class="showcase-img" src="${data.img1}">
                         </a>
 
