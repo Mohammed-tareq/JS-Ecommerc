@@ -1,4 +1,4 @@
-function setDataToRelatedProducts({ category, title, price, oldPrice, badge, rating }, productId) {
+function setDataToRelatedProducts({ category, title, price, oldPrice, badge, rating, img1, img2 }, productId) {
     let starsHtml = '';
     for (let i = 0; i < 5; i++) {
         starsHtml += i < rating
@@ -10,9 +10,9 @@ function setDataToRelatedProducts({ category, title, price, oldPrice, badge, rat
     relatedProductsContainer.innerHTML += `<div class="product-item">
                     <div class="product-banner">
                         <a href="details.html?id=${productId}" class="product-imgs">
-                            <img src="assets/img/product-9-1.jpg" class="product-img default" alt="product-1">
+                            <img src="${img1}" class="product-img default" alt="product-1">
 
-                            <img src="assets/img/product-9-2.jpg" class="product-img hover" alt="product-1">
+                            <img src="${img2}" class="product-img hover" alt="product-1">
 
                         </a>
 
