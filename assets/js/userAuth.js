@@ -171,6 +171,7 @@ function loginUser(e){
             if (user.email === "admin@admin.com") {
                 window.location.href = "admin/admin.html";
             } else {
+                  localStorage.setItem("currentUserEmail", user.email);
                 window.location.href = "index.html";
             }
         })
