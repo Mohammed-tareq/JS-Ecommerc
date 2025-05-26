@@ -18,7 +18,6 @@
 
 <!-- =======================headerHandeler======= -->
  <script src="assets/js/headerHandler.js" defer></script>
-
   <script type="module" src="assets/js/userAuth.js"></script>
 
 <!-- =======================js button=============== -->
@@ -150,13 +149,11 @@
       </div>
 
       <div class="cart-actions">
-        <a href="" class="btn flex btn-md">
-          <i class="fi-rs-shuffle"></i>Update Cart
-        </a>
+      
+       <a href="shop.html" class="btn flex btn-md">
+  <i class="fi-rs-shopping-bag"></i> Continue Shopping
+</a>
 
-        <a href="" class="btn flex btn-md">
-          <i class="fi-rs-shopping-bag"></i> Continue Shopping
-        </a>
       </div>
 
       <div class="divider">
@@ -213,12 +210,10 @@
 </table>
 
 
-<a href="checkout.html">
-         <button  class="btn flex btn-md">
-  <i class="fi fi-rs-box-alt"></i> Proceed To Checkout
-</button></a>
 
-<!-- mtnsash t7ot l function fl button => onclick="checkout()" <= -->
+         <button onclick="checkout()" class="btn flex btn-md">
+  <i class="fi fi-rs-box-alt"></i> Proceed To Checkout
+</button>
         </div>
       </div>
     </section>
@@ -371,19 +366,18 @@
 
 <!-- =========================script for shipping ================ -->
 
-<!-- C:\Users\Helmy\OneDrive\Desktop\JS-Ecommerc-main\JS-Ecommerc-main\JS-Ecommerc-main -->
+
 <!-- =========================================script for dic bottom  -->
 
 
   <!--=============== MAIN JS ===============-->
-  <!-- check out stripe here  -->
-
-  <!--=============== MAIN JS ===============-->
+  <!-- check out cvrip here  -->
+<!--=============== MAIN JS ===============-->
   <script src="./assets/js/main.js"></script>
-  <!-- <script type="module">
-  window.checkout = async function () {
+  <script type="module">
+
     const userEmail = localStorage.getItem("currentUserEmail");
-    const cartKey = cart_${userEmail};
+    const cartKey = `cart_${userEmail}`;
     const cart = JSON.parse(localStorage.getItem(cartKey)) || {};
 
     const cartArray = Object.values(cart);
@@ -404,7 +398,7 @@
       body: JSON.stringify({
         amount: total.toFixed(2),
         name: "Eva-Shop",
-        secertKey: "sk_test_51RPrHHH48QZxOjj9m0d3VgziDynMUFdIX6UTgHkles1EsSQN8kb8tN9Pi5xRzz1dta0gmY0XRvUqEIRf4gpzRAJk00zALmjBhn",
+       secertKey: "sk_test_51RPrHHH48QZxOjj9m0d3VgziDynMUFdIX6UTgHkles1EsSQN8kb8tN9Pi5xRzz1dta0gmY0XRvUqEIRf4gpzRAJk00zALmjBhn",
         onSuccess: "http://127.0.0.1:5501/success.html",
         onCancel: "http://127.0.0.1:5501/success.html",
         shipping: {
@@ -420,8 +414,8 @@
     } else {
       alert("Stripe error: " + data.error);
     }
-  };
-</script> -->
+  
+</script>
 
 </body>
 
