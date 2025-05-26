@@ -1,6 +1,6 @@
 
 import {app, analytics} from "../adminJs/dataconfig.js";
-import {getFirestore, collection, getDocs, doc ,deleteDoc} from "https://www.gstatic.com/firebasejs/11.8.1/firebase-firestore.js";
+import {getFirestore, collection, getDocs, doc ,deleteDoc,limit , query} from "https://www.gstatic.com/firebasejs/11.8.1/firebase-firestore.js";
 
 
 const db = getFirestore(app);
@@ -27,7 +27,8 @@ let lastPiece = document.getElementById("lastPiece");
 async function getAllProducts() {
 
     try {
-        let querySnapshot = await getDocs(allProductCollection);
+        const limitedQuery = query(allProductCollection, limit(8));
+        const querySnapshot = await getDocs(limitedQuery);
         let allproduct = '';
 
 
