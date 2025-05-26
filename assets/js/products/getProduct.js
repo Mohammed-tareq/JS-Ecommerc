@@ -1,8 +1,10 @@
 
 import { app, analytics } from "../adminJs/dataconfig.js";
-import { getFirestore, collection, getDocs,doc, limit, query } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-firestore.js";
+import { getFirestore, collection, getDocs, doc,where, deleteDoc, limit, query } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-firestore.js";
+
 
 const db = getFirestore(app);
+
 let newProductCollection = collection(db, "newProducts")
 let allProductCollection = collection(db, "products")
 
@@ -22,17 +24,17 @@ let lastPiece = document.getElementById("lastPiece");
 async function getAllProducts() {
 
     try {
-        const limitedQuery = query(allProductCollection, limit(8));
-        const querySnapshot = await getDocs(limitedQuery);
-        let allproductdb = '';
+        let querySnapshot = await getDocs(allProductCollection);
+        let allproduct = '';
 
 
         querySnapshot.forEach((doc) => {
             const data = doc.data();
-            allproductdb += ` 
-                    <div class="product-item">
+            allproduct += ` 
+                    
+                          <div class="product-item">
                         <div class="product-banner">
-                            <a href="details.html?id=${doc.id}" class="product-imgs">
+                            <a href="details.html" class="product-imgs">
                                 <img src="${data.img1}" class="product-img default" alt="product-1">
                                 <img src="${data.img2}" class="product-img hover" alt="product-1">
                                  
@@ -61,7 +63,7 @@ async function getAllProducts() {
                         <div class="product-content">
                             <span class="product-category">${data.category}</span>
 
-                            <a href="details.html?id=${doc.id}">
+                            <a href="details.html">
                                 <h3 class="product-title">
                                      ${data.title}
                                 </h3>
@@ -91,13 +93,16 @@ async function getAllProducts() {
 
 
 
-                </div>`;
+                </div>
+
+                    
+               `;
         })
-        allProduct.innerHTML += allproductdb;
+        allProduct.innerHTML += allproduct;
 
 
     } catch (e) {
-        console.error("Error getting documents in product all: ", e);
+        console.error("Error getting documents in product lastPiece: ", e);
     }
 }
 // ========================== new Products ============================================
@@ -114,7 +119,7 @@ async function getNewProducts() {
             product += ` 
                      <div class="product-item swiper-slide" >
                         <div class="product-banner">
-                            <a href="details.html?id=${doc.id}" class="product-imgs">
+                            <a href="details.html" class="product-imgs">
                                 <img src="${data.Img}" class="product-img " alt="product-1">
 
                             </a>
@@ -141,7 +146,7 @@ async function getNewProducts() {
                         <div class="product-content">
                             <span class="product-category">${data.category}</span>
 
-                            <a href="details.html?id=${doc.id}">
+                            <a href="details.html">
                                 <h3 class="product-title">
                                     ${data.title}
                                 </h3>
@@ -173,7 +178,7 @@ async function getNewProducts() {
 
 
     } catch (e) {
-        console.error("Error getting documents in product new: ", e);
+        console.error("Error getting documents in product lastPiece: ", e);
     }
 }
 
@@ -195,8 +200,6 @@ async function gethotReleases() {
 
         randomDocs.forEach((data) => {
             product += ` 
-             <div class="showcase-item">
-                        <a href="details.htmlid=${data.id}" class="showcase-img-box">
             <div class="showcase-item">
                 <a href="details.html?id=${data.id}" class="showcase-img-box">
                     <img class="showcase-img" src="${data.img1}">
@@ -207,28 +210,31 @@ async function gethotReleases() {
                         <h4 class="showcase-title">${data.description}</h4>
                     </a>
                     <div class="showcase-item">
+ HEAD
+                        <a href="details.html" class="showcase-img-box">
+
                         <a href="details.html?id=${doc.id}" class="showcase-img-box?id=${doc.id}">
                             <img class="showcase-img" src="${data.img1}">
                         </a>
 
                         <div class="showcase-content">
-                            <a href="details.html?id=${doc.id}">
+                            <a href="details.html">
                                 <h4 class="showcase-title">${data.description}</h4>
                             </a>
 
-                            <div class="showcase-price flex">
-                                <span class="new-price">${data.oldPrice}</span>
-                                <span class="old-price">${data.price}</span>
-                            </div>
-                        </div>
+                    <div class="showcase-price flex">
+                        <span class="new-price">${data.oldPrice}</span>
+                        <span class="old-price">${data.price}</span>
                     </div>
+                </div>
+            </div>
        `;
         });
 
         hotReleases.innerHTML += product;
 
     } catch (e) {
-        console.error("Error getting documents in product hot: ", e);
+         console.error("Error getting documents in product hot: ", e);
     }
 }
 
@@ -238,10 +244,10 @@ async function gethotReleases() {
 async function getOutlet() {
 
     try {
-        const allDocsSnapsOut = await getDocs(allProductCollection);
+        const allDocsSnapshot = await getDocs(allProductCollection);
         const allDocs = [];
 
-        allDocsSnapsOut.forEach((doc) => {
+        allDocsSnapshot.forEach((doc) => {
             allDocs.push({id: doc.id, ...doc.data()});
         });
 
@@ -253,8 +259,6 @@ async function getOutlet() {
 
         randomDocs.forEach((data) => {
             product += ` 
-             <div class="showcase-item">
-                        <a href="details.htmlid=${data.id}" class="showcase-img-box">
             <div class="showcase-item">
                 <a href="details.html?id=${data.id}" class="showcase-img-box">
                     <img class="showcase-img" src="${data.img1}">
@@ -265,28 +269,28 @@ async function getOutlet() {
                         <h4 class="showcase-title">${data.description}</h4>
                     </a>
                     <div class="showcase-item">
-                        <a href="details.html?id=${doc.id}" class="showcase-img-box">
+                        <a href="details.html" class="showcase-img-box">
                             <img class="showcase-img" src="${data.img1}">
                         </a>
 
                         <div class="showcase-content">
-                            <a href="details.html?id=${doc.id}">
+                            <a href="details.html">
                                 <h4 class="showcase-title">${data.description}</h4>
                             </a>
 
-                            <div class="showcase-price flex">
-                                <span class="new-price">${data.oldPrice}</span>
-                                <span class="old-price">${data.price}</span>
-                            </div>
-                        </div>
+                    <div class="showcase-price flex">
+                        <span class="new-price">${data.oldPrice}</span>
+                        <span class="old-price">${data.price}</span>
                     </div>
+                </div>
+            </div>
        `;
         });
 
         Outlet.innerHTML += product;
 
     } catch (e) {
-        console.error("Error getting documents in product hot: ", e);
+        console.error("Error getting documents in product outlet: ", e);
     }
 }
 
@@ -296,10 +300,10 @@ async function getBrand() {
 
 
     try {
-        const allDocsSnapsBrand = await getDocs(allProductCollection);
+        const allDocsSnapshot = await getDocs(allProductCollection);
         const allDocs = [];
 
-        allDocsSnapsBrand.forEach((doc) => {
+        allDocsSnapshot.forEach((doc) => {
             allDocs.push({id: doc.id, ...doc.data()});
         });
 
@@ -311,8 +315,6 @@ async function getBrand() {
 
         randomDocs.forEach((data) => {
             product += ` 
-             <div class="showcase-item">
-                        <a href="details.html?id=${data.id}" class="showcase-img-box">
             <div class="showcase-item">
                 <a href="details.html?id=${data.id}" class="showcase-img-box">
                     <img class="showcase-img" src="${data.img1}">
@@ -323,28 +325,28 @@ async function getBrand() {
                         <h4 class="showcase-title">${data.description}</h4>
                     </a>
                     <div class="showcase-item">
-                        <a href="details.html?id=${doc.id}" class="showcase-img-box">
+                        <a href="details.html" class="showcase-img-box">
                             <img class="showcase-img" src="${data.img1}">
                         </a>
 
                         <div class="showcase-content">
-                            <a href="details.html?id=${doc.id}">
+                            <a href="details.html">
                                 <h4 class="showcase-title">${data.description}</h4>
                             </a>
 
-                            <div class="showcase-price flex">
-                                <span class="new-price">${data.oldPrice}</span>
-                                <span class="old-price">${data.price}</span>
-                            </div>
-                        </div>
+                    <div class="showcase-price flex">
+                        <span class="new-price">${data.oldPrice}</span>
+                        <span class="old-price">${data.price}</span>
                     </div>
+                </div>
+            </div>
        `;
         });
 
-        brand.innerHTML += product;
+        lastPiecebrand.innerHTML += product;
 
     } catch (e) {
-        console.error("Error getting documents in product hot: ", e);
+        console.error("Error getting documents in product brand: ", e);
     }
 }
 
@@ -369,9 +371,18 @@ async function getLastPiece() {
 
         randomDocs.forEach((data) => {
             product += ` 
-            
             <div class="showcase-item">
-                        <a href="details.html?id=${doc.id}" class="showcase-img-box">
+                <a href="details.html?id=${data.id}" class="showcase-img-box">
+                    <img class="showcase-img" src="${data.img1}">
+                </a>
+
+                <div class="showcase-content">
+                    <a href="details.html?id=${data.id}">
+                        <h4 class="showcase-title">${data.description}</h4>
+                    </a>
+
+                    <div class="showcase-item">
+                        <a href="details.html" class="showcase-img-box">
                             <img class="showcase-img" src="${data.img1}">
                         </a>
 
@@ -380,12 +391,12 @@ async function getLastPiece() {
                                 <h4 class="showcase-title">${data.description}</h4>
                             </a>
 
-                            <div class="showcase-price flex">
-                                <span class="new-price">${data.oldPrice}</span>
-                                <span class="old-price">${data.price}</span>
-                            </div>
-                        </div>
+                    <div class="showcase-price flex">
+                        <span class="new-price">${data.oldPrice}</span>
+                        <span class="old-price">${data.price}</span>
                     </div>
+                </div>
+            </div>
        `;
         });
 
