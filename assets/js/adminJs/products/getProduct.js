@@ -1,4 +1,4 @@
-import {app, analytics} from "./dataconfig.js";
+import {app, analytics} from "../dataconfig.js";
 import {getFirestore, collection, getDocs, doc ,deleteDoc} from "https://www.gstatic.com/firebasejs/11.8.1/firebase-firestore.js";
 
 const db = getFirestore(app);
