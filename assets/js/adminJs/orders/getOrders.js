@@ -16,7 +16,6 @@ let allOrders = []; // تخزين كل الطلبات
 let currentPage = 1;
 const rowsPerPage = 10;
 
-// ============= جلب الطلبات وتخزينها =============
 async function getOrder() {
     try {
         const querySnapshot = await getDocs(orderCollection);
@@ -44,7 +43,6 @@ async function getOrder() {
     }
 }
 
-// ============= عرض الطلبات حسب الصفحة =============
 function displayOrders(page) {
     tbodyOrder.innerHTML = "";
     const start = (page - 1) * rowsPerPage;
@@ -80,7 +78,6 @@ function displayOrders(page) {
     });
 }
 
-// ============= إنشاء أزرار التصفح =============
 function setupPagination() {
     pagination.innerHTML = "";
     const pageCount = Math.ceil(allOrders.length / rowsPerPage);

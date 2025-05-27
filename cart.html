@@ -2,366 +2,364 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-  <!--=============== FLATICON ===============-->
-  <link rel='stylesheet'
-    href='https://cdn-uicons.flaticon.com/2.6.0/uicons-regular-straight/css/uicons-regular-straight.css'>
+    <!--=============== FLATICON ===============-->
+    <link rel='stylesheet'
+          href='https://cdn-uicons.flaticon.com/2.6.0/uicons-regular-straight/css/uicons-regular-straight.css'>
 
-  <!--=============== SWIPER CSS ===============-->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <!--=============== SWIPER CSS ===============-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
 
-  <!--=============== CSS ===============-->
-  <link rel="stylesheet" href="./assets/css/styles.css" />
-<link rel="stylesheet" href="./assets/css/responsive.css">
+    <!--=============== CSS ===============-->
+    <link rel="stylesheet" href="./assets/css/styles.css"/>
+    <link rel="stylesheet" href="./assets/css/responsive.css">
 
-<!-- =======================headerHandeler======= -->
- <script src="assets/js/headerHandler.js" defer></script>
-  <script type="module" src="assets/js/userAuth.js"></script>
+    <!-- =======================headerHandeler======= -->
+    <script src="assets/js/headerHandler.js" defer></script>
+    <script type="module" src="assets/js/userAuth.js"></script>
 
-<!-- =======================js button=============== -->
- <script src="./assets/js/scrollToTop.js" defer></script>
+    <!-- =======================js button=============== -->
 
 
-  <title>Ecommerce Website</title>
-<script type="module" src="./assets/js/loadCart.js"></script>
-<script type="module" src="./assets/js/checkout-stripe.js"></script>
+    <title>Ecommerce Website</title>
+    <script type="module" src="./assets/js/loadCart.js"></script>
+    <script type="module" src="./assets/js/checkout-stripe.js"></script>
 
 </head>
 
 
 <body>
-  <!--=============== HEADER ===============-->
-  <header class="header">
+<!--=============== HEADER ===============-->
+<header class="header">
     <div class="header-top">
-      <div class="header-container container">
-        <div class="header-content">
+        <div class="header-container container">
+            <div class="header-content">
 
-          <span> (+20) - 11111 - 55555</span>
-          <span>Our Location </span>
+                <span> (+20) - 11111 - 55555</span>
+                <span>Our Location </span>
 
+            </div>
+            <p class="header-alert-news">
+                Super Value Deals - Save More With Coupon Codes
+            </p>
+
+            <a href="login-register.html" class="header-top-action">
+                login / register
+            </a>
         </div>
-        <p class="header-alert-news">
-          Super Value Deals - Save More With Coupon Codes
-        </p>
-
-        <a href="login-register.html" class="header-top-action">
-          login / register
-        </a>
-      </div>
     </div>
 
     <nav class="nav container">
-      <a href="index.html" class="nav-logo">
-        <img class="nav-logo-img" src="assets/img/logo.svg" alt="logo">
-      </a>
+        <a href="index.html" class="nav-logo">
+            <img class="nav-logo-img" src="assets/img/logo.svg" alt="logo">
+        </a>
 
-      <div class="nav-menu">
-        <ul class="nav-list">
-                    <li class="nav-item">
-                        <a href="index.html" class="nav-link">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="shop.html" class="nav-link">Shop</a>
-                    </li>
-                    <li class="nav-item" id="myAccount" style="display: none;">
-                        <a href="accounts.html" class="nav-link">My Account</a>
-                    </li>
-                    <li class="nav-item" id="loggedIn" style="display: block;">
-                        <a href="login-register.html" class="nav-link">Login</a>
-                    </li>
-                    <li class="nav-item" id="logOutBtn" style="display: none;">
-                        <a href="#" class="nav-link">Logout</a>
-                    </li>
+        <div class="nav-menu">
+            <ul class="nav-list">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="shop.html" class="nav-link">Shop</a>
+                </li>
+                <li class="nav-item" id="myAccount" style="display: none;">
+                    <a href="accounts.html" class="nav-link">My Account</a>
+                </li>
+                <li class="nav-item" id="loggedIn" style="display: block;">
+                    <a href="login-register.html" class="nav-link">Login</a>
+                </li>
+                <li class="nav-item" id="logOutBtn" style="display: none;">
+                    <a href="#" class="nav-link">Logout</a>
+                </li>
 
-                </ul>
+            </ul>
 
-        <div class="header-search">
-          <input type="text" class="form-input" placeholder="Search For Item ..." />
+            <div class="header-search">
+                <input type="text" class="form-input" placeholder="Search For Item ..."/>
 
-          <button class="search-btn">
-            <img src="assets/img/search.png" />
-          </button>
+                <button class="search-btn">
+                    <img src="assets/img/search.png"/>
+                </button>
+            </div>
         </div>
-      </div>
 
-      <div class="header-user-action">
-        <a href="wishlist.html" class="header-action-btn">
-          <img src="assets/img/icon-heart.svg">
-          <span class="count"></span>
-        </a>
+        <div class="header-user-action">
+            <a href="wishlist.html" class="header-action-btn">
+                <img src="assets/img/icon-heart.svg">
+                <span class="count"></span>
+            </a>
 
-        <a href="cart.html" class="header-action-btn">
-          <img src="assets/img/icon-cart.svg">
-          <span class="count"></span>
-        </a>
-      </div>
+            <a href="cart.html" class="header-action-btn">
+                <img src="assets/img/icon-cart.svg">
+                <span class="count"></span>
+            </a>
+        </div>
     </nav>
 
-  </header>
+</header>
 
-  <!--=============== MAIN ===============-->
-  <main class="main">
+<!--=============== MAIN ===============-->
+<main class="main">
     <!--=============== BREADCRUMB ===============-->
     <section class="breadcrumb">
-      <ul class="breadcrumb-list flex container">
-        <li>
-          <a href="index.html" class="breadcrumb-link">Home</a>
-        </li>
-        <li>
-          <span class="breadcrumb-link">></span>
-        </li>
+        <ul class="breadcrumb-list flex container">
+            <li>
+                <a href="index.html" class="breadcrumb-link">Home</a>
+            </li>
+            <li>
+                <span class="breadcrumb-link">></span>
+            </li>
 
-        <li>
-          <span class="breadcrumb-link">ٍShop</span>
-        </li>
+            <li>
+                <span class="breadcrumb-link">ٍShop</span>
+            </li>
 
-        <li>
-          <span class="breadcrumb-link">></span>
-        </li>
+            <li>
+                <span class="breadcrumb-link">></span>
+            </li>
 
-        <li>
-          <span class="breadcrumb-link">Cart</span>
-        </li>
+            <li>
+                <span class="breadcrumb-link">Cart</span>
+            </li>
 
-      </ul>
+        </ul>
     </section>
 
     <!--=============== CART ===============-->
     <section class="cart section-lg container">
-      <div class="table-container">
-        <table class="table">
-          <thead>
-            <tr>
-              <th>Image</th>
-              <th>Name</th>
-              <th>Price</th>
-              <th>Quantity</th>
-              <th>Subtotal</th>
-              <th>Remove</th>
-            </tr>
-          </thead>
-          <tbody id="cartItemsContainer">
-            <!-- Dynamic rows from loadCart.js -->
-          </tbody>
-        </table>
-      </div>
+        <div class="table-container">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Image</th>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Subtotal</th>
+                    <th>Remove</th>
+                </tr>
+                </thead>
+                <tbody id="cartItemsContainer">
+                <!-- Dynamic rows from loadCart.js -->
+                </tbody>
+            </table>
+        </div>
 
-      <div class="cart-actions">
-      
-       <a href="shop.html" class="btn flex btn-md">
-  <i class="fi-rs-shopping-bag"></i> Continue Shopping
-</a>
+        <div class="cart-actions">
 
-      </div>
-
-      <div class="divider">
-        <i class="fi fi-rs-fingerprint"></i>
-      </div>
-
-
-      <div class="cart-group grid">
-        <div>
-     <div class="cart-shipping">
-  <h3 class="section-title">Calculate Shipping</h3>
-
-  <form id="shippingForm" class="form grid">
-    <input type="text" value="Egypt" class="form-input">
-
-    <div class="form-group grid">
-      <select id="citySelect" class="form-input">
-        <option value="Cairo" selected>Cairo</option>
-        <option value="Alex">Alex</option>
-        <option value="Giza">Giza</option>
-        <option value="Lower Egypt">Lower Egypt</option>
-      </select>
-
-      <input type="text" placeholder="PostCode / ZIP" class="form-input">
-    </div>
-
-    <div class="form-btn">
-      <button type="submit" class="btn flex btn-sm">
-        <i class="fi-rs-shuffle"></i> Update
-      </button>
-    </div>
-  </form>
-</div>
-
+            <a href="shop.html" class="btn flex btn-md">
+                <i class="fi-rs-shopping-bag"></i> Continue Shopping
+            </a>
 
         </div>
 
-        <div class="cart-total">
-          <h3 class="section-title">Cart Totals</h3>
-
-        <table class="cart-total-table">
-  <tr>
-    <td><span class="cart-total-title">Cart Subtotal</span></td>
-    <td><span class="cart-total-price" id="cartSubtotal">$0.00</span></td>
-  </tr>
-  <tr>
-    <td><span class="cart-total-title">Shipping</span></td>
-    <td><span class="cart-total-price" id="shippingCost">$0.00</span></td>
-  </tr>
-  <tr>
-    <td><span class="cart-total-title">Total</span></td>
-    <td><span class="cart-total-price" id="cartTotal">$0.00</span></td>
-  </tr>
-</table>
-
-
-
-         <button onclick="checkout()" class="btn flex btn-md">
-  <i class="fi fi-rs-box-alt"></i> Proceed To Checkout
-</button>
+        <div class="divider">
+            <i class="fi fi-rs-fingerprint"></i>
         </div>
-      </div>
+
+
+        <div class="cart-group grid">
+            <div>
+                <div class="cart-shipping">
+                    <h3 class="section-title">Calculate Shipping</h3>
+
+                    <form id="shippingForm" class="form grid">
+                        <input type="text" value="Egypt" class="form-input">
+
+                        <div class="form-group grid">
+                            <select id="citySelect" class="form-input">
+                                <option value="Cairo" selected>Cairo</option>
+                                <option value="Alex">Alex</option>
+                                <option value="Giza">Giza</option>
+                                <option value="Lower Egypt">Lower Egypt</option>
+                            </select>
+
+                            <input type="text" placeholder="PostCode / ZIP" class="form-input">
+                        </div>
+
+                        <div class="form-btn">
+                            <button type="submit" class="btn flex btn-sm">
+                                <i class="fi-rs-shuffle"></i> Update
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+
+            </div>
+
+            <div class="cart-total">
+                <h3 class="section-title">Cart Totals</h3>
+
+                <table class="cart-total-table">
+                    <tr>
+                        <td><span class="cart-total-title">Cart Subtotal</span></td>
+                        <td><span class="cart-total-price" id="cartSubtotal">$0.00</span></td>
+                    </tr>
+                    <tr>
+                        <td><span class="cart-total-title">Shipping</span></td>
+                        <td><span class="cart-total-price" id="shippingCost">$0.00</span></td>
+                    </tr>
+                    <tr>
+                        <td><span class="cart-total-title">Total</span></td>
+                        <td><span class="cart-total-price" id="cartTotal">$0.00</span></td>
+                    </tr>
+                </table>
+
+
+                <button onclick="checkout()" class="btn flex btn-md">
+                    <i class="fi fi-rs-box-alt"></i> Proceed To Checkout
+                </button>
+            </div>
+        </div>
     </section>
 
     <!--=============== NEWSLETTER ===============-->
     <section class="newsletter section home-newsletter ">
-      <div class="newsletter-container grid">
-        <h3 class="newsletter-title flex">
-          <img src="assets/img/icon-email.svg" class="newsletter-icon">
-          Sign up to Newsletter
-        </h3>
-        <p class="newsletter-description">
-          ...and receive $25 coupon for frist shopping
-        </p>
-        <form action="#" class="newsletter-form">
-          <input class="newsletter-input" type="email" placeholder="Your email address">
-          <button type="submit" class="newsletter-btn ">
-            Subscribe
-          </button>
-        </form>
-      </div>
+        <div class="newsletter-container grid">
+            <h3 class="newsletter-title flex">
+                <img src="assets/img/icon-email.svg" class="newsletter-icon">
+                Sign up to Newsletter
+            </h3>
+            <p class="newsletter-description">
+                ...and receive $25 coupon for frist shopping
+            </p>
+            <form action="#" class="newsletter-form">
+                <input class="newsletter-input" type="email" placeholder="Your email address">
+                <button type="submit" class="newsletter-btn ">
+                    Subscribe
+                </button>
+            </form>
+        </div>
     </section>
     <button onclick="topFunction()" id="scrollTopBtn" title="Go to top">↑</button>
-  </main>
+</main>
 
-  <!--=============== FOOTER ===============-->
-  <footer class="footer container">
+<!--=============== FOOTER ===============-->
+<footer class="footer container">
     <div class="footer-container grid">
-      <div class="footer-content">
-        <a href="index.html" class="footer-logo">
-          <img src="assets/img/logo.svg" alt="logo" class="footer-logo-img">
-        </a>
-        <h4 class="footer-subtitle">Contact</h4>
-
-        <p class="footer-description">
-          <span>Address:</span>
-          123 Street, New York, USA
-        </p>
-
-        <p class="footer-description">
-          <span>Phone:</span>
-          +01 2222 5555 / (+91) 01 2345 6789
-        </p>
-
-        <p class="footer-description">
-          <span>Hours:</span>
-          10:00 - 18:00, Mon - Sat
-        </p>
-
-        <div class="footer-social">
-          <h4 class="footer-subtitle">
-            Follow Me
-          </h4>
-          <div class="footer-social-links flex">
-            <a href="">
-              <img src="assets/img/icon-facebook.svg" alt="facebook" class="footer-social-icon">
+        <div class="footer-content">
+            <a href="index.html" class="footer-logo">
+                <img src="assets/img/logo.svg" alt="logo" class="footer-logo-img">
             </a>
+            <h4 class="footer-subtitle">Contact</h4>
 
-            <a href="">
-              <img src="assets/img/icon-twitter.svg" alt="facebook" class="footer-social-icon">
-            </a>
+            <p class="footer-description">
+                <span>Address:</span>
+                123 Street, New York, USA
+            </p>
 
-            <a href="">
-              <img src="assets/img/icon-instagram.svg" alt="facebook" class="footer-social-icon">
-            </a>
+            <p class="footer-description">
+                <span>Phone:</span>
+                +01 2222 5555 / (+91) 01 2345 6789
+            </p>
 
-            <a href="">
-              <img src="assets/img/icon-pinterest.svg" alt="facebook" class="footer-social-icon">
-            </a>
+            <p class="footer-description">
+                <span>Hours:</span>
+                10:00 - 18:00, Mon - Sat
+            </p>
 
-            <a href="">
-              <img src="assets/img/icon-youtube.svg" alt="facebook" class="footer-social-icon">
-            </a>
-          </div>
+            <div class="footer-social">
+                <h4 class="footer-subtitle">
+                    Follow Me
+                </h4>
+                <div class="footer-social-links flex">
+                    <a href="">
+                        <img src="assets/img/icon-facebook.svg" alt="facebook" class="footer-social-icon">
+                    </a>
+
+                    <a href="">
+                        <img src="assets/img/icon-twitter.svg" alt="facebook" class="footer-social-icon">
+                    </a>
+
+                    <a href="">
+                        <img src="assets/img/icon-instagram.svg" alt="facebook" class="footer-social-icon">
+                    </a>
+
+                    <a href="">
+                        <img src="assets/img/icon-pinterest.svg" alt="facebook" class="footer-social-icon">
+                    </a>
+
+                    <a href="">
+                        <img src="assets/img/icon-youtube.svg" alt="facebook" class="footer-social-icon">
+                    </a>
+                </div>
+            </div>
         </div>
-      </div>
 
 
-      <div class="footer-content">
-        <h3 class="footer-title">Address</h3>
-        <ul>
-          <li><a href="" class="footer-link">About Us</a></li>
-          <li><a href="" class="footer-link">Delivery Information</a></li>
-          <li><a href="" class="footer-link">Privacy plicy</a></li>
-          <li><a href="" class="footer-link"> Terms & conditions</a></li>
-          <li><a href="" class="footer-link">contact Us</a></li>
-          <li><a href="" class="footer-link">Support Center</a></li>
+        <div class="footer-content">
+            <h3 class="footer-title">Address</h3>
+            <ul>
+                <li><a href="" class="footer-link">About Us</a></li>
+                <li><a href="" class="footer-link">Delivery Information</a></li>
+                <li><a href="" class="footer-link">Privacy plicy</a></li>
+                <li><a href="" class="footer-link"> Terms & conditions</a></li>
+                <li><a href="" class="footer-link">contact Us</a></li>
+                <li><a href="" class="footer-link">Support Center</a></li>
 
 
-        </ul>
-      </div>
+            </ul>
+        </div>
 
-      <div class="footer-content">
-        <h3 class="footer-title">My Account</h3>
-        <ul>
-          <li><a href="" class="footer-link"> Sign In</a></li>
-          <li><a href="" class="footer-link">View Cart</a></li>
-          <li><a href="" class="footer-link">My Wishlist</a></li>
-          <li><a href="" class="footer-link"> Track My Order</a></li>
-          <li><a href="" class="footer-link">Help</a></li>
-          <li><a href="" class="footer-link">Order</a></li>
-
-
-        </ul>
-      </div>
+        <div class="footer-content">
+            <h3 class="footer-title">My Account</h3>
+            <ul>
+                <li><a href="" class="footer-link"> Sign In</a></li>
+                <li><a href="" class="footer-link">View Cart</a></li>
+                <li><a href="" class="footer-link">My Wishlist</a></li>
+                <li><a href="" class="footer-link"> Track My Order</a></li>
+                <li><a href="" class="footer-link">Help</a></li>
+                <li><a href="" class="footer-link">Order</a></li>
 
 
-      <div class="footer-content">
-        <h3 class="footer-title">Secured Payment Gateways</h3>
+            </ul>
+        </div>
 
-        <img class="payment-img" src="assets/img/payment-method.png" alt="payment-img">
 
-      </div>
+        <div class="footer-content">
+            <h3 class="footer-title">Secured Payment Gateways</h3>
+
+            <img class="payment-img" src="assets/img/payment-method.png" alt="payment-img">
+
+        </div>
 
     </div>
 
     <div class="footer-bottom">
-      <p class="copyrigth">&copy; 2025 ITI. All rights reserved </p>
-      <span class="designer">Designed BY ITI-PHP</span>
+        <p class="copyrigth">&copy; 2025 ITI. All rights reserved </p>
+        <span class="designer">Designed BY ITI-PHP</span>
     </div>
 
 
-  </footer>
+</footer>
 
-  <!--=============== SWIPER JS ===============-->
-  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<!--=============== SWIPER JS ===============-->
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <!-- ============================================== -->
- <script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const cartItems = [];
-    const rows = document.querySelectorAll("table.table tr:not(:first-child)");
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const cartItems = [];
+        const rows = document.querySelectorAll("table.table tr:not(:first-child)");
 
-    rows.forEach(row => {
-      const name = row.querySelector(".table-title")?.textContent.trim();
-      const priceText = row.querySelector(".table-price")?.textContent.trim().replace("$", "");
-      const quantityInput = row.querySelector(".quantity");
-      const quantity = quantityInput ? parseInt(quantityInput.value) : 1;
+        rows.forEach(row => {
+            const name = row.querySelector(".table-title")?.textContent.trim();
+            const priceText = row.querySelector(".table-price")?.textContent.trim().replace("$", "");
+            const quantityInput = row.querySelector(".quantity");
+            const quantity = quantityInput ? parseInt(quantityInput.value) : 1;
 
-      const price = parseFloat(priceText);
+            const price = parseFloat(priceText);
 
-      if (name && !isNaN(price) && !isNaN(quantity)) {
-        cartItems.push({ name, price, quantity });
-      }
+            if (name && !isNaN(price) && !isNaN(quantity)) {
+                cartItems.push({name, price, quantity});
+            }
+        });
+
+        // Save to localStorage
+        localStorage.setItem("cart", JSON.stringify(cartItems));
     });
-
-    // Save to localStorage
-    localStorage.setItem("cart", JSON.stringify(cartItems));
-  });
 </script>
 
 <!-- =========================script for shipping ================ -->
@@ -370,53 +368,64 @@
 <!-- =========================================script for dic bottom  -->
 
 
-  <!--=============== MAIN JS ===============-->
-  <!-- check out cvrip here  -->
 <!--=============== MAIN JS ===============-->
-  <script src="./assets/js/main.js"></script>
-  <script type="module">
+<!-- check out cvrip here  -->
+<!--=============== MAIN JS ===============-->
+<script src="./assets/js/main.js"></script>
+<script type="module">
 
     const userEmail = localStorage.getItem("currentUserEmail");
     const cartKey = `cart_${userEmail}`;
     const cart = JSON.parse(localStorage.getItem(cartKey)) || {};
 
-    const cartArray = Object.values(cart);
-    if (cartArray.length === 0) return alert("Cart is empty");
 
-    // Get shipping details
-    const city = document.getElementById("citySelect")?.value || "Unknown City";
-    const zip = document.querySelector('input[placeholder="PostCode / ZIP"]')?.value || "00000";
 
-    // Calculate total
-    const subtotal = cartArray.reduce((sum, item) => sum + item.price * item.quantity, 0);
-    const shipping = subtotal > 0 ? 40 : 0;
-    const total = subtotal + shipping;
-
-    const response = await fetch("https://adel.dev/scripts/stripe.php", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        amount: total.toFixed(2),
-        name: "Eva-Shop",
-       secertKey: "sk_test_51RPrHHH48QZxOjj9m0d3VgziDynMUFdIX6UTgHkles1EsSQN8kb8tN9Pi5xRzz1dta0gmY0XRvUqEIRf4gpzRAJk00zALmjBhn",
-        onSuccess: "http://127.0.0.1:5501/success.html",
-        onCancel: "http://127.0.0.1:5501/success.html",
-        shipping: {
-          city: city,
-          zip: zip
+    function validateCart(cart) {
+        const cartArray = Object.values(cart);
+        if (cartArray.length === 0) {
+            return alert("Cart is empty");
         }
-      }),
-    });
+        validateCart(cart);
 
-    const data = await response.json();
-    if (data.url) {
-      window.location.href = data.url;
-    } else {
-      alert("Stripe error: " + data.error);
+        // Get shipping details
+        const city = document.getElementById("citySelect")?.value || "Unknown City";
+        const zip = document.querySelector('input[placeholder="PostCode / ZIP"]')?.value || "00000";
+
+        // Calculate total
+        const subtotal = cartArray.reduce((sum, item) => sum + item.price * item.quantity, 0);
+        const shipping = subtotal > 0 ? 40 : 0;
+        const total = subtotal + shipping;
+
+        async function checkout() {
+            const response = await fetch("https://adel.dev/scripts/stripe.php", {
+                method: "POST",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify({
+                    amount: total.toFixed(2),
+                    name: "Eva-Shop",
+                    secertKey: "sk_test_51RPrHHH48QZxOjj9m0d3VgziDynMUFdIX6UTgHkles1EsSQN8kb8tN9Pi5xRzz1dta0gmY0XRvUqEIRf4gpzRAJk00zALmjBhn",
+                    onSuccess: "http://127.0.0.1:5501/success.html",
+                    onCancel: "http://127.0.0.1:5501/success.html",
+                    shipping: {
+                        city: city,
+                        zip: zip
+                    }
+                }),
+            });
+
+            const data = await response.json();
+            if (data.url) {
+                window.location.href = data.url;
+            } else {
+                alert("Stripe error: " + data.error);
+            }
+        }
+        checkout();
     }
-  
+
+
 </script>
 
 </body>
-   
+
 </html>

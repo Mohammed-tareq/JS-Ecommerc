@@ -1,3 +1,425 @@
+<!----><!DOCTYPE html>-->
+<!--<html lang="en">-->
+
+<!--<head>-->
+<!--  <meta charset="UTF-8" />-->
+<!--  <meta name="viewport" content="width=device-width, initial-scale=1.0" />-->
+
+<!--  &lt;!&ndash;=============== FLATICON ===============&ndash;&gt;-->
+<!--  <link rel='stylesheet'-->
+<!--    href='https://cdn-uicons.flaticon.com/2.6.0/uicons-regular-straight/css/uicons-regular-straight.css'>-->
+
+<!--  &lt;!&ndash;=============== SWIPER CSS ===============&ndash;&gt;-->
+<!--  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />-->
+
+<!--  &lt;!&ndash;=============== CSS ===============&ndash;&gt;-->
+<!--  <link rel="stylesheet" href="./assets/css/styles.css" />-->
+<!-- <link rel="stylesheet" href="./assets/css/responsive.css">-->
+
+
+<!-- &lt;!&ndash; =======================headerHandeler======= &ndash;&gt;-->
+<!-- <script src="assets/js/headerHandler.js" defer></script>-->
+<!--  <script type="module" src="assets/js/userAuth.js"></script>-->
+
+
+
+<!--  <title>Ecommerce Website</title>-->
+<!--</head>-->
+
+<!--<body>-->
+<!--  &lt;!&ndash;=============== HEADER ===============&ndash;&gt;-->
+<!--  <header class="header">-->
+<!--    <div class="header-top">-->
+<!--      <div class="header-container container">-->
+<!--        <div class="header-content">-->
+
+<!--          <span> (+20) - 11111 - 55555</span>-->
+<!--          <span>Our Location </span>-->
+
+<!--        </div>-->
+<!--        <p class="header-alert-news">-->
+<!--          Super Value Deals - Save More With Coupon Codes-->
+<!--        </p>-->
+
+<!--        <a href="login-register.html" class="header-top-action">-->
+<!--          login / register-->
+<!--        </a>-->
+<!--      </div>-->
+<!--    </div>-->
+
+<!--    <nav class="nav container">-->
+<!--      <a href="index.html" class="nav-logo">-->
+<!--        <img class="nav-logo-img" src="assets/img/logo.svg" alt="logo">-->
+<!--      </a>-->
+
+<!--      <div class="nav-menu">-->
+<!--        <ul class="nav-list">-->
+<!--                    <li class="nav-item">-->
+<!--                        <a href="index.html" class="nav-link">Home</a>-->
+<!--                    </li>-->
+<!--                    <li class="nav-item">-->
+<!--                        <a href="shop.html" class="nav-link">Shop</a>-->
+<!--                    </li>-->
+<!--                    <li class="nav-item" id="myAccount" style="display: none;">-->
+<!--                        <a href="accounts.html" class="nav-link">My Account</a>-->
+<!--                    </li>-->
+<!--                    <li class="nav-item" id="loggedIn" style="display: block;">-->
+<!--                        <a href="login-register.html" class="nav-link">Login</a>-->
+<!--                    </li>-->
+<!--                    <li class="nav-item" id="logOutBtn" style="display: none;">-->
+<!--                        <a href="#" class="nav-link">Logout</a>-->
+<!--                    </li>-->
+
+<!--                </ul>-->
+
+<!--        <div class="header-search">-->
+<!--          <input type="text" class="form-input" placeholder="Search For Item ..." />-->
+
+<!--          <button class="search-btn">-->
+<!--            <img src="assets/img/search.png" />-->
+<!--          </button>-->
+<!--        </div>-->
+<!--      </div>-->
+
+<!--      <div class="header-user-action">-->
+<!--        <a href="wishlist.html" class="header-action-btn">-->
+<!--          <img src="assets/img/icon-heart.svg">-->
+<!--          <span class="count"></span>-->
+<!--        </a>-->
+
+<!--        <a href="cart.html" class="header-action-btn">-->
+<!--          <img src="assets/img/icon-cart.svg">-->
+<!--          <span class="count"></span>-->
+<!--        </a>-->
+<!--      </div>-->
+<!--    </nav>-->
+
+<!--  </header>-->
+<!--  &lt;!&ndash;=============== MAIN ===============&ndash;&gt;-->
+<!--  <main class="main">-->
+<!--    &lt;!&ndash;=============== BREADCRUMB ===============&ndash;&gt;-->
+<!--    <section class="breadcrumb">-->
+<!--      <ul class="breadcrumb-list flex container">-->
+<!--        <li>-->
+<!--          <a href="index.html" class="breadcrumb-link">Home</a>-->
+<!--        </li>-->
+<!--        <li>-->
+<!--          <span class="breadcrumb-link">></span>-->
+<!--        </li>-->
+<!--        <li>-->
+<!--          <a href="index.html" class="breadcrumb-link">Shop</a>-->
+<!--        </li>-->
+<!--        <li>-->
+<!--          <span class="breadcrumb-link">></span>-->
+<!--        </li>-->
+
+<!--        <li>-->
+<!--          <span class="breadcrumb-link">Checkout</span>-->
+<!--        </li>-->
+
+<!--      </ul>-->
+<!--    </section>-->
+<!--    &lt;!&ndash;=============== CHECKOUT ===============&ndash;&gt;-->
+<!--    <section class="checkout section-lg">-->
+<!--      <div class="checkout-container container grid">-->
+<!--        <div class="checkout-group">-->
+<!--          <h3 class="section-title">Billing Details</h3>-->
+
+<!--          <form action="" class="form grid">-->
+<!--            <input type="text" placeholder="Name" class="form-input">-->
+
+<!--            <input type="text" placeholder="Address" class="form-input">-->
+
+<!--            <input type="text" placeholder="City" class="form-input">-->
+
+<!--            <input type="text" placeholder="Country" class="form-input">-->
+
+<!--            <input type="text" placeholder="PostCode / ZIP" class="form-input">-->
+
+<!--            <input type="text" placeholder="Phone" class="form-input">-->
+
+<!--            <input type="email" placeholder="Email" class="form-input">-->
+
+<!--            <h3 class="checkout-title">Additional Information</h3>-->
+
+<!--            <textarea name="" placeholder="Order note" cols="30" rows="10" class="form-input textarea"></textarea>-->
+<!--          </form>-->
+<!--        </div>-->
+
+
+<!--        <div class="checkout-group">-->
+<!--          <h3 class="section-title"> Cart Torals</h3>-->
+
+<!--         &lt;!&ndash; Cart Totals Table &ndash;&gt;-->
+<!--<table class="order-table" id="orderTable">-->
+<!--  <tr>-->
+<!--    <th colspan="2">Products</th>-->
+<!--    <th>Total</th>-->
+<!--  </tr>-->
+<!--  &lt;!&ndash; Dynamic rows will be inserted here &ndash;&gt;-->
+<!--  <tbody id="orderTableBody"></tbody>-->
+
+<!--  <tr>-->
+<!--    <td><span class="order-subtitle">SubTotal</span></td>-->
+<!--    <td colspan="2"><span class="table-price" id="subtotal">$0.00</span></td>-->
+<!--  </tr>-->
+
+<!--  <tr>-->
+<!--    <td><span class="order-subtitle">Shipping</span></td>-->
+<!--    <td colspan="2"><span class="table-price" id="shipping">Free Shipping</span></td>-->
+<!--  </tr>-->
+
+<!--  <tr>-->
+<!--    <td><span class="order-subtitle">Total</span></td>-->
+<!--    <td colspan="2"><span class="order-grand-total" id="grandTotal">$0.00</span></td>-->
+<!--  </tr>-->
+<!--</table>-->
+
+
+<!--          <div class="payment-methods">-->
+
+
+<!--            &lt;!&ndash; helmyyyyy comment  &ndash;&gt;-->
+
+<!--            &lt;!&ndash; <h3 class="checkout-title payment-title">Payment</h3> &ndash;&gt;-->
+
+<!--            &lt;!&ndash; <div class="payment-option flex">-->
+
+<!--              <input type="radio" id="1" name="radio" class="payment-input">-->
+<!--              <label for="1" class="payment-label">Dirct Bank Transfer</label>-->
+<!--            </div>-->
+
+<!--            <div class="payment-option flex">-->
+
+<!--              <input type="radio" id="2" name="radio" class="payment-input">-->
+<!--              <label for="2" class="payment-label">Check Payment</label>-->
+<!--            </div>-->
+
+<!--            <div class="payment-option flex">-->
+
+<!--              <input type="radio" name="radio" id="3" class="payment-input">-->
+<!--              <label for="3" class="payment-label">Paypal</label>-->
+<!--            </div> &ndash;&gt;-->
+
+<!--          </div>-->
+<!--          -->
+<!--          &lt;!&ndash; <button class="btn btn-md"> Place Order </button> &ndash;&gt;-->
+<!--        <button id="placeOrderBtn" class="btn btn-md">Place Order</button>-->
+
+<!--        </div>-->
+<!--      </div>-->
+<!--      </div>-->
+<!--    </section>-->
+
+<!--    &lt;!&ndash;=============== NEWSLETTER ===============&ndash;&gt;-->
+<!--    <section class="newsletter section">-->
+<!--      <div class="newsletter-container grid">-->
+<!--        <h3 class="newsletter-title flex">-->
+<!--          <img src="assets/img/icon-email.svg" class="newsletter-icon">-->
+<!--          Sign up to Newsletter-->
+<!--        </h3>-->
+<!--        <p class="newsletter-description">-->
+<!--          ...and receive $25 coupon for frist shopping-->
+<!--        </p>-->
+<!--        <form action="#" class="newsletter-form">-->
+<!--          <input class="newsletter-input" type="email" placeholder="Your email address">-->
+<!--          <button type="submit" class="newsletter-btn ">-->
+<!--            Subscribe-->
+<!--          </button>-->
+<!--        </form>-->
+<!--      </div>-->
+<!--    </section>-->
+<!--  </main>-->
+
+<!--  &lt;!&ndash;=============== FOOTER ===============&ndash;&gt;-->
+<!--  <footer class="footer container">-->
+<!--    <div class="footer-container grid">-->
+<!--      <div class="footer-content">-->
+<!--        <a href="index.html" class="footer-logo">-->
+<!--          <img src="assets/img/logo.svg" alt="logo" class="footer-logo-img">-->
+<!--        </a>-->
+<!--        <h4 class="footer-subtitle">Contact</h4>-->
+
+<!--        <p class="footer-description">-->
+<!--          <span>Address:</span>-->
+<!--          123 Street, New York, USA-->
+<!--        </p>-->
+
+<!--        <p class="footer-description">-->
+<!--          <span>Phone:</span>-->
+<!--          +01 2222 5555 / (+91) 01 2345 6789-->
+<!--        </p>-->
+
+<!--        <p class="footer-description">-->
+<!--          <span>Hours:</span>-->
+<!--          10:00 - 18:00, Mon - Sat-->
+<!--        </p>-->
+
+<!--        <div class="footer-social">-->
+<!--          <h4 class="footer-subtitle">-->
+<!--            Follow Me-->
+<!--          </h4>-->
+<!--          <div class="footer-social-links flex">-->
+<!--            <a href="">-->
+<!--              <img src="assets/img/icon-facebook.svg" alt="facebook" class="footer-social-icon">-->
+<!--            </a>-->
+
+<!--            <a href="">-->
+<!--              <img src="assets/img/icon-twitter.svg" alt="facebook" class="footer-social-icon">-->
+<!--            </a>-->
+
+<!--            <a href="">-->
+<!--              <img src="assets/img/icon-instagram.svg" alt="facebook" class="footer-social-icon">-->
+<!--            </a>-->
+
+<!--            <a href="">-->
+<!--              <img src="assets/img/icon-pinterest.svg" alt="facebook" class="footer-social-icon">-->
+<!--            </a>-->
+
+<!--            <a href="">-->
+<!--              <img src="assets/img/icon-youtube.svg" alt="facebook" class="footer-social-icon">-->
+<!--            </a>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+
+
+<!--      <div class="footer-content">-->
+<!--        <h3 class="footer-title">Address</h3>-->
+<!--        <ul>-->
+<!--          <li><a href="" class="footer-link">About Us</a></li>-->
+<!--          <li><a href="" class="footer-link">Delivery Information</a></li>-->
+<!--          <li><a href="" class="footer-link">Privacy plicy</a></li>-->
+<!--          <li><a href="" class="footer-link"> Terms & conditions</a></li>-->
+<!--          <li><a href="" class="footer-link">contact Us</a></li>-->
+<!--          <li><a href="" class="footer-link">Support Center</a></li>-->
+
+
+<!--        </ul>-->
+<!--      </div>-->
+
+<!--      <div class="footer-content">-->
+<!--        <h3 class="footer-title">My Account</h3>-->
+<!--        <ul>-->
+<!--          <li><a href="" class="footer-link"> Sign In</a></li>-->
+<!--          <li><a href="" class="footer-link">View Cart</a></li>-->
+<!--          <li><a href="" class="footer-link">My Wishlist</a></li>-->
+<!--          <li><a href="" class="footer-link"> Track My Order</a></li>-->
+<!--          <li><a href="" class="footer-link">Help</a></li>-->
+<!--          <li><a href="" class="footer-link">Order</a></li>-->
+
+
+<!--        </ul>-->
+<!--      </div>-->
+
+
+<!--      <div class="footer-content">-->
+<!--        <h3 class="footer-title">Secured Payment Gateways</h3>-->
+
+<!--        <img class="payment-img" src="assets/img/payment-method.png" alt="payment-img">-->
+
+<!--      </div>-->
+
+<!--    </div>-->
+
+<!--    <div class="footer-bottom">-->
+<!--      <p class="copyrigth">&copy; 2025 ITI. All rights reserved </p>-->
+<!--      <span class="designer">Designed BY ITI-PHP</span>-->
+<!--    </div>-->
+
+
+<!--  </footer>-->
+
+<!--  &lt;!&ndash;=============== SWIPER JS ===============&ndash;&gt;-->
+<!--  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>-->
+
+<!--  &lt;!&ndash;=============== MAIN JS ===============&ndash;&gt;-->
+<!--  <script src="./assets/js/main.js"></script>-->
+
+
+<!--  &lt;!&ndash; ======================= &ndash;&gt;-->
+<!--   <script>-->
+<!--    // assets/js/payment-handler.js-->
+<!--import { db } from "./firebaseInitializeApp.js";-->
+<!--import { collection, addDoc } from "https://www.gstatic.com/firebasejs/11.7.3/firebase-firestore.js";-->
+
+<!--window.addEventListener("DOMContentLoaded", async () => {-->
+<!--  if (window.location.pathname.includes("success.html")) {-->
+<!--    const cart = JSON.parse(localStorage.getItem("cart")) || [];-->
+
+<!--    if (cart.length === 0) return;-->
+
+<!--    const order = {-->
+<!--      items: cart,-->
+<!--      total: cart.reduce((sum, item) => sum + item.price * item.quantity, 0),-->
+<!--      createdAt: new Date(),-->
+<!--    };-->
+
+<!--    try {-->
+<!--      await addDoc(collection(db, "successfulOrders"), order);-->
+<!--      localStorage.removeItem("cart");-->
+<!--      alert("✅ Order saved to Firebase!");-->
+<!--    } catch (err) {-->
+<!--      console.error("❌ Firebase error:", err);-->
+<!--    }-->
+<!--  }-->
+<!--});-->
+
+<!--   </script>-->
+<!--   <script type="module" src="./assets/js/checkout-stripe.js"></script>-->
+<!--<script>-->
+<!--  document.addEventListener("DOMContentLoaded", () => {-->
+<!--    document.getElementById("placeOrderBtn").addEventListener("click", () => {-->
+<!--      if (typeof window.checkout === "function") {-->
+<!--        window.checkout();-->
+<!--      }-->
+<!--    });-->
+<!--  });-->
+<!--</script>-->
+<!--<script>-->
+<!--  document.addEventListener("DOMContentLoaded", () => {-->
+<!--    const cart = JSON.parse(localStorage.getItem("cart")) || [];-->
+<!--    let total = 0;-->
+
+<!--    const tableBody = document.querySelector("table.order-table");-->
+
+<!--    cart.forEach(item => {-->
+<!--      const row = document.createElement("tr");-->
+<!--      row.innerHTML = `-->
+<!--        <td><img src="assets/img/product-1-2.jpg" class="order-img" alt=""></td>-->
+<!--        <td>-->
+<!--          <h3 class="table-title">${item.name}</h3>-->
+<!--          <p class="table-quantity">x ${item.quantity}</p>-->
+<!--        </td>-->
+<!--        <td><span class="table-price">$${item.price * item.quantity}</span></td>-->
+<!--      `;-->
+<!--      tableBody.appendChild(row);-->
+
+<!--      total += item.price * item.quantity;-->
+<!--    });-->
+
+<!--    // Update total fields in summary-->
+<!--    document.querySelector(".order-grand-total").textContent = `$${total.toFixed(2)}`;-->
+<!--  });-->
+
+<!--</script>-->
+
+<!--<script>-->
+<!--  -->
+<!--  document.getElementById("placeOrderBtn").addEventListener("click", () => {-->
+<!--    if (typeof window.checkout === "function") {-->
+<!--      window.checkout();-->
+<!--    }-->
+<!--  });-->
+
+
+<!--</script>-->
+<!--   <script type="module" src="./assets/js/payment-handler.js"></script>-->
+
+<!--</body>-->
+
+<!--</html>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,367 +428,367 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <!--=============== FLATICON ===============-->
-  <link rel='stylesheet'
-    href='https://cdn-uicons.flaticon.com/2.6.0/uicons-regular-straight/css/uicons-regular-straight.css'>
+<link rel='stylesheet'
+      href='https://cdn-uicons.flaticon.com/2.6.0/uicons-regular-straight/css/uicons-regular-straight.css'>
 
-  <!--=============== SWIPER CSS ===============-->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+<!--=============== SWIPER CSS ===============-->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
-  <!--=============== CSS ===============-->
-  <link rel="stylesheet" href="./assets/css/styles.css" />
- <link rel="stylesheet" href="./assets/css/responsive.css">
-
-
- <!-- =======================headerHandeler======= -->
- <script src="assets/js/headerHandler.js" defer></script>
-  <script type="module" src="assets/js/userAuth.js"></script>
+<!--=============== CSS ===============-->
+<link rel="stylesheet" href="./assets/css/styles.css" />
+<link rel="stylesheet" href="./assets/css/responsive.css">
 
 
+<!-- =======================headerHandeler======= -->
+<script src="assets/js/headerHandler.js" defer></script>
+<script type="module" src="assets/js/userAuth.js"></script>
 
-  <title>Ecommerce Website</title>
+
+
+<title>Ecommerce Website</title>
 </head>
 
 <body>
-  <!--=============== HEADER ===============-->
-  <header class="header">
-    <div class="header-top">
-      <div class="header-container container">
-        <div class="header-content">
+<!--=============== HEADER ===============-->
+<header class="header">
+  <div class="header-top">
+    <div class="header-container container">
+      <div class="header-content">
 
-          <span> (+20) - 11111 - 55555</span>
-          <span>Our Location </span>
+        <span> (+20) - 11111 - 55555</span>
+        <span>Our Location </span>
 
-        </div>
-        <p class="header-alert-news">
-          Super Value Deals - Save More With Coupon Codes
-        </p>
-
-        <a href="login-register.html" class="header-top-action">
-          login / register
-        </a>
       </div>
-    </div>
+      <p class="header-alert-news">
+        Super Value Deals - Save More With Coupon Codes
+      </p>
 
-    <nav class="nav container">
-      <a href="index.html" class="nav-logo">
-        <img class="nav-logo-img" src="assets/img/logo.svg" alt="logo">
+      <a href="login-register.html" class="header-top-action">
+        login / register
       </a>
+    </div>
+  </div>
 
-      <div class="nav-menu">
-        <ul class="nav-list">
-                    <li class="nav-item">
-                        <a href="index.html" class="nav-link">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="shop.html" class="nav-link">Shop</a>
-                    </li>
-                    <li class="nav-item" id="myAccount" style="display: none;">
-                        <a href="accounts.html" class="nav-link">My Account</a>
-                    </li>
-                    <li class="nav-item" id="loggedIn" style="display: block;">
-                        <a href="login-register.html" class="nav-link">Login</a>
-                    </li>
-                    <li class="nav-item" id="logOutBtn" style="display: none;">
-                        <a href="#" class="nav-link">Logout</a>
-                    </li>
+  <nav class="nav container">
+    <a href="index.html" class="nav-logo">
+      <img class="nav-logo-img" src="assets/img/logo.svg" alt="logo">
+    </a>
 
-                </ul>
-
-        <div class="header-search">
-          <input type="text" class="form-input" placeholder="Search For Item ..." />
-
-          <button class="search-btn">
-            <img src="assets/img/search.png" />
-          </button>
-        </div>
-      </div>
-
-      <div class="header-user-action">
-        <a href="wishlist.html" class="header-action-btn">
-          <img src="assets/img/icon-heart.svg">
-          <span class="count"></span>
-        </a>
-
-        <a href="cart.html" class="header-action-btn">
-          <img src="assets/img/icon-cart.svg">
-          <span class="count"></span>
-        </a>
-      </div>
-    </nav>
-
-  </header>
-  <!--=============== MAIN ===============-->
-  <main class="main">
-    <!--=============== BREADCRUMB ===============-->
-    <section class="breadcrumb">
-      <ul class="breadcrumb-list flex container">
-        <li>
-          <a href="index.html" class="breadcrumb-link">Home</a>
+    <div class="nav-menu">
+      <ul class="nav-list">
+        <li class="nav-item">
+          <a href="index.html" class="nav-link">Home</a>
         </li>
-        <li>
-          <span class="breadcrumb-link">></span>
+        <li class="nav-item">
+          <a href="shop.html" class="nav-link">Shop</a>
         </li>
-        <li>
-          <a href="index.html" class="breadcrumb-link">Shop</a>
+        <li class="nav-item" id="myAccount" style="display: none;">
+          <a href="accounts.html" class="nav-link">My Account</a>
         </li>
-        <li>
-          <span class="breadcrumb-link">></span>
+        <li class="nav-item" id="loggedIn" style="display: block;">
+          <a href="login-register.html" class="nav-link">Login</a>
         </li>
-
-        <li>
-          <span class="breadcrumb-link">Checkout</span>
+        <li class="nav-item" id="logOutBtn" style="display: none;">
+          <a href="#" class="nav-link">Logout</a>
         </li>
 
       </ul>
-    </section>
-    <!--=============== CHECKOUT ===============-->
-    <section class="checkout section-lg">
-      <div class="checkout-container container grid">
-        <div class="checkout-group">
-          <h3 class="section-title">Billing Details</h3>
 
-          <form action="" class="form grid">
-            <input type="text" placeholder="Name" class="form-input">
+      <div class="header-search">
+        <input type="text" class="form-input" placeholder="Search For Item ..." />
 
-            <input type="text" placeholder="Address" class="form-input">
-
-            <input type="text" placeholder="City" class="form-input">
-
-            <input type="text" placeholder="Country" class="form-input">
-
-            <input type="text" placeholder="PostCode / ZIP" class="form-input">
-
-            <input type="text" placeholder="Phone" class="form-input">
-
-            <input type="email" placeholder="Email" class="form-input">
-
-            <h3 class="checkout-title">Additional Information</h3>
-
-            <textarea name="" placeholder="Order note" cols="30" rows="10" class="form-input textarea"></textarea>
-          </form>
-        </div>
-
-
-        <div class="checkout-group">
-          <h3 class="section-title"> Cart Torals</h3>
-
-         <!-- Cart Totals Table -->
-<table class="order-table" id="orderTable">
-  <tr>
-    <th colspan="2">Products</th>
-    <th>Total</th>
-  </tr>
-  <!-- Dynamic rows will be inserted here -->
-  <tbody id="orderTableBody"></tbody>
-
-  <tr>
-    <td><span class="order-subtitle">SubTotal</span></td>
-    <td colspan="2"><span class="table-price" id="subtotal">$0.00</span></td>
-  </tr>
-
-  <tr>
-    <td><span class="order-subtitle">Shipping</span></td>
-    <td colspan="2"><span class="table-price" id="shipping">Free Shipping</span></td>
-  </tr>
-
-  <tr>
-    <td><span class="order-subtitle">Total</span></td>
-    <td colspan="2"><span class="order-grand-total" id="grandTotal">$0.00</span></td>
-  </tr>
-</table>
-
-
-          <div class="payment-methods">
-
-
-            <!-- helmyyyyy comment  -->
-
-            <!-- <h3 class="checkout-title payment-title">Payment</h3> -->
-
-            <!-- <div class="payment-option flex">
-
-              <input type="radio" id="1" name="radio" class="payment-input">
-              <label for="1" class="payment-label">Dirct Bank Transfer</label>
-            </div>
-
-            <div class="payment-option flex">
-
-              <input type="radio" id="2" name="radio" class="payment-input">
-              <label for="2" class="payment-label">Check Payment</label>
-            </div>
-
-            <div class="payment-option flex">
-
-              <input type="radio" name="radio" id="3" class="payment-input">
-              <label for="3" class="payment-label">Paypal</label>
-            </div> -->
-
-          </div>
-          
-          <!-- <button class="btn btn-md"> Place Order </button> -->
-        <button id="placeOrderBtn" class="btn btn-md">Place Order</button>
-
-        </div>
+        <button class="search-btn">
+          <img src="assets/img/search.png" />
+        </button>
       </div>
-      </div>
-    </section>
+    </div>
 
-    <!--=============== NEWSLETTER ===============-->
-    <section class="newsletter section">
-      <div class="newsletter-container grid">
-        <h3 class="newsletter-title flex">
-          <img src="assets/img/icon-email.svg" class="newsletter-icon">
-          Sign up to Newsletter
-        </h3>
-        <p class="newsletter-description">
-          ...and receive $25 coupon for frist shopping
-        </p>
-        <form action="#" class="newsletter-form">
-          <input class="newsletter-input" type="email" placeholder="Your email address">
-          <button type="submit" class="newsletter-btn ">
-            Subscribe
-          </button>
+    <div class="header-user-action">
+      <a href="wishlist.html" class="header-action-btn">
+        <img src="assets/img/icon-heart.svg">
+        <span class="count"></span>
+      </a>
+
+      <a href="cart.html" class="header-action-btn">
+        <img src="assets/img/icon-cart.svg">
+        <span class="count"></span>
+      </a>
+    </div>
+  </nav>
+
+</header>
+<!--=============== MAIN ===============-->
+<main class="main">
+  <!--=============== BREADCRUMB ===============-->
+  <section class="breadcrumb">
+    <ul class="breadcrumb-list flex container">
+      <li>
+        <a href="index.html" class="breadcrumb-link">Home</a>
+      </li>
+      <li>
+        <span class="breadcrumb-link">></span>
+      </li>
+      <li>
+        <a href="index.html" class="breadcrumb-link">Shop</a>
+      </li>
+      <li>
+        <span class="breadcrumb-link">></span>
+      </li>
+
+      <li>
+        <span class="breadcrumb-link">Checkout</span>
+      </li>
+
+    </ul>
+  </section>
+  <!--=============== CHECKOUT ===============-->
+  <section class="checkout section-lg">
+    <div class="checkout-container container grid">
+      <div class="checkout-group">
+        <h3 class="section-title">Billing Details</h3>
+
+        <form action="" class="form grid">
+          <input type="text" placeholder="Name" class="form-input">
+
+          <input type="text" placeholder="Address" class="form-input">
+
+          <input type="text" placeholder="City" class="form-input">
+
+          <input type="text" placeholder="Country" class="form-input">
+
+          <input type="text" placeholder="PostCode / ZIP" class="form-input">
+
+          <input type="text" placeholder="Phone" class="form-input">
+
+          <input type="email" placeholder="Email" class="form-input">
+
+          <h3 class="checkout-title">Additional Information</h3>
+
+          <textarea name="" placeholder="Order note" cols="30" rows="10" class="form-input textarea"></textarea>
         </form>
       </div>
-    </section>
-  </main>
 
-  <!--=============== FOOTER ===============-->
-  <footer class="footer container">
-    <div class="footer-container grid">
-      <div class="footer-content">
-        <a href="index.html" class="footer-logo">
-          <img src="assets/img/logo.svg" alt="logo" class="footer-logo-img">
-        </a>
-        <h4 class="footer-subtitle">Contact</h4>
 
-        <p class="footer-description">
-          <span>Address:</span>
-          123 Street, New York, USA
-        </p>
+      <div class="checkout-group">
+        <h3 class="section-title"> Cart Torals</h3>
 
-        <p class="footer-description">
-          <span>Phone:</span>
-          +01 2222 5555 / (+91) 01 2345 6789
-        </p>
+        <!-- Cart Totals Table -->
+        <table class="order-table" id="orderTable">
+          <tr>
+            <th colspan="2">Products</th>
+            <th>Total</th>
+          </tr>
+          <!-- Dynamic rows will be inserted here -->
+          <tbody id="orderTableBody"></tbody>
 
-        <p class="footer-description">
-          <span>Hours:</span>
-          10:00 - 18:00, Mon - Sat
-        </p>
+          <tr>
+            <td><span class="order-subtitle">SubTotal</span></td>
+            <td colspan="2"><span class="table-price" id="subtotal">$0.00</span></td>
+          </tr>
 
-        <div class="footer-social">
-          <h4 class="footer-subtitle">
-            Follow Me
-          </h4>
-          <div class="footer-social-links flex">
-            <a href="">
-              <img src="assets/img/icon-facebook.svg" alt="facebook" class="footer-social-icon">
-            </a>
+          <tr>
+            <td><span class="order-subtitle">Shipping</span></td>
+            <td colspan="2"><span class="table-price" id="shipping">Free Shipping</span></td>
+          </tr>
 
-            <a href="">
-              <img src="assets/img/icon-twitter.svg" alt="facebook" class="footer-social-icon">
-            </a>
+          <tr>
+            <td><span class="order-subtitle">Total</span></td>
+            <td colspan="2"><span class="order-grand-total" id="grandTotal">$0.00</span></td>
+          </tr>
+        </table>
 
-            <a href="">
-              <img src="assets/img/icon-instagram.svg" alt="facebook" class="footer-social-icon">
-            </a>
 
-            <a href="">
-              <img src="assets/img/icon-pinterest.svg" alt="facebook" class="footer-social-icon">
-            </a>
+        <div class="payment-methods">
 
-            <a href="">
-              <img src="assets/img/icon-youtube.svg" alt="facebook" class="footer-social-icon">
-            </a>
+
+          <!-- helmyyyyy comment  -->
+
+          <!-- <h3 class="checkout-title payment-title">Payment</h3> -->
+
+          <!-- <div class="payment-option flex">
+
+            <input type="radio" id="1" name="radio" class="payment-input">
+            <label for="1" class="payment-label">Dirct Bank Transfer</label>
           </div>
+
+          <div class="payment-option flex">
+
+            <input type="radio" id="2" name="radio" class="payment-input">
+            <label for="2" class="payment-label">Check Payment</label>
+          </div>
+
+          <div class="payment-option flex">
+
+            <input type="radio" name="radio" id="3" class="payment-input">
+            <label for="3" class="payment-label">Paypal</label>
+          </div> -->
+
+        </div>
+
+        <!-- <button class="btn btn-md"> Place Order </button> -->
+        <button id="placeOrderBtn" class="btn btn-md">Place Order</button>
+
+      </div>
+    </div>
+    </div>
+  </section>
+
+  <!--=============== NEWSLETTER ===============-->
+  <section class="newsletter section">
+    <div class="newsletter-container grid">
+      <h3 class="newsletter-title flex">
+        <img src="assets/img/icon-email.svg" class="newsletter-icon">
+        Sign up to Newsletter
+      </h3>
+      <p class="newsletter-description">
+        ...and receive $25 coupon for frist shopping
+      </p>
+      <form action="#" class="newsletter-form">
+        <input class="newsletter-input" type="email" placeholder="Your email address">
+        <button type="submit" class="newsletter-btn ">
+          Subscribe
+        </button>
+      </form>
+    </div>
+  </section>
+</main>
+
+<!--=============== FOOTER ===============-->
+<footer class="footer container">
+  <div class="footer-container grid">
+    <div class="footer-content">
+      <a href="index.html" class="footer-logo">
+        <img src="assets/img/logo.svg" alt="logo" class="footer-logo-img">
+      </a>
+      <h4 class="footer-subtitle">Contact</h4>
+
+      <p class="footer-description">
+        <span>Address:</span>
+        123 Street, New York, USA
+      </p>
+
+      <p class="footer-description">
+        <span>Phone:</span>
+        +01 2222 5555 / (+91) 01 2345 6789
+      </p>
+
+      <p class="footer-description">
+        <span>Hours:</span>
+        10:00 - 18:00, Mon - Sat
+      </p>
+
+      <div class="footer-social">
+        <h4 class="footer-subtitle">
+          Follow Me
+        </h4>
+        <div class="footer-social-links flex">
+          <a href="">
+            <img src="assets/img/icon-facebook.svg" alt="facebook" class="footer-social-icon">
+          </a>
+
+          <a href="">
+            <img src="assets/img/icon-twitter.svg" alt="facebook" class="footer-social-icon">
+          </a>
+
+          <a href="">
+            <img src="assets/img/icon-instagram.svg" alt="facebook" class="footer-social-icon">
+          </a>
+
+          <a href="">
+            <img src="assets/img/icon-pinterest.svg" alt="facebook" class="footer-social-icon">
+          </a>
+
+          <a href="">
+            <img src="assets/img/icon-youtube.svg" alt="facebook" class="footer-social-icon">
+          </a>
         </div>
       </div>
-
-
-      <div class="footer-content">
-        <h3 class="footer-title">Address</h3>
-        <ul>
-          <li><a href="" class="footer-link">About Us</a></li>
-          <li><a href="" class="footer-link">Delivery Information</a></li>
-          <li><a href="" class="footer-link">Privacy plicy</a></li>
-          <li><a href="" class="footer-link"> Terms & conditions</a></li>
-          <li><a href="" class="footer-link">contact Us</a></li>
-          <li><a href="" class="footer-link">Support Center</a></li>
-
-
-        </ul>
-      </div>
-
-      <div class="footer-content">
-        <h3 class="footer-title">My Account</h3>
-        <ul>
-          <li><a href="" class="footer-link"> Sign In</a></li>
-          <li><a href="" class="footer-link">View Cart</a></li>
-          <li><a href="" class="footer-link">My Wishlist</a></li>
-          <li><a href="" class="footer-link"> Track My Order</a></li>
-          <li><a href="" class="footer-link">Help</a></li>
-          <li><a href="" class="footer-link">Order</a></li>
-
-
-        </ul>
-      </div>
-
-
-      <div class="footer-content">
-        <h3 class="footer-title">Secured Payment Gateways</h3>
-
-        <img class="payment-img" src="assets/img/payment-method.png" alt="payment-img">
-
-      </div>
-
-    </div>
-
-    <div class="footer-bottom">
-      <p class="copyrigth">&copy; 2025 ITI. All rights reserved </p>
-      <span class="designer">Designed BY ITI-PHP</span>
     </div>
 
 
-  </footer>
+    <div class="footer-content">
+      <h3 class="footer-title">Address</h3>
+      <ul>
+        <li><a href="" class="footer-link">About Us</a></li>
+        <li><a href="" class="footer-link">Delivery Information</a></li>
+        <li><a href="" class="footer-link">Privacy plicy</a></li>
+        <li><a href="" class="footer-link"> Terms & conditions</a></li>
+        <li><a href="" class="footer-link">contact Us</a></li>
+        <li><a href="" class="footer-link">Support Center</a></li>
 
-  <!--=============== SWIPER JS ===============-->
-  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
-  <!--=============== MAIN JS ===============-->
-  <script src="./assets/js/main.js"></script>
+      </ul>
+    </div>
+
+    <div class="footer-content">
+      <h3 class="footer-title">My Account</h3>
+      <ul>
+        <li><a href="" class="footer-link"> Sign In</a></li>
+        <li><a href="" class="footer-link">View Cart</a></li>
+        <li><a href="" class="footer-link">My Wishlist</a></li>
+        <li><a href="" class="footer-link"> Track My Order</a></li>
+        <li><a href="" class="footer-link">Help</a></li>
+        <li><a href="" class="footer-link">Order</a></li>
 
 
-  <!-- ======================= -->
-   <script>
-    // assets/js/payment-handler.js
-import { db } from "./firebaseInitializeApp.js";
-import { collection, addDoc } from "https://www.gstatic.com/firebasejs/11.7.3/firebase-firestore.js";
+      </ul>
+    </div>
 
-window.addEventListener("DOMContentLoaded", async () => {
-  if (window.location.pathname.includes("success.html")) {
-    const cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-    if (cart.length === 0) return;
+    <div class="footer-content">
+      <h3 class="footer-title">Secured Payment Gateways</h3>
 
-    const order = {
-      items: cart,
-      total: cart.reduce((sum, item) => sum + item.price * item.quantity, 0),
-      createdAt: new Date(),
-    };
+      <img class="payment-img" src="assets/img/payment-method.png" alt="payment-img">
 
-    try {
-      await addDoc(collection(db, "successfulOrders"), order);
-      localStorage.removeItem("cart");
-      alert("✅ Order saved to Firebase!");
-    } catch (err) {
-      console.error("❌ Firebase error:", err);
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    <p class="copyrigth">&copy; 2025 ITI. All rights reserved </p>
+    <span class="designer">Designed BY ITI-PHP</span>
+  </div>
+
+
+</footer>
+
+<!--=============== SWIPER JS ===============-->
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+<!--=============== MAIN JS ===============-->
+<script src="./assets/js/main.js"></script>
+
+
+<!-- ======================= -->
+<script>
+  // assets/js/payment-handler.js
+  import { db } from "./firebaseInitializeApp.js";
+  import { collection, addDoc } from "https://www.gstatic.com/firebasejs/11.7.3/firebase-firestore.js";
+
+  window.addEventListener("DOMContentLoaded", async () => {
+    if (window.location.pathname.includes("success.html")) {
+      const cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+      if (cart.length === 0) return;
+
+      const order = {
+        items: cart,
+        total: cart.reduce((sum, item) => sum + item.price * item.quantity, 0),
+        createdAt: new Date(),
+      };
+
+      try {
+        await addDoc(collection(db, "successfulOrders"), order);
+        localStorage.removeItem("cart");
+        alert("✅ Order saved to Firebase!");
+      } catch (err) {
+        console.error("❌ Firebase error:", err);
+      }
     }
-  }
-});
+  });
 
-   </script>
-   <script type="module" src="./assets/js/checkout-stripe.js"></script>
+</script>
+<script type="module" src="./assets/js/checkout-stripe.js"></script>
 <script>
   document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("placeOrderBtn").addEventListener("click", () => {
@@ -405,7 +827,7 @@ window.addEventListener("DOMContentLoaded", async () => {
 </script>
 
 <script>
-  
+
   document.getElementById("placeOrderBtn").addEventListener("click", () => {
     if (typeof window.checkout === "function") {
       window.checkout();
@@ -414,7 +836,7 @@ window.addEventListener("DOMContentLoaded", async () => {
 
 
 </script>
-   <script type="module" src="./assets/js/payment-handler.js"></script>
+<script type="module" src="./assets/js/payment-handler.js"></script>
 
 </body>
 

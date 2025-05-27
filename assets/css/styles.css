@@ -1229,7 +1229,7 @@ table {
 }
 
 .review-data {
-    width: calc(100%-94px);
+    width: calc(100% - 94px);
 }
 
 .review-description {
@@ -1369,7 +1369,7 @@ table {
 }
 
 .divider i {
-    color: var(--body-color-alt);
+    /*color: var(--body-color);*/
     background-color: var(--body-color);
     font-size: 1.25rem;
     padding-inline: 1.25rem;
@@ -1560,7 +1560,7 @@ table {
 }
 
 .account-tabs {
-    border: 1px solid var(--body-color-alt);
+    border: 1px solid var(--body-color);
     border-radius: 0.25rem;
 }
 

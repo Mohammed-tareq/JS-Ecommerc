@@ -54,7 +54,8 @@ import {
   setDoc,
   orderBy,
   getCountFromServer,
-  addDoc
+  addDoc,
+    deleteDoc,
 } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-firestore.js";
 
 const firebaseConfig = {
@@ -88,5 +89,6 @@ export {
   orderBy,
   app,
   getCountFromServer,
-  firebaseConfig
+  firebaseConfig,
+  deleteDoc
 };
