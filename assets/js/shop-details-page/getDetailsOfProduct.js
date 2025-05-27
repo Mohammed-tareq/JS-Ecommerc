@@ -14,25 +14,51 @@ function getDetailsOfProduct() {
 
 
 
-async function fetchOneProduct(id) {
-    const docRef = doc(db, "products", id);
-    const docSnap = await getDoc(docRef);
+// async function fetchOneProduct(id) {
+//     const docRef = doc(db, "products", id);
+//     const docSnap = await getDoc(docRef);
+//     if (docSnap.exists()) {
+//         getRelatedProducts(docSnap.data());
+//         setDataToDetailsItem(docSnap.data());
+//         handleClickCartBtn(docSnap.data(), docSnap.id);
+//     } else {
+//         console.log("No such document!");
+//     }
+// }
 
-    if (docSnap.exists()) {
-        getRelatedProducts(docSnap.data());
-        setDataToDetailsItem(docSnap.data());
-        handleClickCartBtn()
-    } else {
-        console.log("No such document!");
-    }
+async function fetchOneProduct(id) {
+  const docRef = doc(db, "products", id);
+  const docSnap = await getDoc(docRef);
+
+  if (docSnap.exists()) {
+    const productData = docSnap.data();
+
+    getRelatedProducts(productData);
+    setDataToDetailsItem(productData);
+    handleClickCartBtn(id, {
+      title: productData.title,
+      price: productData.price,
+      imageUrl: productData.img1,
+    });
+  } else {
+    console.log("No such document!");
+  }
 }
 
 
 getDetailsOfProduct();
 
-function handleClickCartBtn() {
-    const cartBtn = document.getElementById('cartBtn');
-    cartBtn.addEventListener('click', addToCart)
+function handleClickCartBtn(productId, productData) {
+  const cartBtn = document.getElementById('cartBtn');
+  if (!cartBtn) {
+    console.warn("No Add to Cart button found in details.html");
+    return;
+  }
+
+  cartBtn.addEventListener('click', () => {
+    addToCart(productId, productData);
+  });
 }
+
 
 export { getDetailsOfProduct }
