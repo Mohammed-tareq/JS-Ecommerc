@@ -78,7 +78,6 @@ async function addProductDB(e) {
         console.log(imgUrl);
 
         let productObj = {
-            ID: productID.value,
             brand: brandName.value,
             policy: policy.value,
             size: size.value,
@@ -105,7 +104,6 @@ async function addProductDB(e) {
         productCount.value = '';
         productImg.value = null;
         descriptionProduct.value = '';
-        productID.value = '';
         brandName.value = '';
         policy.value = '';
         size.value = '';

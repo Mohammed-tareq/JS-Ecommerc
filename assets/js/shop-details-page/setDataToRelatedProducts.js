@@ -25,10 +25,6 @@ function setDataToRelatedProducts({ category, title, price, oldPrice, badge, rat
                                 <i class="fi fi-rs-heart"></i>
                             </a>
 
-                            <a href="#" class="action-btn" aria-label="Compare">
-                                <i class="fi fi-rs-shuffle"></i>
-                            </a>
-
                         </div>
 
                         <div class="product-badge light-pink">${badge}</div>

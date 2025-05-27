@@ -1,6 +1,6 @@
 
 import { app, analytics } from "../adminJs/dataconfig.js";
-import { getFirestore, collection, getDocs, doc,where, deleteDoc, limit, query } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-firestore.js";
+import { getFirestore, collection, getDocs, doc, where, deleteDoc, limit, query } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-firestore.js";
 
 
 const db = getFirestore(app);
@@ -35,7 +35,7 @@ async function getAllProducts() {
                     
                           <div class="product-item">
                         <div class="product-banner">
-                            <a href="details.html" class="product-imgs">
+                            <a href="details.html?id=${doc.id}" class="product-imgs">
                                 <img src="${data.img1}" class="product-img default" alt="product-1">
                                 <img src="${data.img2}" class="product-img hover" alt="product-1">
                                  
@@ -51,10 +51,6 @@ async function getAllProducts() {
                                     <i class="fi fi-rs-heart"></i>
                                 </a>
 
-                                <a href="#" class="action-btn" aria-label="Compare">
-                                    <i class="fi fi-rs-shuffle"></i>
-                                </a>
-
                             </div>
 
                             <div class="product-badge light-pink">Hot</div>
@@ -64,7 +60,7 @@ async function getAllProducts() {
                         <div class="product-content">
                             <span class="product-category">${data.category}</span>
 
-                            <a href="details.html">
+                            <a href="details.html?id=${doc.id}">
                                 <h3 class="product-title">
                                      ${data.title}
                                 </h3>
@@ -120,7 +116,7 @@ async function getNewProducts() {
             product += ` 
                      <div class="product-item swiper-slide" >
                         <div class="product-banner">
-                            <a href="details.html" class="product-imgs">
+                            <a href="details.html?id=${doc.id}" class="product-imgs">
                                 <img src="${data.Img}" class="product-img " alt="product-1">
 
                             </a>
@@ -134,10 +130,6 @@ async function getNewProducts() {
                                     <i class="fi fi-rs-heart"></i>
                                 </a>
 
-                                <a href="#" class="action-btn" aria-label="Compare">
-                                    <i class="fi fi-rs-shuffle"></i>
-                                </a>
-
                             </div>
 
                             <div class="product-badge light-pink">Hot</div>
@@ -147,7 +139,7 @@ async function getNewProducts() {
                         <div class="product-content">
                             <span class="product-category">${data.category}</span>
 
-                            <a href="details.html">
+                            <a href="details.html?id=${doc.id}">
                                 <h3 class="product-title">
                                     ${data.title}
                                 </h3>
@@ -190,7 +182,7 @@ async function gethotReleases() {
         const allDocs = [];
 
         allDocsSnapshot.forEach((doc) => {
-            allDocs.push({id: doc.id, ...doc.data()});
+            allDocs.push({ id: doc.id, ...doc.data() });
         });
 
         const randomDocs = allDocs
@@ -223,7 +215,7 @@ async function gethotReleases() {
         hotReleases.innerHTML += product;
 
     } catch (e) {
-         console.error("Error getting documents in product hot: ", e);
+        console.error("Error getting documents in product hot: ", e);
     }
 }
 
@@ -237,7 +229,7 @@ async function getOutlet() {
         const allDocs = [];
 
         allDocsSnapsOut.forEach((doc) => {
-            allDocs.push({id: doc.id, ...doc.data()});
+            allDocs.push({ id: doc.id, ...doc.data() });
         });
 
         const randomDocs = allDocs
@@ -284,7 +276,7 @@ async function getBrand() {
         const allDocs = [];
 
         allDocsSnapsBrand.forEach((doc) => {
-            allDocs.push({id: doc.id, ...doc.data()});
+            allDocs.push({ id: doc.id, ...doc.data() });
         });
 
         const randomDocs = allDocs
@@ -332,7 +324,7 @@ async function getLastPiece() {
         const allDocs = [];
 
         allDocsSnapsLast.forEach((doc) => {
-            allDocs.push({id: doc.id, ...doc.data()});
+            allDocs.push({ id: doc.id, ...doc.data() });
         });
 
         const randomDocs = allDocs

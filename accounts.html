@@ -21,7 +21,7 @@
 
 
 <!-- =======================js=============== -->
-  <script type="module" src="assets/js/userAuth.js"></script>
+
 
   <title>Ecommerce Website</title>
 </head>
@@ -71,14 +71,6 @@
                     </li>
 
                 </ul>
-
-        <div class="header-search">
-          <input type="text" class="form-input" placeholder="Search For Item ..." />
-
-          <button class="search-btn">
-            <img src="assets/img/search.png" />
-          </button>
-        </div>
       </div>
 
       <div class="header-user-action">
@@ -125,9 +117,7 @@
           </p>
 
 
-          <p class="account-tab " data-target="#update-profile">
-            <i class="fi fi-rs-user"></i> Update Profile
-          </p>
+
 
           <p class="account-tab" data-target="#address">
             <i class="fi fi-rs-user"></i> My Address
@@ -138,9 +128,7 @@
           </p>
 
 
-          <p class="account-tab" data-target="#change-password">
-            <i class="fi fi-rs-exit"></i> LogOut
-          </p>
+
 
 
 
@@ -180,18 +168,7 @@
   
 
 
-          <div class="tab-content" data-content id="update-profile">
-            <h3 class="tab-header"> Update Profile</h3>
 
-            <div class="tab-body">
-              <form action="" class="form grid">
-                <input type="text" placeholder="User name" class="form-input">
-                <div class="form-btn">
-                  <button class="btn btn-md">Save</button>
-                </div>
-              </form>
-            </div>
-          </div>
 
           <div class="tab-content" data-content id="address">
             <h3 class="tab-header">Shipping Adress</h3>
@@ -386,6 +363,26 @@
     font-size: 28px;
     cursor: pointer;
   }
+  .btnn{
+  display: inline-block;
+  background-color: var(--first-color);
+  border: 2px solid var(--first-color);
+  color: var(--body-color);
+  padding-inline: 1.75rem;
+  height: 49px;
+  line-height: 49px;
+  border-radius: 0.25rem;
+  font-family: var(--second-font);
+  font-size: var(--small-font-size);
+  font-weight: var(--weight-700);
+  transition: all 0.2s var(--transition);
+  }
+
+  .btnn:hover {
+    background-color: transparent;
+    color: var(--first-color);
+  }
+
   .close:hover {
     color: black;
   }
@@ -438,7 +435,7 @@ const firebaseConfig = {
           <td>${createdAt}</td>
           <td>Processing</td>
           <td>$${total}</td>
-          <td><a href="#" class="view-order" data-id="${orderId}">View</a></td>
+          <td><a href="#" class="view-order btnn "  data-id="${orderId}">View</a></td>
         `;
         ordersTable.appendChild(row);
       });
@@ -480,6 +477,8 @@ const firebaseConfig = {
     }
   });
 </script>
+  <script type="module" src="assets/js/userAuth.js"></script>
+
 </body>
 
 </html>

@@ -48,77 +48,77 @@
 </head>
 <body>
 
-  <div class="success-container">
-    <h1>✅ Thank You for Your Order!</h1>
-    <p>Your payment was successful. Your items are now being processed.</p>
+<div class="success-container">
+  <h1>✅ Thank You for Your Order!</h1>
+  <p>Your payment was successful. Your items are now being processed.</p>
 
-    <button class="btn btn-shop" onclick="window.location.href='shop.html'">🛒 Order Again!</button>
-    <button class="btn btn-orders" onclick="window.location.href='accounts.html#orders'">📦 My Orders</button>
-    <button id="logoutBtn" class="btn btn-logout">🚪 Log Out</button>
-  </div>
+  <button class="btn btn-shop" onclick="window.location.href='shop.html'">🛒 Order Again!</button>
+  <button class="btn btn-orders" onclick="window.location.href='accounts.html#orders'">📦 My Orders</button>
+  <button id="logoutBtn" class="btn btn-logout">🚪 Log Out</button>
+</div>
 
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.7.3/firebase-app.js";
-    import { 
-      getFirestore, collection, addDoc, getDoc, doc, deleteDoc 
-    } from "https://www.gstatic.com/firebasejs/11.7.3/firebase-firestore.js";
-    import { getAuth, signOut } from "https://www.gstatic.com/firebasejs/11.7.3/firebase-auth.js";
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.7.3/firebase-app.js";
+  import {
+    getFirestore, collection, addDoc, getDoc, doc, deleteDoc
+  } from "https://www.gstatic.com/firebasejs/11.7.3/firebase-firestore.js";
+  import { getAuth, signOut } from "https://www.gstatic.com/firebasejs/11.7.3/firebase-auth.js";
 
-    const firebaseConfig = {
-  apiKey: "AIzaSyBjRfUhrD8izFBizJxYvGS4PPoLjV5x6Mc",
-  authDomain: "iti-e2.firebaseapp.com",
-  projectId: "iti-e2",
-  storageBucket: "iti-e2.firebasestorage.app",
-  messagingSenderId: "394747800497",
-  appId: "1:394747800497:web:46ffd532adfab5d7aa2b90"
-};
+  const firebaseConfig = {
+    apiKey: "AIzaSyBjRfUhrD8izFBizJxYvGS4PPoLjV5x6Mc",
+    authDomain: "iti-e2.firebaseapp.com",
+    projectId: "iti-e2",
+    storageBucket: "iti-e2.firebasestorage.app",
+    messagingSenderId: "394747800497",
+    appId: "1:394747800497:web:46ffd532adfab5d7aa2b90"
+  };
 
-    const app = initializeApp(firebaseConfig);
-    const db = getFirestore(app);
-    const auth = getAuth(app);
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+  const auth = getAuth(app);
 
-    document.addEventListener("DOMContentLoaded", async () => {
-      const userEmail = localStorage.getItem("currentUserEmail");
-      const cartKey = `cart_${userEmail}`;
-      const cart = JSON.parse(localStorage.getItem(cartKey)) || {};
+  document.addEventListener("DOMContentLoaded", async () => {
+    const userEmail = localStorage.getItem("currentUserEmail");
+    const cartKey = `cart_${userEmail}`;
+    const cart = JSON.parse(localStorage.getItem(cartKey)) || {};
 
-      if (userEmail && Object.keys(cart).length > 0) {
-        try {
-          // Save order to Firestore with status field
-          await addDoc(collection(db, "orders"), {
-            email: userEmail,
-            items: cart,
-            status: "Processing",
-            createdAt: new Date()
-          });
+    if (userEmail && Object.keys(cart).length > 0) {
+      try {
+        // Save order to Firestore with status field
+        await addDoc(collection(db, "orders"), {
+          email: userEmail,
+          items: cart,
+          status: "Processing",
+          createdAt: new Date()
+        });
 
-          // Delete cart from Firestore
-          await deleteDoc(doc(db, "cart", userEmail));
+        // Delete cart from Firestore
+        await deleteDoc(doc(db, "cart", userEmail));
 
-          // Clear localStorage cart
-          localStorage.removeItem(cartKey);
+        // Clear localStorage cart
+        localStorage.removeItem(cartKey);
 
-          // Update success message
-          document.querySelector(".success-container p").textContent = "Your order has been saved and is now being processed.";
+        // Update success message
+        document.querySelector(".success-container p").textContent = "Your order has been saved and is now being processed.";
 
-          console.log("Order saved and cart cleared.");
-        } catch (err) {
-          console.error("Error saving order:", err);
-        }
+        console.log("Order saved and cart cleared.");
+      } catch (err) {
+        console.error("Error saving order:", err);
       }
+    }
 
-      // Handle Logout Button
-      document.getElementById("logoutBtn").addEventListener("click", async () => {
-        try {
-          await signOut(auth);
-          localStorage.removeItem("currentUserEmail");
-          window.location.href = "login-register.html";
-        } catch (err) {
-          console.error("Logout failed:", err);
-        }
-      });
+    // Handle Logout Button
+    document.getElementById("logoutBtn").addEventListener("click", async () => {
+      try {
+        await signOut(auth);
+        localStorage.removeItem("currentUserEmail");
+        window.location.href = "login-register.html";
+      } catch (err) {
+        console.error("Logout failed:", err);
+      }
     });
-  </script>
+  });
+</script>
 
 </body>
 </html>
