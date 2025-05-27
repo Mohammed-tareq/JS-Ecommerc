@@ -51,10 +51,6 @@ async function getAllProducts() {
                                     <i class="fi fi-rs-heart"></i>
                                 </a>
 
-                                <a href="#" class="action-btn" aria-label="Compare">
-                                    <i class="fi fi-rs-shuffle"></i>
-                                </a>
-
                             </div>
 
                             <div class="product-badge light-pink">Hot</div>
@@ -132,10 +128,6 @@ async function getNewProducts() {
 
                                 <a href="#" class="action-btn" aria-label="Add to Wishlist">
                                     <i class="fi fi-rs-heart"></i>
-                                </a>
-
-                                <a href="#" class="action-btn" aria-label="Compare">
-                                    <i class="fi fi-rs-shuffle"></i>
                                 </a>
 
                             </div>

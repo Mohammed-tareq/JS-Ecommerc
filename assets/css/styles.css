@@ -1496,33 +1496,6 @@ table {
     font-weight: var(--weight-700);
 }
 
-/*=============== COMPARE ===============*/
-.compare-table tr th,
-.compare tr td {
-    padding: 0.5rem;
-    border: 1px solid var(--border-color-alt);
-}
-
-.compare-table tr th {
-    color: var(--text-color);
-    font-size: var(--small-font-size);
-}
-
-.compare-table tr td {
-    text-align: center;
-}
-
-.compare-colors {
-    justify-content: center;
-}
-
-.table-stock,
-.table-weight,
-.table-dimension {
-    font-size: var(--small-font-size);
-
-}
-
 /*=============== LOGIN & REGISTER ===============*/
 .login-register-container {
     grid-template-columns: repeat(2, 1fr);
