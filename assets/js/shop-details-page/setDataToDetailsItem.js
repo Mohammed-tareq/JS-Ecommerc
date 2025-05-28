@@ -1,6 +1,20 @@
-function setDataToDetailsItem({ title, price, oldPrice, badge, description, brand, policy, img1, img2, count }) {
-    const detailsContainer = document.getElementById('main-details');
-    detailsContainer.innerHTML += `
+function setDataToDetailsItem(
+  {
+    title,
+    price,
+    oldPrice,
+    badge,
+    description,
+    brand,
+    policy,
+    img1,
+    img2,
+    count,
+  },
+  productId
+) {
+  const detailsContainer = document.getElementById("main-details");
+  detailsContainer.innerHTML += `
     <div class="details-group">
         <img src="${img1}" class="details-img">
         <div class="details-small-images grid">
@@ -57,7 +71,7 @@ function setDataToDetailsItem({ title, price, oldPrice, badge, description, bran
         <div class="details-action">
             <input type="number" class="quantity" value="3">
             <a href="#" class="btn btn-sm" id="cartBtn">ADD TO CART</a>
-            <a href="#" class="details-action-btn">
+            <a href="#" class="details-action-btn" data-product-id="${productId}">
                 <i class="fi fi-rs-heart"></i>
             </a>
         </div>
@@ -69,8 +83,6 @@ function setDataToDetailsItem({ title, price, oldPrice, badge, description, bran
         </ul>
     </div>
 `;
-
 }
 
-
-export { setDataToDetailsItem }
+export { setDataToDetailsItem };

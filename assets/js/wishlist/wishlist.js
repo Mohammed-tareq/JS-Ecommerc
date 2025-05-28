@@ -1,3 +1,4 @@
+import { addToCart } from "../shop-details-page/addtocart.js";
 import {
   doc,
   setDoc,
@@ -87,13 +88,22 @@ function renderWishlistRow(product) {
     <td><span class="table-stock">${
       product.count > 0 ? "In stock" : "Out of stock"
     }</span></td>
-    <td><a href="#" class="btn btn-sm">Add to Cart</a></td>
+    <td><a href="#" class="btn btn-sm add-to-cart-btn">Add to Cart</a></td>
     <td><i class="fi fi-rs-trash table-trash" style="cursor: pointer;"></i></td>
   `;
   const deleteBtn = row.querySelector(".table-trash");
   deleteBtn.addEventListener("click", () => {
     deleteWishlistItem(product.productId);
     row.remove();
+  });
+  const addToCartBtn = row.querySelector(".add-to-cart-btn");
+  addToCartBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    addToCart(product.productId, {
+      title: product.title,
+      price: product.price,
+      imageUrl: product.img1,
+    });
   });
   tableBody.appendChild(row);
 }
@@ -139,4 +149,15 @@ async function loadWishlistOnPageLoad() {
   }
 }
 
+// function handleClickCartBtn(productId, productData) {
+//   const cartBtn = document.getElementById("cartBtn");
+//   if (!cartBtn) {
+//     console.warn("No Add to Cart button found in details.html");
+//     return;
+//   }
+
+//   cartBtn.addEventListener("click", () => {
+//     addToCart(productId, productData);
+//   });
+// }
 document.addEventListener("DOMContentLoaded", loadWishlistOnPageLoad);

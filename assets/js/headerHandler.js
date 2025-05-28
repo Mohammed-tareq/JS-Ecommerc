@@ -9,6 +9,9 @@ document.addEventListener("DOMContentLoaded", () => {
       headerTopAction.addEventListener("click", (e) => {
         e.preventDefault();
         localStorage.removeItem("currentUserEmail");
+        localStorage.removeItem("wishlist");
+        localStorage.removeItem("authenticatedUserId");
+        localStorage.removeItem("cart");
         alert("You have been logged out.");
         window.location.href = "index.html"; // Or reload: location.reload();
       });
